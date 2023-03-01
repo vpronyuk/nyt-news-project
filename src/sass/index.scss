@@ -1,6 +1,7 @@
-@import './common';
-@import './reset';
-@import './global-styles';
+@import './base/common';
+@import './base/mixin';
+@import './base/reset';
+@import './base/global-styles';
 @import './empty';
 @import './footer';
 // @import './example';
