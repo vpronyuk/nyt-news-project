@@ -172,7 +172,7 @@
 }
 ::placeholder {
   margin-right: 60px;
-  border-right: 1px solid rgba(17, 19, 33, 0.4);
+  border-right: 1px solid #999aa0;
   @include tablet {
     margin-right: 105px;
   }
@@ -249,6 +249,7 @@
 }
 .mob-menu {
   position: fixed;
+  z-index: 100;
   top: 0;
   background-color: #ffffff;
   width: 100vw;
@@ -267,7 +268,6 @@
   &__list {
     font-weight: 500;
     line-height: 1.37;
-    color: rgba(17, 19, 33, 1);
   }
   &__checkbox {
     display: inline-block;
@@ -346,4 +346,78 @@
   border: 1px solid #111321;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding-left: 50px;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+.body--dark {
+  background-color: rgba(46, 46, 46, 1);
+
+  color: white;
+}
+.mob-menu--dark {
+  fill: #ffffff;
+  color: white;
+  background-color: rgba(46, 46, 46, 1);
+}
+
+.mob-icon-sun {
+  fill: #4b48db;
+  stroke: #4b48db;
+}
+.mob-icon-sun--dark {
+  fill: rgba(95, 103, 117, 1);
+  stroke: rgba(95, 103, 117, 1);
+}
+
+.mob-icon-moon {
+  fill: white;
+  stroke: #5f6775;
+}
+.mob-icon-moon--dark {
+  fill: rgba(46, 46, 46, 1);
+  stroke: rgba(75, 72, 219, 1);
+}
+
+.form-header__icon-sun {
+  fill: #4b48db;
+  stroke: #4b48db;
+}
+
+.form-header__icon-sun--dark {
+  fill: rgba(95, 103, 117, 1);
+  stroke: rgba(95, 103, 117, 1);
+}
+
+.form-header__icon-moon {
+  fill: white;
+  stroke: #5f6775;
+}
+
+.form-header__icon-moon--dark {
+  fill: rgba(46, 46, 46, 1);
+  stroke: rgba(75, 72, 219, 1);
+}
+
+.form-header__dark--dark {
+  color: #4440f7;
+}
+
+.form-header__light--dark {
+  color: #7d7d7d;
+}
+
+.form-header__input--dark {
+  background-color: rgba(46, 46, 46, 1);
+  border: 1px solid #f4f4f4;
+}
+
+.form-header__icon-search--dark {
+  fill: #f4f4f4;
+}
+.icon-mob-menu--dark {
+  fill: #f4f4f4;
 }
