@@ -1,0 +1,100 @@
+.weather-card {
+  background-color: #4440f6;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 395px;
+  height: 675px;
+  margin: 0 auto;
+}
+
+.temperature,
+.description {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.weather-icon {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.week-weather-btn {
+  display: block;
+  width: 177px;
+  height: 42px;
+  background: rgba(254, 254, 255, 0.3);
+  border-radius: 10px;
+  margin: 0 auto;
+  border-color: transparent;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.date {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 110px;
+  margin-bottom: 28px;
+}
+
+.city-name {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #ffffff;
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 42px;
+  padding-bottom: 9px;
+  padding-right: 17px;
+  background: rgba(254, 254, 255, 0.3);
+  border-radius: 10px;
+}
+
+.extra-part {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+.top-part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 110px;
+}
+.temperature {
+  padding-right: 8px;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  border-right: 1px solid #ffffff;
+  margin: 0;
+  font-size: 64px;
+  line-height: 75px;
+}
+.description {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
