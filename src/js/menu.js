@@ -137,8 +137,8 @@ const readLink = document.getElementById('read__link');
 
 if (currentPage === '/index.html') {
   homeLink.classList.add('current');
-} else if (currentPage === './favorite.html') {
+} else if (currentPage === '/favorite.html') {
   favoriteLink.classList.add('current');
-} else if (currentPage === './read.html') {
+} else if (currentPage === '/read.html') {
   readLink.classList.add('current');
 }
