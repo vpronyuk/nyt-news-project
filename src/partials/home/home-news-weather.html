@@ -1,280 +1,253 @@
 <div class="filter-elements">
-    <div class="filter-category">
-      <ul class="filter-category__list-bt">
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>       
-        </li>
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>
-        </li>
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>
-        </li>
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>
-        </li>
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>
-        </li>
-        <li class="filter-category__item-bt">
-            <div><span>bla</span></div>
-        </li>
-      </ul>
-      <div class="filter-category__others-container">
-        <button class="filter-category__others-button">
-          <span>Categories</span>
-          <svg class="filter-category__button-arrow" width="14" height="14">
-            <use href="./images/sprite.svg#arrow-down"></use>
-          </svg>
-        </button>
-        <div class="filter-category__container">
-          <!--список-->
+  <div class="category-filter">
+    <div class="category_menu">
+      <ul class="category_list">
+        <div class="dropdown">
+          <button type="button" class="category_other_btn">Other</button>
+          <div class="dropdown_content category_hidden"></div>
         </div>
-      </div>
+      </ul>
     </div>
+    <div class="mobile_category_menu">
+      <button type="button" class="mobile_category_btn">
+        <span class="mob-btn-span">Categories</span>
+        <svg class="category_icon" width="14" height="8">
+          <use href="/src/images/symbol-defs.svg#icon-arrow-down"></use>
+        </svg>
+      </button>
+
+      <ul class="mobile_category_list category_hidden"></ul>
+    </div>
+    <div class="content"></div>
+  </div>
+  <div class="calendar-filter">
     <p class="calendar-form__text">Search date news</p>
     <div class="calendar-form">
       <div class="input-form">
         <svg class="calendar__button-calendar" width="14" height="14">
           <use href="./images/sprite.svg#calendar"></use>
         </svg>
-        <span class="calendar-input datepicker-here">   
-            Виберіть дату
-        </span>
+        <span class="calendar-input datepicker-here"> Виберіть дату </span>
         <svg class="calendar__button-arrow" width="14" height="14">
           <use href="./images/sprite.svg#arrow-down"></use>
         </svg>
       </div>
     </div>
   </div>
-    <section class="section__list-news dark">
-      <ul class="list-news">
-  
-          <li class="list-news__item">
-              <article class="item-news__article">
-                  <div class="item-news__wrapper-img">
-                      <img class="item-news__img" src="#" alt="">
-                      <p class="item-news__category">Job searching</p>
-                      <p class="item-news__add-to-favorite">Add to favorite
-                        <!-- сердечко -->
-                      </p>
-                  </div>
-                  <h2 class="item-news__title">
-                      8 tips for passing an online interview that will help you get a job
-                  </h2>
-                  <p class="item-news__description">
-                      Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                      offered by these...</p>
-                  <div class="item-news__info">
-                      <span class="item-news__info-date">
-                          20/02/2021
-                      </span>
-                      <a class="item-news__info-link" href="#">Read more</a>
-                  </div>
-              </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-                        <!-- сердечко -->
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <div class="weather-cards">
-          </div>
-          
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-  
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-  
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-  
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-  
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-          <li class="list-news__item">
-            <article class="item-news__article">
-                <div class="item-news__wrapper-img">
-                    <img class="item-news__img" src="#" alt="">
-                    <p class="item-news__category">Job searching</p>
-                    <p class="item-news__add-to-favorite">Add to favorite
-  
-                        <!-- сердечко -->
-  
-                    </p>
-                </div>
-                <h2 class="item-news__title">
-                    8 tips for passing an online interview that will help you get a job
-                </h2>
-                <p class="item-news__description">
-                    Before you start looking for a job, it is useful to familiarize yourself with the job prospects
-                    offered by these...</p>
-                <div class="item-news__info">
-                    <span class="item-news__info-date">
-                        20/02/2021
-                    </span>
-                    <a class="item-news__info-link" href="#">Read more</a>
-                </div>
-            </article>
-          </li>
-  
-      </ul>
-  </section>
-  
-  
-  <div class="page-container pagination">
-    <div class="pagin">
-      <button class="prev-page btn-prev">
-        <a>
-          <span>&#8249; Prew</span>
-        </a>
-      </button>
-      <div id="pagination"></div>
-      <button class="next-page btn-next">
-        <a>
-          Next <span>&#8250;</span>
-        </a>
-      </button>
-  
-    </div>
+</div>
+<section class="section__list-news dark">
+  <ul class="list-news">
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <div class="weather-cards"></div>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+
+    <li class="list-news__item">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="#" alt="" />
+          <p class="item-news__category">Job searching</p>
+          <p class="item-news__add-to-favorite">
+            Add to favorite
+
+            <!-- сердечко -->
+          </p>
+        </div>
+        <h2 class="item-news__title">
+          8 tips for passing an online interview that will help you get a job
+        </h2>
+        <p class="item-news__description">
+          Before you start looking for a job, it is useful to familiarize
+          yourself with the job prospects offered by these...
+        </p>
+        <div class="item-news__info">
+          <span class="item-news__info-date"> 20/02/2021 </span>
+          <a class="item-news__info-link" href="#">Read more</a>
+        </div>
+      </article>
+    </li>
+  </ul>
+</section>
+
+<div class="page-container pagination">
+  <div class="pagin">
+    <button class="prev-page btn-prev">
+      <a>
+        <span>&#8249; Prew</span>
+      </a>
+    </button>
+    <div id="pagination"></div>
+    <button class="next-page btn-next">
+      <a> Next <span>&#8250;</span> </a>
+    </button>
   </div>
-  
+</div>

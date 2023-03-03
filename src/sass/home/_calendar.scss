@@ -1,8 +1,5 @@
-
-
 .calendar-form__text {
   display: none;
-  margin-left: 52px;
 
   @media screen and (min-width: 1280px) {
     display: inline;
@@ -12,8 +9,6 @@
     font-size: 18px;
     line-height: 1.38;
     color: var(--main-color);
-    margin-right: -350px;
-    margin-left: 111px;
   }
 }
 
@@ -21,7 +16,6 @@
   position: relative;
 
   @media screen and (min-width: 1280px) {
-    margin-left: 52px;
   }
 }
 
@@ -30,7 +24,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 
   width: 152px;
   height: 31px;
@@ -50,8 +43,7 @@
   color: var(--main-color);
   background-color: transparent;
 
-  cursor:    pointer;
-
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     width: 168px;
@@ -61,8 +53,6 @@
     gap: 18px;
   }
 }
-
-
 
 .input-form {
   position: relative;
@@ -80,14 +70,14 @@
   fill: var(--accent-color);
   right: 12px;
 
-  cursor:    pointer;
+  cursor: pointer;
 
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .calendar__button-arrow-icon {
-  cursor:    pointer;
+  cursor: pointer;
 }
 
 .calendar__button-back {
@@ -103,4 +93,3 @@
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
-

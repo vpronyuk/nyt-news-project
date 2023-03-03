@@ -1,6 +1,6 @@
 .mobile_category_menu {
   position: relative;
-  margin-top: 24px;
+  z-index: 1;
   @include tablet {
     display: none;
   }
@@ -15,20 +15,17 @@
 }
 
 .mobile_category_btn {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border: 1px solid var(--border-color);
-  width: 112px;
+  min-width: 112px;
   min-height: 31px;
   border-radius: 20px;
   padding: 7.5px 13px;
-  padding-right: 28px;
   font-size: 12px;
   line-height: 16px;
-  text-align: left;
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -42,9 +39,6 @@
 }
 
 .category_icon {
-  position: absolute;
-  top: 14px;
-  left: 85px;
   fill: var(--switcher-accent-day);
   transition: transform 200ms ease;
 }
@@ -83,15 +77,9 @@
   }
 }
 
-.category_hidden {
-  display: none;
-  transform: translateY(-100%);
-}
-
 .category_list {
   display: flex;
   gap: 16px;
-  margin-top: 28px;
 }
 
 .category_menu button {
@@ -113,4 +101,9 @@
   white-space: nowrap;
   color: var(--switcher-accent-day);
   background-color: var(--third-color);
+}
+
+.category_hidden {
+  display: none;
+  transform: translateY(-100%);
 }

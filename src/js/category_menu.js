@@ -6,6 +6,7 @@ const mobileCatList = document.querySelector('.mobile_category_list');
 const otherBtn = document.querySelector('.category_other_btn');
 const mobCatBtn = document.querySelector('.mobile_category_btn');
 const catBtnIcon = document.querySelector('.category_icon');
+const mobBtnSpan = document.querySelector('.mob-btn-span');
 
 const content = document.querySelector('.content');
 console.log(content);
@@ -17,7 +18,7 @@ function onClickMobileBtn(event) {
   console.log(event.target);
   mobileCatList.classList.toggle('category_hidden');
 
-  if (event.currentTarget.textContent === 'Categories') {
+  if (mobBtnSpan.textContent === 'Categories') {
     mobCatBtn.classList.toggle('is-active');
     catBtnIcon.classList.toggle('rotate');
   } else {
@@ -40,25 +41,26 @@ function onClickMobileCat(event) {
   console.log(query);
 
   if (text != undefined && text.length < 11) {
-    mobCatBtn.textContent = text;
+    mobBtnSpan.textContent = text;
   } else {
-    mobCatBtn.textContent = `${text.substring(0, 9)}...`;
+    mobBtnSpan.textContent = `${text.substring(0, 9)}...`;
   }
 
-  fetch(
-    `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
-  )
-    .then(res => res.json())
-    .then(data => {
-      if (data.results === null) {
-        content.innerHTML = "We don't find any news";
-      } else {
-        const cards = data.results.reduce((markup, card) => {
-          return markup + createCard(card);
-        }, '');
-        content.innerHTML = cards;
-      }
-    });
+  // fetch(
+  //   `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
+  // )
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     if (data.results === null) {
+  //       content.innerHTML = "We don't find any news";
+  //     } else {
+  //       const cards = data.results.reduce((markup, card) => {
+  //         return markup + createCard(card);
+  //       }, '');
+  //       content.innerHTML = cards;
+  //     }
+  //   });
 }
 
 fetch(
