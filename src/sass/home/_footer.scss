@@ -1,0 +1,11 @@
+
+.footer {
+  height: 120px;
+  background-color: var(--footer-color);
+
+  @media screen and (min-width: 768px){
+    height: 146px;
+  }
+ 
+}
+

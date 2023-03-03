@@ -1,5 +1,12 @@
+html,
 body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  height: 100vh;
   font-family: 'Manrope', sans-serif;
   color: var(--main-color);
   background-color: var(--bg-color);
 }
+
