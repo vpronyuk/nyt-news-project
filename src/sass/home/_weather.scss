@@ -1,0 +1,20 @@
+.weather-cards {
+
+  background-color: #4440f6;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 350px;
+  padding: 32px 36px;
+  min-height: 550px;
+  margin: 0 auto;
+  @media screen and(min-width: 768px) {
+    height: 675px;
+    width: 353px;
+    padding: 40px 32px 60px 32px;
+  }
+  @media screen and(min-width: 1280px) {
+    width: 395px;
+    padding: 40px 53px;
+  }
+
+}
