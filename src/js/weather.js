@@ -88,7 +88,7 @@ function displayDate() {
 
 displayDate();
 
-weekWeatherBtn.addEventListener(`submit`, getWeekWeather);
+// weekWeatherBtn.addEventListener(`submit`, getWeekWeather);
 
 function getWeekWeather() {
   //
