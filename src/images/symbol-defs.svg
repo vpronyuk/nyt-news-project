@@ -29,6 +29,22 @@
    <symbol id="icon-close" viewBox="0 0 32 32">
    <path d="M26.667 7.303l-1.97-1.97-7.808 7.808-7.808-7.808-1.97 1.97 7.808 7.808-7.808 7.808 1.97 1.97 7.808-7.808 7.808 7.808 1.97-1.97-7.808-7.808 7.808-7.808z"></path>
   </symbol>
+   <symbol id="icon-home1" viewBox="0 0 32 32">
+<path fill="#4440f6" style="fill: var(--color1, #4440f6)" d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color2, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1" d="M9.25 13.75l6.75-5.25 6.75 5.25v8.25c0 0.828-0.672 1.5-1.5 1.5v0h-10.5c-0.828 0-1.5-0.672-1.5-1.5v0-8.25z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color2, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1" d="M13.75 23.5v-7.5h4.5v7.5"></path>
+</symbol>
+<symbol id="icon-heart1" viewBox="0 0 32 32">
+<path fill="#4440f6" style="fill: var(--color1, #4440f6)" d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color2, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1" d="M22.63 10.457c-0.747-0.747-1.778-1.208-2.918-1.208s-2.171 0.462-2.918 1.208l-0.795 0.795-0.795-0.795c-0.745-0.74-1.772-1.197-2.906-1.197-2.279 0-4.126 1.847-4.126 4.126 0 1.134 0.457 2.161 1.197 2.906l6.63 6.63 6.63-6.63c0.747-0.747 1.208-1.778 1.208-2.918s-0.462-2.171-1.208-2.918v0z"></path>
+</symbol>
+<symbol id="icon-read1" viewBox="0 0 32 32">
+<path fill="#4440f6" style="fill: var(--color1, #4440f6)" d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color2, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1" d="M8.5 9.25h4.5c1.657 0 3 1.343 3 3v0 10.5c0-1.243-1.007-2.25-2.25-2.25v0h-5.25v-11.25zM23.5 9.25h-4.5c-1.657 0-3 1.343-3 3v0 10.5c0-1.243 1.007-2.25 2.25-2.25v0h5.25v-11.25z"></path>
+</symbol>
+<symbol id="icon-close" viewBox="0 0 20 20">
+<path d="M10 8.586l-7.071-7.071-1.414 1.414 7.071 7.071-7.071 7.071 1.414 1.414 7.071-7.071 7.071 7.071 1.414-1.414-7.071-7.071 7.071-7.071-1.414-1.414-7.071 7.071z"></path>
+</symbol>
 </defs>
 <symbol id="icon-arrow-down" viewBox="0 0 50 32">
 <path  d="M5.849 1.778l-5.849 5.412 24.889 23.032 24.889-23.032-5.849-5.413-19.040 17.581-19.040-17.581z"></path>
