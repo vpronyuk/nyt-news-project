@@ -128,3 +128,17 @@ if (isDarkModeMob) {
   sun.classList.remove('mob-icon-sun--dark');
   mobMoon.classList.remove('mob-icon-moon--dark');
 }
+
+const currentPage = window.location.pathname;
+
+const homeLink = document.getElementById('home__link');
+const favoriteLink = document.getElementById('favorite__link');
+const readLink = document.getElementById('read__link');
+
+if (currentPage === '/index.html') {
+  homeLink.classList.add('current');
+} else if (currentPage === './favorite.html') {
+  favoriteLink.classList.add('current');
+} else if (currentPage === './read.html') {
+  readLink.classList.add('current');
+}
