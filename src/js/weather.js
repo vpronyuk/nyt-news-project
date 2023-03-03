@@ -67,7 +67,7 @@ function errorCallback() {
     })
     .then(data => {
       const iconUrl = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-      cityName.textContent = `Kyiv`;
+      cityName.insertAdjacentHTML(`beforeend`, `Kyiv`);
       temperature.innerHTML = `${Math.round(data.main.temp)}&deg`;
       description.textContent = data.weather[0].description;
       weatherIcon.setAttribute('src', iconUrl);
@@ -95,7 +95,7 @@ displayDate();
 weekWeatherBtn.addEventListener(`click`, () => {
   weatherCard.style.display = 'none';
   weekWeatherCard.style.display = 'block';
-  const newApiKey = `aded7e3553934d64aa846631cabf27f3`;
+  const newApiKey = `ffa0b0a775424c0b835c3cb89496b67e`;
   function getCurrentLocation() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -116,7 +116,7 @@ weekWeatherBtn.addEventListener(`click`, () => {
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${location.latitude}&lon=${location.longitude}&key=${newApiKey}`;
     return fetch(url)
       .then(response => response.json())
-      .then(data => data.data);
+      .then(data => data.data.slice(0, 7));
   }
 
   function displayWeatherData(weatherData) {
@@ -132,9 +132,11 @@ weekWeatherBtn.addEventListener(`click`, () => {
           <div class="week-weather-date">${date}</div>
           <div class="week-weather-body">
             <div class="week-weather-icon">
-              <img src="https://www.weatherbit.io/static/img/icons/${iconWeek}.png" width=60px>
+              <img src="https://www.weatherbit.io/static/img/icons/${iconWeek}.png">
             </div>
-            <div class="week-weather-temp">${minTemp}° - ${maxTemp}°</div>
+            <div class="week-weather-temp">${Math.round(
+              minTemp
+            )}° - ${Math.round(maxTemp)}°</div>
             <div class="week-weather-desc">${descriptionWeek}</div>
           </div>
         </li>
