@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Poppins&family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    />
 
-    <link rel="stylesheet" href="./sass/index.scss" />
-    <link rel="stylesheet" title="theme" href="#" />
-    <!-- <script type="module" src="./index.js"></script> -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Poppins&family=Roboto&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 
-  <body>
-    <include src="./partials/header.html"></include>
-    <main>
-      <div class="container">
-        <!-- ❗️❗️❗️ Add partials like so for every page -->
-        <!-- <include src="./partials/example.html"></include> -->
+  <link rel="stylesheet" href="./sass/index.scss" />
 
-        <include src="./partials/markup.html"></include>
-        <include src="./partials/components/calendar.html"></include>
-        <include src="./partials/components/mob-menu.html"></include>
-        <include src="./partials/home/home-cathegory.html"></include>
-        <include src="./partials/components/weather-card.html"></include>
-        <include src="./partials/home/home-pagination.html"></include>
-        <include src="./partials/home/empty_page.html"></include>
-      </div>
-    </main>
-    <include src="./partials/footer.html"></include>
-    <!-- <include src="./partials/header_mode.html"></include> -->
-    <script src="./js/menu.js" type="module"></script>
-    <script src="./js/header_mode.js" type="module"></script>
-    <script src="./js/weather.js" type="module"></script>
-    <script src="./js/mob-menu.js" type="module"></script>
-    <script src="./js/calendar.js" type="module"></script>
-  </body>
+  <!-- <script type="module" src="./index.js"></script> -->
+</head>
+
+<body>
+  <include src="./partials/header.html"></include>
+  <main>
+    <div class="container">
+      <!-- ❗️❗️❗️ Add partials like so for every page -->
+      <!-- <include src="./partials/example.html"></include> -->
+      <include src="./partials/home/home-news-cards.html"></include>
+      <!-- <include src="./partials/markup.html"></include> -->
+      <!-- <include src="./partials/components/calendar.html"></include> -->
+      <!-- <include src="./partials/components/mob-menu.html"></include> -->
+      <!-- <include src="./partials/home/home-cathegory.html"></include> -->
+      <!-- <include src="./partials/components/weather-card.html"></include> -->
+      <!-- <include src="./partials/home/home-pagination.html"></include> -->
+      <include src="./partials/home/empty_page.html"></include>
+    </div>
+  </main>
+  <include src="./partials/footer.html"></include>
+  <!-- <include src="./partials/header_mode.html"></include> -->
+  <script src="./js/news_cards.js" type="module"></script>
+  <script src="./js/menu.js" type="module"></script>
+  <script src="./js/header_mode.js" type="module"></script>
+  <!-- <script src="./js/weather.js" type="module"></script> -->
+  <!-- <script src="./js/mob-menu.js" type="module"></script> -->
+  <!-- <script src="./js/calendar.js" type="module"></script> -->
+</body>
+
 </html>
