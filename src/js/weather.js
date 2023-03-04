@@ -4,7 +4,7 @@ const description = document.querySelector('.description');
 const weatherIcon = document.querySelector('.weather-icon');
 const dateEl = document.querySelector('.date');
 const weekDay = document.querySelector(`.week-day`);
-const monthAndYear = document.querySelector(`.month-year`);
+const monthAndYear = document.querySelector(`.month_year`);
 const weatherCard = document.querySelector(`.weather-card`);
 const weekWeatherBtn = document.querySelector(`.week-weather-btn`);
 const todayWeatherBtn = document.querySelector(`.today-forecast-btn`);
@@ -86,7 +86,7 @@ function displayDate() {
   const month = months[date.getMonth()];
   const year = date.getFullYear();
   weekDay.textContent = dayOfWeek;
-  monthAndYear.textContent = `${dayOfMonth} ${month} ${year}`;
+  monthAndYear.innerHTML = `${dayOfMonth} ${month} ${year}`;
 }
 
 displayDate();
