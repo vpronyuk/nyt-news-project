@@ -1,13 +1,85 @@
 footer {
     width: 100%;
     height: 146px;
-    background-color: rgba(122, 122, 122, 1);
+
+    background-image:url(../images/dronedesk-min.jpeg);
+    background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   }
   
   @media screen and (max-width: 768px) {
     footer {
       min-width: 320px;
       height: 120px;
+      background-image:url(../images/mobdrone-min.jpeg);
+      background-size: contain;
+      background-position:bottom;
     }
+
   }
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    footer{
+    min-width:768px;
+        height:146px;
+        background-image:url(../images/dronedesk-min.jpeg);
+        background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+ }
+
+//  .soc__icon-web{
+//   display:flex;
+//  justify-content: center;
+//  }
+
+.web{
+  height: 100%;
+  display:flex;
+ justify-content:center;
+ align-items: flex-end;
+ @include mobile{
+  align-items: stretch;
+  // justify-content:baseline;
+ }
+ @include tablet{
+  display:flex;
+  justify-content:center;
+  align-items: flex-end;
+ }
+
+}
+.web__link{
+  font-size: 21px;
+  padding-top: 15px;
+  
+  @include tablet{
+    font-size: 25px;
+    padding-bottom: 7px; 
+  }
+  @include desktop{
+    font-size: 47px;
+  }
+}
+.soc__icon-web{
+  margin-right: 30px;
+  @include tablet{
+    // padding-top:7px;
+    margin-right: 15px;
+    margin-left: 22px;
+  }
+  @include mobile{
+    // margin-right: 57px;
+  //  padding-bottom: 15px;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+
+  }
+}
+
+
+
+
   
