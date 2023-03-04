@@ -201,16 +201,20 @@ p {
 .week-forecast-list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  align-items: baseline;
   @include mobile {
+    gap: 20px;
     padding-top: 10px;
     margin-bottom: 10px;
   }
   @include tablet {
+    gap: 30px;
     padding-top: 0;
     margin-bottom: 0;
   }
   @include desktop {
+    gap: 30px;
     padding-top: 0;
     margin-bottom: 0;
   }
@@ -231,7 +235,7 @@ p {
   @include desktop {
     font-size: 15px;
   }
-  color: #ffffff;
+  color: #eedf14;
   margin-bottom: 3px;
 }
 .week-weather-item {
@@ -246,14 +250,24 @@ p {
   @include desktop {
     margin-top: 10px;
   }
-
-  align-items: center;
 }
 
 .today-forecast-btn {
   display: block;
-  width: 150px;
-  height: 30px;
+  @include mobile {
+    width: 151px;
+    height: 34px;
+  }
+  @include tablet {
+    margin-top: 10px;
+    width: 177px;
+    height: 42px;
+  }
+  @include desktop {
+    margin-top: 10px;
+    width: 177px;
+    height: 42px;
+  }
   background: rgba(254, 254, 255, 0.3);
   border-radius: 10px;
   margin: 0 auto;
@@ -261,12 +275,22 @@ p {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
-  line-height: 17px;
+  @include mobile {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  @include tablet {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  @include desktop {
+    font-size: 20px;
+    line-height: 23px;
+  }
   color: #ffffff;
+  cursor: pointer;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
 }
 .week-weather-desc {
   font-family: 'Roboto';
@@ -286,7 +310,11 @@ p {
   margin-left: 10px;
 }
 .week-weather-temp {
+  display: block;
+  width: 80px;
   font-family: 'Roboto';
+  border-right: 1px solid #ffffff;
+  padding-right: 5px;
   font-style: normal;
   font-weight: 400;
   @include mobile {
@@ -302,6 +330,7 @@ p {
   color: #ffffff;
 }
 .week-weather-icon {
+  margin-right: 15px;
   @include mobile {
     width: 45px;
     height: 40px;
@@ -338,4 +367,21 @@ p {
     width: 27px;
     height: 27px;
   }
+}
+
+.icon-item {
+  display: flex;
+  @include mobile {
+    margin-left: 20px;
+  }
+  @include tablet {
+    margin-left: 30px;
+  }
+  @include desktop {
+    margin-left: 50px;
+  }
+}
+.week-item-list {
+  display: flex;
+  flex-direction: column;
 }

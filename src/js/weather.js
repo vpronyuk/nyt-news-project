@@ -81,7 +81,6 @@ navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 function displayDate() {
   const date = new Date();
-
   const dayOfWeek = daysOfWeek[date.getDay()];
   const dayOfMonth = date.getDate().toString().padStart(2, '0');
   const month = months[date.getMonth()];
@@ -128,19 +127,18 @@ weekWeatherBtn.addEventListener(`click`, () => {
         const descriptionWeek = day.weather.description;
         const iconWeek = day.weather.icon;
         return `
-        <li class="week-weather-item">
-          <div class="week-weather-date">${date}</div>
-          <div class="week-weather-body">
-            <div class="week-weather-icon">
-              <img src="https://www.weatherbit.io/static/img/icons/${iconWeek}.png">
-            </div>
-            <div class="week-weather-temp">${Math.round(
-              minTemp
-            )}° - ${Math.round(maxTemp)}°</div>
-            <div class="week-weather-desc">${descriptionWeek}</div>
-          </div>
-        </li>
-      `;
+            <li class="icon-item"> 
+             <img class="week-weather-icon" src="https://www.weatherbit.io/static/img/icons/${iconWeek}.png">
+             <div class="week-weather-item">
+              <div class="week-weather-date">${date}</div>
+              <div class="week-weather-body">
+               <div class="week-weather-temp">${Math.round(
+                 minTemp
+               )}° - ${Math.round(maxTemp)}°</div>
+               <div class="week-weather-desc">${descriptionWeek}</div>
+              </div>
+             </div>
+        </li>`;
       })
       .join('');
     weekWeatherList.innerHTML = weekWeatherMarkup;
