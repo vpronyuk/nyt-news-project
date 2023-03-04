@@ -44,7 +44,7 @@ function createMarkup({
   url,
 }) {
   const imageUrl = media?.[0]?.['media-metadata']?.[2]?.url || '';
-  return `<li class="list-news__item" data-id="${id}">
+  return `<li class="list-news__item" data-id="${id}" >
       <article class="item-news__article">
         <div class="item-news__wrapper-img">
           <img class="item-news__img" src="${imageUrl}" alt="photo">
@@ -65,5 +65,23 @@ function createMarkup({
       </article>
     </li>`;
 }
+
+function readmoreHandler(e){
+  if(e.target.nodeName === "A"){
+    const readMoreLink = e.target;
+    readMoreLink.setAttribute("data-is-read",true);
+
+    const ulItem = e.target.parentElement.parentElement.parentElement;
+    console.log(ulItem);
+    const read = document.createElement('p');
+    read.innerText="Already read";
+    read.classList.add('have-read');
+    ulItem.appendChild(read);
+    const ID = ulItem.getAttribute("data-id");
+  }
+  return;
+}
+
+newsWrapper.addEventListener('click',readmoreHandler);
 
 localStorage.setItem('cards', '[]');
