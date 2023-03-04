@@ -1,3 +1,8 @@
+const prev = document.querySelector('.prev');
+console.log(prev);
+const conCalendar = document.querySelector('.con-calendar');
+console.log(conCalendar);
+
 const date = new Date();
 
 const renderCalendar = () => {
@@ -70,24 +75,26 @@ const renderCalendar = () => {
   }
 };
 
-document.querySelector('.prev').addEventListener('click', () => {
-  date.setMonth(date.getMonth() - 1);
-  renderCalendar();
-});
+// document.querySelector('.prev').addEventListener('click', () => {
+//   date.setMonth(date.getMonth() - 1);
+//   renderCalendar();
+// });
 
-document.querySelector('.next').addEventListener('click', () => {
-  date.setMonth(date.getMonth() + 1);
-  renderCalendar();
-});
+// document.querySelector('.next').addEventListener('click', () => {
+//   date.setMonth(date.getMonth() + 1);
+//   renderCalendar();
+// });
 
-renderCalendar();
+// renderCalendar();
 
-document.querySelector('.prev-year').addEventListener('click', () => {
-  date.setFullYear(date.getFullYear() - 1);
-  renderCalendar();
-});
+// document.querySelector('.prev-year').addEventListener('click', () => {
+//   date.setFullYear(date.getFullYear() - 1);
+//   renderCalendar();
+// });
 
-document.querySelector('.next-year').addEventListener('click', () => {
-  date.setFullYear(date.getFullYear() + 1);
-  renderCalendar();
-});
+// document.querySelector('.next-year').addEventListener('click', () => {
+//   date.setFullYear(date.getFullYear() + 1);
+//   renderCalendar();
+// });
+
+console.log('Я тут, ау!');
