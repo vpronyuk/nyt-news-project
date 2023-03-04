@@ -9,10 +9,11 @@ const mobCatBtnIcon = document.querySelector('.category_mob_icon');
 const mobBtnSpan = document.querySelector('.mob-btn-span');
 const catBtnIcon = document.querySelector('.category_icon');
 const deskSpanBtn = document.querySelector('.desk-btn-span');
-
-const content = document.querySelector('.content');
-
+const sectionNews = document.querySelector('.section__list-news');
+const newsList = document.querySelector('.list-news');
 //---------------------- Mobile categories menu -------------------------------------//
+
+console.log(sectionNews);
 
 mobCatBtn.addEventListener('click', onClickMobileBtn);
 mobileCatList.addEventListener('click', onClickMobileCat);
@@ -122,15 +123,6 @@ function createMarkup({ section, display_name }) {
 //   }
 // });
 
-function createCard({ title, thumbnail_standard }) {
-  return `
-  <div class="card">
-  <h2>${title}</h2>
-  <img src="${thumbnail_standard}">
-  </div>
-  `;
-}
-
 //------------------------- categories menu -------------------------------------//
 
 otherBtn.addEventListener('click', onClickOtherBtn);
@@ -156,8 +148,54 @@ function onClickCatBtn(event) {
     catBtnIcon.classList.remove('rotate');
   }
 
-  console.log(event.target);
   const query = event.target.dataset.section;
-  const text = event.target.dataset.name;
   console.log(query);
+
+  fetch(
+    `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
+  )
+    .then(res => res.json())
+    .then(data => {
+      if (data.results === null) {
+        newsList.innerHTML =
+          '<include src="./partials/home/empty_page.html"></include>';
+      } else {
+        markup = data.results.reduce((markup, card) => {
+          return markup + createCard(card);
+        }, '');
+        newsList.innerHTML = markup;
+      }
+    });
+}
+
+function createCard({
+  title,
+  multimedia,
+  section,
+  id,
+  abstract,
+  published_date,
+  url,
+}) {
+  const imageUrl = multimedia?.[3]?.url || '';
+  return `<li class="list-news__item" data-id="${id}">
+      <article class="item-news__article">
+        <div class="item-news__wrapper-img">
+          <img class="item-news__img" src="${imageUrl}" alt="photo">
+          <p class="item-news__category">${section}</p>
+          <button class="item-news__add-to-favorite" 
+          <svg class="heart-icon">
+                <use
+                  href="./images/symbol-defs.svg#icon-heart-empty"
+                ></use></svg>Add to favorite
+          </button>
+        </div>
+        <h2 class="item-news__title">${title}</h2>
+        <p class="item-news__description">${abstract}</p>
+        <div class="item-news__info">
+          <span class="item-news__info-date">${published_date}</span>
+          <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
+        </div>
+      </article>
+    </li>`;
 }
