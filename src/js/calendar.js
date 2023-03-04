@@ -47,10 +47,11 @@ const renderCalendar = () => {
     'December',
   ];
 
-  document.querySelector('.date h1').innerHTML = months[date.getMonth()];
-  document.querySelector('.date h2').innerHTML = date.getFullYear();
+  document.querySelector('.date-calendar h1').innerHTML =
+    months[date.getMonth()];
+  document.querySelector('.date-calendar h2').innerHTML = date.getFullYear();
 
-  document.querySelector('.date p').innerHTML = new Date().toDateString();
+  // document.querySelector('.date-calendar p').innerHTML = new Date().toDateString();
 
   let days = '';
 
@@ -75,26 +76,26 @@ const renderCalendar = () => {
   }
 };
 
-// document.querySelector('.prev').addEventListener('click', () => {
-//   date.setMonth(date.getMonth() - 1);
-//   renderCalendar();
-// });
+document.querySelector('.prev').addEventListener('click', () => {
+  date.setMonth(date.getMonth() - 1);
+  renderCalendar();
+});
 
-// document.querySelector('.next').addEventListener('click', () => {
-//   date.setMonth(date.getMonth() + 1);
-//   renderCalendar();
-// });
+document.querySelector('.next').addEventListener('click', () => {
+  date.setMonth(date.getMonth() + 1);
+  renderCalendar();
+});
 
-// renderCalendar();
+renderCalendar();
 
-// document.querySelector('.prev-year').addEventListener('click', () => {
-//   date.setFullYear(date.getFullYear() - 1);
-//   renderCalendar();
-// });
+document.querySelector('.prev-year').addEventListener('click', () => {
+  date.setFullYear(date.getFullYear() - 1);
+  renderCalendar();
+});
 
-// document.querySelector('.next-year').addEventListener('click', () => {
-//   date.setFullYear(date.getFullYear() + 1);
-//   renderCalendar();
-// });
+document.querySelector('.next-year').addEventListener('click', () => {
+  date.setFullYear(date.getFullYear() + 1);
+  renderCalendar();
+});
 
 console.log('Я тут, ау!');
