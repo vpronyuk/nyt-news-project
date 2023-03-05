@@ -17,6 +17,9 @@ const catBtnIcon = document.querySelector('.category_icon');
 const newsList = document.querySelector('.list-news');
 const emptyPage = document.querySelector('.empty');
 
+mobileCatList.classList.remove('category_hidden');
+mobileCatList.classList.add('category_mobile_hidden');
+
 async function getNewsByCategory(query) {
   try {
     const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}`;
