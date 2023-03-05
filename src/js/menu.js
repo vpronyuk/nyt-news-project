@@ -192,6 +192,7 @@ function onHeaderFormClick(event) {
      </li>`;
           })
           .join('');
+        localStorage.setItem('nytimesNews', JSON.stringify(data.response.docs));
       })
       .catch(error => console.log(error));
   }
@@ -209,7 +210,7 @@ searchClear.addEventListener('click', () => {
 });
 
 headerInput.addEventListener('input', () => {
-  if (headerInput.value) {
+  if (headerInput.value && document.documentElement.clientWidth > 768) {
     searchClear.style.display = 'block';
   } else {
     searchClear.style.display = 'none';
