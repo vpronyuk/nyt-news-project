@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
   <include src="./partials/header.html"></include>
   <main>
     <div class="container">
@@ -34,20 +33,38 @@
       <!-- <include src="./partials/components/mob-menu.html"></include> -->
       <!-- <include src="./partials/home/home-cathegory.html"></include> -->
 
-      <!-- <include src="./partials/home/home-pagination.html"></include> -->
-      <!-- <include src="./partials/home/empty_page.html"></include> -->
-      <include src="./partials/components/mob-menu.html"></include>
-    </div>
-  </main>
-  <include src="./partials/footer.html"></include>
-  <!-- <include src="./partials/header_mode.html"></include> -->
-  <script src="./js/news_cards.js" type="module"></script>
-  <script src="./js/category_menu.js" type="module"></script>
-  <script src="./js/menu.js" type="module"></script>
-  <!-- <script src="./js/header_mode.js" type="module"></script> -->
-  <script src="./js/weather.js" type="module"></script>
-  <script src="./js/mob-menu.js" type="module"></script>
-  <script src="./js/calendar.js" type="module"></script>
-</body>
+      <body>
+        <include src="./partials/header.html"></include>
+        <main>
+          <div class="container">
+            <!-- ❗️❗️❗️ Add partials like so for every page -->
+            <!-- <include src="./partials/example.html"></include> -->
+            <section class="cathegory-calendar">
+              <include src="./partials/home/home-news-weather.html"></include>
+              <include src="./partials/components/calendar.html"></include>
+            </section>
+            <include src="./partials/components/weather-card.html"></include>
+            <include src="./partials/home/home-news-cards.html"></include>
+            <!-- <include src="./partials/components/calendar.html"></include> -->
+            <!-- <include src="./partials/markup.html"></include> -->
+            <!-- <include src="./partials/components/calendar.html"></include> -->
+            <!-- <include src="./partials/components/mob-menu.html"></include> -->
+            <!-- <include src="./partials/home/home-cathegory.html"></include> -->
+
+            <!-- <include src="./partials/home/home-pagination.html"></include> -->
+            <include src="./partials/home/empty_page.html"></include>
+            <include src="./partials/components/mob-menu.html"></include>
+          </div>
+        </main>
+        <include src="./partials/footer.html"></include>
+        <!-- <include src="./partials/header_mode.html"></include> -->
+        <script src="./js/news_cards.js" type="module"></script>
+        <script src="./js/category_menu.js" type="module"></script>
+        <script src="./js/menu.js" type="module"></script>
+        <script src="./js/header_mode.js" type="module"></script>
+        <script src="./js/weather.js" type="module"></script>
+        <script src="./js/mob-menu.js" type="module"></script>
+        <script src="./js/calendar.js" type="module"></script>
+      </body>
 
 </html>
