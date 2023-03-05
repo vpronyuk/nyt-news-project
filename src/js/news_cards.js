@@ -45,7 +45,18 @@ function createMarkup({
   published_date,
   url,
 }) {
-  const imageUrl = media?.[0]?.['media-metadata']?.[2]?.url || '';
+  const imageUrl =
+    media?.[0]?.['media-metadata']?.[2]?.url ||
+    `https://source.unsplash.com/featured/?nature`;
+  const MAX_SNIPPET_LENGTH = 110;
+  if (abstract.length > MAX_SNIPPET_LENGTH) {
+    abstract = abstract.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';
+  }
+  const date = new Date(published_date);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear().toString();
+  const formattedDate = `${day}/${month}/${year}`;
   return `<li class="list-news__item" data-id="${id}" >
       <article class="item-news__article">
         <div class="item-news__wrapper-img">
@@ -61,7 +72,7 @@ function createMarkup({
         <h2 class="item-news__title">${title}</h2>
         <p class="item-news__description">${abstract}</p>
         <div class="item-news__info">
-          <span class="item-news__info-date">${published_date}</span>
+          <span class="item-news__info-date">${formattedDate}</span>
           <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
         </div>
       </article>
