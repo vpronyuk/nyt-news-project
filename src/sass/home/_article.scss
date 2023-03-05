@@ -221,6 +221,7 @@
   .item-news__description {
     font-size: 16px;
     line-height: calc(22 / 16);
+    margin-bottom: 20px;
     height: 57px;
     overflow: hidden;
     @include tablet {
@@ -258,7 +259,8 @@
   .item-news__title {
     flex-grow: 1;
 
-    height: 167px;
+    height: 132px;
+    // height: 167px;
     overflow: hidden;
   }
 
