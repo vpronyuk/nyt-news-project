@@ -179,7 +179,7 @@ function createCard({
         <div class="item-news__wrapper-img">
           <img class="item-news__img" src="${imageUrl}" alt="photo">
           <p class="item-news__category">${section}</p>
-          <button class="item-news__add-to-favorite" 
+          <button class="item-news__add-to-favorite"
           <svg class="heart-icon">
                 <use
                   href="./images/symbol-defs.svg#icon-heart-empty"
