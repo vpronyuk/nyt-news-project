@@ -8,7 +8,7 @@ const CATEGORY_LIST = `https://api.nytimes.com/svc/news/v3/content/section-list.
 
 const mobileMenu = document.querySelector('.mobile_category_menu');
 const categoriesList = document.querySelector('.category_list');
-const dropDownMenu = document.querySelector('.dropdown_menu');
+const dropDownMenu = document.querySelector('.dropdown');
 const dropDownContent = document.querySelector('.dropdown_content');
 const mobileCatList = document.querySelector('.mobile_category_list');
 const otherBtn = document.querySelector('.category_btn');

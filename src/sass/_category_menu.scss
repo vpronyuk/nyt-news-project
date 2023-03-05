@@ -48,10 +48,6 @@
   fill: var(--third-color);
 }
 
-// .mobile_category_menu {
-//   position: relative;
-// }
-
 .mobile_category_list {
   display: flex;
   left: 0;
@@ -112,11 +108,12 @@
   white-space: nowrap;
   color: var(--switcher-accent-day);
   background-color: var(--third-color);
-
+  fill: var(--switcher-accent-day);
   &:hover,
   &:focus {
     background-color: var(--accent-color);
     color: var(--third-color);
+    fill: var(--third-color);
   }
 }
 
