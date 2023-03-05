@@ -8,5 +8,6 @@ body {
   font-family: 'Manrope', sans-serif;
   color: var(--main-color);
   background-color: var(--bg-color);
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
 }
-
