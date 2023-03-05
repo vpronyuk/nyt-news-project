@@ -354,6 +354,7 @@
 }
 
 body {
+  position: relative;
   transition: background-color 700ms;
 }
 
@@ -430,8 +431,25 @@ body {
 .search__clear {
   display: none;
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
   cursor: pointer;
   color: black;
+}
+
+.search__clear--dark {
+  color: #ffffff;
+}
+
+.header {
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.header--dark {
+  background-color: rgba(46, 46, 46, 1);
 }

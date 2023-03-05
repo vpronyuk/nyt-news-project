@@ -24,6 +24,8 @@ const headerIconMoon = document.querySelector('.form-header__icon-moon');
 const headerDark = document.querySelector('.form-header__dark');
 const headerLight = document.querySelector('.form-header__light');
 const iconMobMenu = document.querySelector('.icon-mob-menu');
+const header = document.querySelector('.header');
+const searchClearBtn = document.getElementById('searchClear');
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
 
@@ -37,6 +39,8 @@ function setDarkMode(isDarkMode) {
     headerInput.classList.add('form-header__input--dark');
     headerIconSearch.classList.add('form-header__icon-search--dark');
     iconMobMenu.classList.add('icon-mob-menu--dark');
+    header.classList.add('header--dark');
+    searchClearBtn.classList.add('search__clear--dark');
     checkboxInput.checked = true;
   } else {
     document.body.classList.remove('body--dark');
@@ -47,6 +51,8 @@ function setDarkMode(isDarkMode) {
     headerInput.classList.remove('form-header__input--dark');
     headerIconSearch.classList.remove('form-header__icon-search--dark');
     iconMobMenu.classList.remove('icon-mob-menu--dark');
+    header.classList.remove('header--dark');
+    searchClearBtn.classList.remove('search__clear--dark');
     checkboxInput.checked = false;
   }
 
