@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
@@ -7,9 +8,10 @@ const CATEGORY_NEWS = 'news/v3/content/inyt/automobiles.json'; //фідбек н
 const SEARCHED_QUERY = 'search/v2/articlesearch.json'; //фідбек на запит з input
 
 const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
+let btnAddtoStorage;
 
 const newsWrapper = document.querySelector('.list-news');
-
+newsWrapper.addEventListener('click', addRemoveToLocalStorage);
 // standard
 async function getPopularNews() {
   try {
@@ -66,22 +68,22 @@ function createMarkup({
     </li>`;
 }
 
-function readmoreHandler(e){
-  if(e.target.nodeName === "A"){
+function readmoreHandler(e) {
+  if (e.target.nodeName === 'A') {
     const readMoreLink = e.target;
-    readMoreLink.setAttribute("data-is-read",true);
+    readMoreLink.setAttribute('data-is-read', true);
 
     const ulItem = e.target.parentElement.parentElement.parentElement;
     console.log(ulItem);
     const read = document.createElement('p');
-    read.innerText="Already read";
+    read.innerText = 'Already read';
     read.classList.add('have-read');
     ulItem.appendChild(read);
-    const ID = ulItem.getAttribute("data-id");
+    const ID = ulItem.getAttribute('data-id');
   }
   return;
 }
 
-newsWrapper.addEventListener('click',readmoreHandler);
+// newsWrapper.addEventListener('click', readmoreHandler);
 
 localStorage.setItem('cards', '[]');
