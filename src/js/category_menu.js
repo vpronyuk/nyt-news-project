@@ -6,6 +6,7 @@ const BASE_URL = 'https://api.nytimes.com/svc/';
 const CATEGORY_NEWS = 'news/v3/content/inyt/';
 const CATEGORY_LIST = `https://api.nytimes.com/svc/news/v3/content/section-list.json?`;
 
+const mobileMenu = document.querySelector('.mobile_category_menu');
 const categoriesList = document.querySelector('.category_list');
 const dropDownContent = document.querySelector('.dropdown_content');
 const mobileCatList = document.querySelector('.mobile_category_list');
@@ -53,12 +54,33 @@ mobileCatList.addEventListener('click', onClickMobileCat);
 
 function onClickMobileBtn(event) {
   mobileCatList.classList.toggle('category_mobile_hidden');
+  document.addEventListener('click', closeMobileMenu);
 
   if (mobBtnSpan.textContent === 'Categories') {
-    mobCatBtn.classList.toggle('is-active');
+    mobCatBtn.classList.toggle('is-active-category-btn');
     mobCatBtnIcon.classList.toggle('rotate');
   } else {
     mobCatBtnIcon.classList.toggle('rotate');
+  }
+}
+
+function closeMobileMenu(e) {
+  const withinMobileMenu = e.composedPath().includes(mobileMenu);
+  console.log(withinMobileMenu);
+
+  if (
+    !withinMobileMenu &&
+    !mobileCatList.classList.contains('category_mobile_hidden') &&
+    mobBtnSpan.textContent === 'Categories'
+  ) {
+    mobileCatList.classList.add('category_mobile_hidden');
+    mobCatBtn.classList.remove('is-active-category-btn');
+    mobCatBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeMobileMenu);
+  } else if (!withinMobileMenu && mobBtnSpan.textContent !== 'Categories') {
+    mobileCatList.classList.add('category_mobile_hidden');
+    mobCatBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeMobileMenu);
   }
 }
 
@@ -70,7 +92,7 @@ function onClickMobileCat(event) {
   const query = event.target.dataset.section;
   const text = event.target.dataset.name;
   mobileCatList.classList.add('category_mobile_hidden');
-  mobCatBtn.classList.add('is-active');
+  mobCatBtn.classList.add('is-active-category-btn');
   mobCatBtnIcon.classList.remove('rotate');
   mobCatBtnIcon.style.fill = 'white';
 
@@ -135,14 +157,15 @@ categoriesList.addEventListener('click', onClickCatBtn);
 function onClickOtherBtn(event) {
   dropDownContent.classList.toggle('category_hidden');
   catBtnIcon.classList.toggle('rotate');
-  otherBtn.classList.toggle('is-active');
+  otherBtn.classList.toggle('is-active-other-btn');
 }
 
 function onClickCatBtn(event) {
   if (
     event.target.classList.contains('category_btn') ||
     event.target.classList.contains('desk-btn-span') ||
-    event.target.classList.contains('category_icon')
+    event.target.classList.contains('category_icon') ||
+    event.target.tagName !== 'BUTTON'
   ) {
     return;
   }
@@ -152,8 +175,22 @@ function onClickCatBtn(event) {
     catBtnIcon.classList.remove('rotate');
   }
 
+  const activeBtn = document.querySelector('.is-active-category-btn');
+  if (activeBtn) {
+    activeBtn.classList.remove('is-active-category-btn');
+    otherBtn.classList.remove('is-active-other-btn');
+  }
+
+  const activeBtnInOther = event.composedPath().includes(dropDownContent);
+
+  if (activeBtnInOther) {
+    event.target.classList.add('is-active-category-btn');
+    otherBtn.classList.add('is-active-other-btn');
+  } else {
+    event.target.classList.add('is-active-category-btn');
+  }
+
   const query = event.target.dataset.section;
-  console.log(query);
 
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
