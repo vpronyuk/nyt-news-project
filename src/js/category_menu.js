@@ -1,6 +1,12 @@
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+
 const API_KEY = 'AKwAkjVAbzaYm1bK9yzcr2BnwjHsxavz';
+const BASE_URL = 'https://api.nytimes.com/svc/';
+const CATEGORY_NEWS = 'news/v3/content/inyt/';
+const CATEGORY_LIST = `https://api.nytimes.com/svc/news/v3/content/section-list.json?`;
+
 const categoriesList = document.querySelector('.category_list');
-const dropDownMenu = document.querySelector('.dropdown');
 const dropDownContent = document.querySelector('.dropdown_content');
 const mobileCatList = document.querySelector('.mobile_category_list');
 const otherBtn = document.querySelector('.category_btn');
@@ -8,18 +14,39 @@ const mobCatBtn = document.querySelector('.mobile_category_btn');
 const mobCatBtnIcon = document.querySelector('.category_mob_icon');
 const mobBtnSpan = document.querySelector('.mob-btn-span');
 const catBtnIcon = document.querySelector('.category_icon');
-const deskSpanBtn = document.querySelector('.desk-btn-span');
-const sectionNews = document.querySelector('.section__list-news');
 const newsList = document.querySelector('.list-news');
-//---------------------- Mobile categories menu -------------------------------------//
 
-console.log(sectionNews);
+async function getNewsByCategory(query) {
+  try {
+    const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}`;
+
+    const response = await axios.get(url);
+
+    return response.data;
+  } catch (error) {
+    newsList.innerHTML = emptyPageMarkup;
+    console.error(error);
+  }
+}
+
+async function getCategoryList() {
+  try {
+    const url = `${CATEGORY_LIST}api-key=${API_KEY}`;
+
+    const response = await axios.get(url);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//---------------------- Mobile categories menu -------------------------------------//
 
 mobCatBtn.addEventListener('click', onClickMobileBtn);
 mobileCatList.addEventListener('click', onClickMobileCat);
 
 function onClickMobileBtn(event) {
-  console.log(event.target);
   mobileCatList.classList.toggle('category_hidden');
 
   if (mobBtnSpan.textContent === 'Categories') {
@@ -50,49 +77,40 @@ function onClickMobileCat(event) {
     mobBtnSpan.textContent = `${text.substring(0, 9)}...`;
   }
 
-  // fetch(
-  //   `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
-  // )
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     if (data.results === null) {
-  //       content.innerHTML = "We don't find any news";
-  //     } else {
-  //       const cards = data.results.reduce((markup, card) => {
-  //         return markup + createCard(card);
-  //       }, '');
-  //       content.innerHTML = cards;
-  //     }
-  //   });
+  getNewsByCategory(query).then(data => {
+    if (data.results === null) {
+      newsList.innerHTML = emptyPageMarkup;
+    } else {
+      const cards = data.results.reduce((markup, card) => {
+        return markup + createCard(card);
+      }, '');
+      newsList.innerHTML = cards;
+    }
+  });
 }
 
-fetch(
-  `https://api.nytimes.com/svc/news/v3/content/section-list.json?api-key=${API_KEY}`
-)
-  .then(response => response.json())
-  .then(response => {
-    const array = response.results;
+getCategoryList().then(response => {
+  const array = response.results;
 
-    const mobileMenu = array.reduce((markup, card) => {
-      return markup + createMarkup(card);
-    }, '');
+  const mobileMenu = array.reduce((markup, card) => {
+    return markup + createMarkup(card);
+  }, '');
 
-    mobileCatList.insertAdjacentHTML('beforeend', mobileMenu);
+  mobileCatList.insertAdjacentHTML('beforeend', mobileMenu);
 
-    const firstBtns = array.splice(0, 6);
-    const otherBtns = array;
+  const firstBtns = array.splice(0, 6);
+  const otherBtns = array;
 
-    const mainBtn = firstBtns.reduce((markup, card) => {
-      return markup + createMarkup(card);
-    }, '');
-    const listBtn = otherBtns.reduce((markup, card) => {
-      return markup + createMarkup(card);
-    }, '');
+  const mainBtn = firstBtns.reduce((markup, card) => {
+    return markup + createMarkup(card);
+  }, '');
+  const listBtn = otherBtns.reduce((markup, card) => {
+    return markup + createMarkup(card);
+  }, '');
 
-    categoriesList.insertAdjacentHTML('afterbegin', mainBtn);
-    dropDownContent.insertAdjacentHTML('beforeend', listBtn);
-  });
+  categoriesList.insertAdjacentHTML('afterbegin', mainBtn);
+  dropDownContent.insertAdjacentHTML('beforeend', listBtn);
+});
 
 function createMarkup({ section, display_name }) {
   return `
@@ -101,27 +119,6 @@ function createMarkup({ section, display_name }) {
   </li>
   `;
 }
-
-// categoriesList.addEventListener('click', e => {
-//   const query = e.target.dataset.section;
-
-//   if (e.target.textContent === 'Other') {
-//     fetch(
-//       `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
-//     )
-//       .then(res => res.json())
-//       .then(data => {
-//         if (data.results === null) {
-//           content.innerHTML = '';
-//         } else {
-//           const cards = data.results.reduce((markup, card) => {
-//             return markup + createCard(card);
-//           }, '');
-//           content.innerHTML = cards;
-//         }
-//       });
-//   }
-// });
 
 //------------------------- categories menu -------------------------------------//
 
@@ -151,33 +148,28 @@ function onClickCatBtn(event) {
   const query = event.target.dataset.section;
   console.log(query);
 
-  fetch(
-    `https://api.nytimes.com/svc/news/v3/content/inyt/${query}.json?api-key=${API_KEY}`
-  )
-    .then(res => res.json())
-    .then(data => {
-      if (data.results === null) {
-        newsList.innerHTML =
-          '<include src="./partials/home/empty_page.html"></include>';
-      } else {
-        markup = data.results.reduce((markup, card) => {
-          return markup + createCard(card);
-        }, '');
-        newsList.innerHTML = markup;
-      }
-    });
+  getNewsByCategory(query).then(data => {
+    if (data.results === null) {
+      newsList.innerHTML = emptyPageMarkup;
+    } else {
+      markup = data.results.reduce((markup, card) => {
+        return markup + createCard(card);
+      }, '');
+      newsList.innerHTML = markup;
+    }
+  });
 }
 
 function createCard({
   title,
   multimedia,
   section,
-  id,
   abstract,
   published_date,
   url,
 }) {
-  const imageUrl = multimedia?.[3]?.url || '';
+  const id = uuidv4();
+  const imageUrl = multimedia?.[2]?.url || '';
   return `<li class="list-news__item" data-id="${id}">
       <article class="item-news__article">
         <div class="item-news__wrapper-img">
@@ -199,3 +191,58 @@ function createCard({
       </article>
     </li>`;
 }
+
+const emptyPageMarkup = `<li><section class="empty">
+  <p class="empty_title">
+    We haven't found news
+    <br />
+    from this category
+  </p>
+  <picture>
+    <source
+      srcset="./img/mobile.png 1x, ./img/mobile@2x.png 2x"
+      type="image/png"
+      media="(max-width: 480px)"
+      alt="empty-page"
+    />
+    <source
+      srcset="./img/tablet.png 1x, ./img/tablet@2x.png 2x"
+      type="image/png"
+      media="(max-width:768px)"
+      alt="empty-page"
+    />
+    <source
+      srcset="./img/desktop.png 1x, ./img/desktop@2x.png 2x"
+      type="image/png"
+      media="(min-width: 1280px)"
+      alt="empty-page"
+    />
+    <img
+      class="empty_picture"
+      src="./img/mobile.png"
+      alt="empty-page"
+      width="248"
+      height="198"
+    />
+  </picture>
+</section></li>`;
+
+function readmoreHandler(e) {
+  if (e.target.nodeName === 'A') {
+    const readMoreLink = e.target;
+    readMoreLink.setAttribute('data-is-read', true);
+
+    const ulItem = e.target.parentElement.parentElement.parentElement;
+    console.log(ulItem);
+    const read = document.createElement('p');
+    read.innerText = 'Already read';
+    read.classList.add('have-read');
+    ulItem.appendChild(read);
+    const ID = ulItem.getAttribute('data-id');
+  }
+  return;
+}
+
+newsWrapper.addEventListener('click', readmoreHandler);
+
+localStorage.setItem('cards', '[]');
