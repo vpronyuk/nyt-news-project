@@ -1,34 +1,40 @@
-<div class="con-calendar">
-  <div class="calendar">
-    <div class="month-year">
-      <div class="month">
-        <i class="fas fa-angle-left prev"></i>
-        <div class="date-calendar">
-          <h1></h1>
-          <p></p>
+<div class="calendar">
+  <div class="calendar__box">
+    <p class="calendar__text">Search date news</p>
+    <input type="text" class="calendar__input" placeholder="Jacob Mercer"></input>
+  </div>
+  <div class="calendar__conteiner is-hidden">
+    <div class="calendar__calendar">
+      <div class="calendar__month-year">
+        <div class="calendar__month">
+          <i class="fas fa-angle-left calendar__prev"></i>
+          <div class="calendar__date">
+            <h1></h1>
+            <p></p>
+          </div>
+          <i class="fas fa-angle-right calendar__next"></i>
         </div>
-        <i class="fas fa-angle-right next"></i>
+
+        <div class="calendar__year">
+          <i class="fas fa-angle-left calendar__prev-year"></i>
+          <div class="calendar__date">
+            <h2></h2>
+          </div>
+          <i class="fas fa-angle-right calendar__next-year"></i>
+        </div>
       </div>
 
-      <div class="year">
-        <i class="fas fa-angle-left prev-year"></i>
-        <div class="date-calendar">
-          <h2></h2>
-        </div>
-        <i class="fas fa-angle-right next-year"></i>
+      <div class="calendar__weekdays">
+        <div>Su</div>
+        <div>Mo</div>
+        <div>Tu</div>
+        <div>We</div>
+        <div>Th</div>
+        <div>Fr</div>
+        <div>Sa</div>
       </div>
-    </div>
 
-    <div class="weekdays">
-      <div>Su</div>
-      <div>Mo</div>
-      <div>Tu</div>
-      <div>We</div>
-      <div>Th</div>
-      <div>Fr</div>
-      <div>Sa</div>
+      <div class="calendar__days"></div>
     </div>
-
-    <div class="days"></div>
   </div>
 </div>
