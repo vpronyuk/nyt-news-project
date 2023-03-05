@@ -20,7 +20,13 @@
 // }
 main {
   position: absolute;
-  top: 118px;
+  top: 104px;
+  @include tablet {
+    top: 116px;
+  }
+  @include desktop {
+    top: 120px;
+  }
 }
 
 .container {

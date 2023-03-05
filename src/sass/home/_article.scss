@@ -232,7 +232,8 @@
   .list-news {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    row-gap: 40px;
+    column-gap: 30px;
   }
 
   .list-news__item {
