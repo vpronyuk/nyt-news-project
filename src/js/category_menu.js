@@ -156,11 +156,11 @@ function onClickCatBtn(event) {
       newsList.style.justifyContent = 'center';
       newsList.innerHTML = emptyPageMarkup;
     } else {
-      markup = data.results.reduce((markup, card) => {
+      const cards = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
       newsList.style.justifyContent = '';
-      newsList.innerHTML = markup;
+      newsList.innerHTML = cards;
     }
   });
 }
