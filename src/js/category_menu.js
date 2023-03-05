@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 const API_KEY = 'AKwAkjVAbzaYm1bK9yzcr2BnwjHsxavz';
@@ -6,7 +6,9 @@ const BASE_URL = 'https://api.nytimes.com/svc/';
 const CATEGORY_NEWS = 'news/v3/content/inyt/';
 const CATEGORY_LIST = `https://api.nytimes.com/svc/news/v3/content/section-list.json?`;
 
+const mobileMenu = document.querySelector('.mobile_category_menu');
 const categoriesList = document.querySelector('.category_list');
+const dropDownMenu = document.querySelector('.dropdown_menu');
 const dropDownContent = document.querySelector('.dropdown_content');
 const mobileCatList = document.querySelector('.mobile_category_list');
 const otherBtn = document.querySelector('.category_btn');
@@ -17,6 +19,11 @@ const catBtnIcon = document.querySelector('.category_icon');
 const newsList = document.querySelector('.list-news');
 const emptyPage = document.querySelector('.empty');
 
+console.log(dropDownMenu);
+
+mobileCatList.classList.remove('category_hidden');
+mobileCatList.classList.add('category_mobile_hidden');
+
 async function getNewsByCategory(query) {
   try {
     const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}`;
@@ -26,6 +33,8 @@ async function getNewsByCategory(query) {
     return response.data;
   } catch (error) {
     console.error(error);
+    newsList.innerHTML = '';
+    emptyPage.style.display = 'block';
   }
 }
 
@@ -47,13 +56,34 @@ mobCatBtn.addEventListener('click', onClickMobileBtn);
 mobileCatList.addEventListener('click', onClickMobileCat);
 
 function onClickMobileBtn(event) {
-  mobileCatList.classList.toggle('category_hidden');
+  mobileCatList.classList.toggle('category_mobile_hidden');
+  document.addEventListener('click', closeMobileMenu);
 
   if (mobBtnSpan.textContent === 'Categories') {
-    mobCatBtn.classList.toggle('is-active');
+    mobCatBtn.classList.toggle('is-active-category-btn');
     mobCatBtnIcon.classList.toggle('rotate');
   } else {
     mobCatBtnIcon.classList.toggle('rotate');
+  }
+}
+
+function closeMobileMenu(e) {
+  const withinMobileMenu = e.composedPath().includes(mobileMenu);
+  console.log(withinMobileMenu);
+
+  if (
+    !withinMobileMenu &&
+    !mobileCatList.classList.contains('category_mobile_hidden') &&
+    mobBtnSpan.textContent === 'Categories'
+  ) {
+    mobileCatList.classList.add('category_mobile_hidden');
+    mobCatBtn.classList.remove('is-active-category-btn');
+    mobCatBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeMobileMenu);
+  } else if (!withinMobileMenu && mobBtnSpan.textContent !== 'Categories') {
+    mobileCatList.classList.add('category_mobile_hidden');
+    mobCatBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeMobileMenu);
   }
 }
 
@@ -64,8 +94,8 @@ function onClickMobileCat(event) {
   }
   const query = event.target.dataset.section;
   const text = event.target.dataset.name;
-  mobileCatList.classList.add('category_hidden');
-  mobCatBtn.classList.add('is-active');
+  mobileCatList.classList.add('category_mobile_hidden');
+  mobCatBtn.classList.add('is-active-category-btn');
   mobCatBtnIcon.classList.remove('rotate');
   mobCatBtnIcon.style.fill = 'white';
 
@@ -130,14 +160,29 @@ categoriesList.addEventListener('click', onClickCatBtn);
 function onClickOtherBtn(event) {
   dropDownContent.classList.toggle('category_hidden');
   catBtnIcon.classList.toggle('rotate');
-  otherBtn.classList.toggle('is-active');
+  otherBtn.classList.toggle('is-active-other-btn');
+  document.addEventListener('click', closeDesktopMenu);
+}
+
+function closeDesktopMenu(e) {
+  const withinDesktopMenu = e.composedPath().includes(dropDownMenu);
+
+  console.log(withinDesktopMenu);
+
+  if (!withinDesktopMenu) {
+    dropDownContent.classList.add('category_hidden');
+    otherBtn.classList.remove('is-active-other-btn');
+    catBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeDesktopMenu);
+  }
 }
 
 function onClickCatBtn(event) {
   if (
     event.target.classList.contains('category_btn') ||
     event.target.classList.contains('desk-btn-span') ||
-    event.target.classList.contains('category_icon')
+    event.target.classList.contains('category_icon') ||
+    event.target.tagName !== 'BUTTON'
   ) {
     return;
   }
@@ -147,8 +192,23 @@ function onClickCatBtn(event) {
     catBtnIcon.classList.remove('rotate');
   }
 
+  const activeBtn = document.querySelector('.is-active-category-btn');
+  if (activeBtn) {
+    activeBtn.classList.remove('is-active-category-btn');
+    otherBtn.classList.remove('is-active-other-btn');
+  }
+
+  const activeBtnInOther = event.composedPath().includes(dropDownContent);
+
+  if (activeBtnInOther) {
+    event.target.classList.add('is-active-category-btn');
+    otherBtn.classList.add('is-active-other-btn');
+  } else {
+    event.target.classList.add('is-active-category-btn');
+  }
+
+  document.removeEventListener('click', closeDesktopMenu);
   const query = event.target.dataset.section;
-  console.log(query);
 
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
@@ -174,6 +234,15 @@ function createCard({
 }) {
   const id = uuidv4();
   const imageUrl = multimedia?.[2]?.url || '';
+  const MAX_SNIPPET_LENGTH = 110;
+  if (abstract.length > MAX_SNIPPET_LENGTH) {
+    abstract = abstract.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';
+  }
+  const date = new Date(published_date);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear().toString();
+  const formattedDate = `${day}/${month}/${year}`;
   return `<li class="list-news__item" data-id="${id}">
       <article class="item-news__article">
         <div class="item-news__wrapper-img">
@@ -189,7 +258,7 @@ function createCard({
         <h2 class="item-news__title">${title}</h2>
         <p class="item-news__description">${abstract}</p>
         <div class="item-news__info">
-          <span class="item-news__info-date">${published_date}</span>
+          <span class="item-news__info-date">${formattedDate}</span>
           <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
         </div>
       </article>
