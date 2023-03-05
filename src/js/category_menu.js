@@ -15,6 +15,7 @@ const mobCatBtnIcon = document.querySelector('.category_mob_icon');
 const mobBtnSpan = document.querySelector('.mob-btn-span');
 const catBtnIcon = document.querySelector('.category_icon');
 const newsList = document.querySelector('.list-news');
+const emptyPage = document.querySelector('.empty');
 
 async function getNewsByCategory(query) {
   try {
@@ -24,8 +25,6 @@ async function getNewsByCategory(query) {
 
     return response.data;
   } catch (error) {
-    newsList.style.justifyContent = 'center';
-    newsList.innerHTML = emptyPageMarkup;
     console.error(error);
   }
 }
@@ -80,13 +79,13 @@ function onClickMobileCat(event) {
 
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
-      newsList.innerHTML = emptyPageMarkup;
-      newsList.style.justifyContent = 'center';
+      newsList.innerHTML = '';
+      emptyPage.style.display = 'block';
     } else {
       const cards = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
-      newsList.style.justifyContent = '';
+      emptyPage.style.display = 'none';
       newsList.innerHTML = cards;
     }
   });
@@ -153,13 +152,13 @@ function onClickCatBtn(event) {
 
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
-      newsList.style.justifyContent = 'center';
-      newsList.innerHTML = emptyPageMarkup;
+      newsList.innerHTML = '';
+      emptyPage.style.display = 'block';
     } else {
       const cards = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
-      newsList.style.justifyContent = '';
+      emptyPage.style.display = 'none';
       newsList.innerHTML = cards;
     }
   });
@@ -197,41 +196,6 @@ function createCard({
     </li>`;
 }
 
-const emptyPageMarkup = `<li><section class="empty">
-  <p class="empty_title">
-    We haven't found news
-    <br />
-    from this category
-  </p>
-  <picture>
-    <source
-      srcset="./img/mobile.png 1x, ./img/mobile@2x.png 2x"
-      type="image/png"
-      media="(max-width: 480px)"
-      alt="empty-page"
-    />
-    <source
-      srcset="./img/tablet.png 1x, ./img/tablet@2x.png 2x"
-      type="image/png"
-      media="(max-width:768px)"
-      alt="empty-page"
-    />
-    <source
-      srcset="./img/desktop.png 1x, ./img/desktop@2x.png 2x"
-      type="image/png"
-      media="(min-width: 1280px)"
-      alt="empty-page"
-    />
-    <img
-      class="empty_picture"
-      src="./img/mobile.png"
-      alt="empty-page"
-      width="248"
-      height="198"
-    />
-  </picture>
-</section></li>`;
-
 function readmoreHandler(e) {
   if (e.target.nodeName === 'A') {
     const readMoreLink = e.target;
@@ -248,6 +212,6 @@ function readmoreHandler(e) {
   return;
 }
 
-newsWrapper.addEventListener('click', readmoreHandler);
+newsList.addEventListener('click', readmoreHandler);
 
 localStorage.setItem('cards', '[]');
