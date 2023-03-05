@@ -26,6 +26,8 @@ async function getNewsByCategory(query) {
     return response.data;
   } catch (error) {
     console.error(error);
+    newsList.innerHTML = '';
+    emptyPage.style.display = 'block';
   }
 }
 
@@ -47,7 +49,7 @@ mobCatBtn.addEventListener('click', onClickMobileBtn);
 mobileCatList.addEventListener('click', onClickMobileCat);
 
 function onClickMobileBtn(event) {
-  mobileCatList.classList.toggle('category_hidden');
+  mobileCatList.classList.toggle('category_mobile_hidden');
 
   if (mobBtnSpan.textContent === 'Categories') {
     mobCatBtn.classList.toggle('is-active');
@@ -64,7 +66,7 @@ function onClickMobileCat(event) {
   }
   const query = event.target.dataset.section;
   const text = event.target.dataset.name;
-  mobileCatList.classList.add('category_hidden');
+  mobileCatList.classList.add('category_mobile_hidden');
   mobCatBtn.classList.add('is-active');
   mobCatBtnIcon.classList.remove('rotate');
   mobCatBtnIcon.style.fill = 'white';
