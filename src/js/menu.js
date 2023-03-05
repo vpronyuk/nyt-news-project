@@ -68,42 +68,47 @@ const isDarkMode = JSON.parse(localStorage.getItem('isDarkMode')) || false;
 setDarkMode(isDarkMode);
 
 /*-----------------------------------------------Темна тема мобільне меню-----------------------------------*/
-// const mob = document.querySelector('.mob-menu__checkbox-input');
-// const menu = document.querySelector('.mob-menu');
-// const sun = document.querySelector('.mob-icon-sun');
-// const mobMoon = document.querySelector('.mob-icon-moon');
+const mob = document.querySelector('.mob-menu__checkbox-input');
+const menu = document.querySelector('.mob-nav-menu');
+const sun = document.querySelector('.mob-icon-sun');
+const mobMoon = document.querySelector('.mob-icon-moon');
+const btnMenu = document.querySelector('.button-menu__icon-close');
 // const iconMobMenu = document.querySelector('.icon-mob-menu');
 
-// mob.addEventListener('click', onMobClick);
+mob.addEventListener('click', onMobClick);
 
-// function onMobClick() {
-//   const isDarkModeMob = mob.checked;
-//   if (isDarkModeMob) {
-//     menu.classList.add('mob-menu--dark');
-//     sun.classList.add('mob-icon-sun--dark');
-//     mobMoon.classList.add('mob-icon-moon--dark');
-//   } else {
-//     menu.classList.remove('mob-menu--dark');
-//     sun.classList.remove('mob-icon-sun--dark');
-//     mobMoon.classList.remove('mob-icon-moon--dark');
-//   }
-//   mob.setAttribute('checked', 'checked');
-//   localStorage.setItem('isDarkMode', isDarkModeMob);
-// }
+function onMobClick() {
+  const isDarkModeMob = mob.checked;
+  if (isDarkModeMob) {
+    menu.classList.add('mob-nav-menu--dark');
+    sun.classList.add('mob-icon-sun--dark');
+    mobMoon.classList.add('mob-icon-moon--dark');
+    btnMenu.classList.add('.button-menu__icon-close--dark');
+  } else {
+    menu.classList.remove('mob-nav-menu--dark');
+    sun.classList.remove('mob-icon-sun--dark');
+    mobMoon.classList.remove('mob-icon-moon--dark');
+    btnMenu.classList.add('.button-menu__icon-close--dark');
+  }
+  mob.setAttribute('checked', 'checked');
+  localStorage.setItem('isDarkMode', isDarkModeMob);
+}
 
-// const isDarkModeMob = JSON.parse(localStorage.getItem('isDarkMode'));
+const isDarkModeMob = JSON.parse(localStorage.getItem('isDarkMode'));
 
-// if (isDarkModeMob) {
-//   mob.checked = true;
-//   menu.classList.add('mob-menu--dark');
-//   sun.classList.add('mob-icon-sun--dark');
-//   mobMoon.classList.add('mob-icon-moon--dark');
-// } else {
-//   mob.checked = false;
-//   menu.classList.remove('mob-menu--dark');
-//   sun.classList.remove('mob-icon-sun--dark');
-//   mobMoon.classList.remove('mob-icon-moon--dark');
-// }
+if (isDarkModeMob) {
+  mob.checked = true;
+  menu.classList.add('mob-nav-menu--dark');
+  sun.classList.add('mob-icon-sun--dark');
+  mobMoon.classList.add('mob-icon-moon--dark');
+  btnMenu.classList.add('.button-menu__icon-close--dark');
+} else {
+  mob.checked = false;
+  menu.classList.remove('mob-nav-menu--dark');
+  sun.classList.remove('mob-icon-sun--dark');
+  mobMoon.classList.remove('mob-icon-moon--dark');
+  btnMenu.classList.add('.button-menu__icon-close--dark');
+}
 
 /*------------------------------Отримання данних знахлдження користувача на сторінці та навігація по хедеру------------------*/
 const currentPage = window.location.pathname;
