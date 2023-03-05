@@ -127,7 +127,7 @@ weekWeatherBtn.addEventListener(`click`, () => {
         const descriptionWeek = day.weather.description;
         const iconWeek = day.weather.icon;
         return `
-            <li class="icon-item"> 
+            <li class="icon-item">
              <img class="week-weather-icon" src="https://www.weatherbit.io/static/img/icons/${iconWeek}.png">
              <div class="week-weather-item">
               <div class="week-weather-date">${date}</div>
