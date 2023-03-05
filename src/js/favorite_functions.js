@@ -4,6 +4,7 @@ function addRemoveToLocalStorage(evt) {
   if (evt.target.tagName !== 'BUTTON') {
     return;
   }
+
   btnAddtoStorage = evt.target;
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
 
