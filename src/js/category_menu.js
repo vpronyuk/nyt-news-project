@@ -24,6 +24,7 @@ async function getNewsByCategory(query) {
 
     return response.data;
   } catch (error) {
+    newsList.style.justifyContent = 'center';
     newsList.innerHTML = emptyPageMarkup;
     console.error(error);
   }
@@ -80,10 +81,12 @@ function onClickMobileCat(event) {
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
       newsList.innerHTML = emptyPageMarkup;
+      newsList.style.justifyContent = 'center';
     } else {
       const cards = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
+      newsList.style.justifyContent = '';
       newsList.innerHTML = cards;
     }
   });
@@ -150,11 +153,13 @@ function onClickCatBtn(event) {
 
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
+      newsList.style.justifyContent = 'center';
       newsList.innerHTML = emptyPageMarkup;
     } else {
       markup = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
+      newsList.style.justifyContent = '';
       newsList.innerHTML = markup;
     }
   });
