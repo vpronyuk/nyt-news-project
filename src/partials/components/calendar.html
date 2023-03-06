@@ -1,12 +1,22 @@
 <div class="calendar">
   <div class="calendar__box">
     <p class="calendar__text">Search date news</p>
-    <input
-      type="text"
-      class="calendar__input"
-      name="calendar-name"
-      placeholder="Choose a date"
-    />
+    <div class="calendar__box-input">
+      <svg class="calendar__icon" id="calendar" width="17" height="17">
+        <use href="/src/images/sprite.svg#calendar"></use>
+      </svg>
+
+      <input
+        type="text"
+        class="calendar__input"
+        name="calendar-name"
+        placeholder="00/00/0000"
+      />
+
+      <!-- <svg class="calendar__icon" id="arrow-down" width="15" height="9">
+        <use href="/src/images/sprite.svg#arrow-down"></use>
+      </svg> -->
+    </div>
   </div>
   <div class="calendar__container is-hidden">
     <div class="calendar__calendar">
@@ -15,7 +25,6 @@
           <i class="fas fa-angle-left calendar__prev"></i>
           <div class="calendar__date">
             <h1></h1>
-            <p></p>
           </div>
           <i class="fas fa-angle-right calendar__next"></i>
         </div>
