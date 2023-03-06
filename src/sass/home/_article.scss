@@ -1,3 +1,6 @@
+.section__list-news {
+  max-width: 100%;
+}
 .list-news__item {
   position: relative;
   pointer-events: auto;
@@ -39,6 +42,7 @@
   pointer-events: auto;
   position: relative;
   margin-bottom: 20px;
+  // max-width: 288px;
 }
 
 .item-news__img {
@@ -179,7 +183,7 @@
 }
 
 .item-news__description {
-  // margin-bottom: 20px;
+  margin-bottom: 20px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
