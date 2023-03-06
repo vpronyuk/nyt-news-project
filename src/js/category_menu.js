@@ -18,8 +18,8 @@ const mobBtnSpan = document.querySelector('.mob-btn-span');
 const catBtnIcon = document.querySelector('.category_icon');
 const newsList = document.querySelector('.list-news');
 const emptyPage = document.querySelector('.empty');
-
-console.log(dropDownMenu);
+const darkModeDeskCheckbox = document.querySelector('.checkbox-header__input');
+const darkModeMobCheckbox = document.querySelector('.mob-menu__checkbox-input');
 
 mobileCatList.classList.remove('category_hidden');
 mobileCatList.classList.add('category_mobile_hidden');
@@ -121,6 +121,8 @@ function onClickMobileCat(event) {
   });
 }
 
+///------------------------   Отримання даних з бекенденду та рендеринг кнопок меню ----------//////
+
 getCategoryList().then(response => {
   const array = response.results;
 
@@ -142,17 +144,47 @@ getCategoryList().then(response => {
 
   categoriesList.insertAdjacentHTML('afterbegin', mainBtn);
   dropDownContent.insertAdjacentHTML('beforeend', listBtn);
+
+  //--- Перевірка встановленного режиму теми в локал localstorage і встановлення фону кнопки при рендеру--//
+
+  const catMenuBtnList = document.querySelectorAll('.cat-menu-btn');
+  const darkMode = JSON.parse(localStorage.getItem('isDarkMode'));
+  if (darkMode) {
+    for (btn of catMenuBtnList) {
+      btn.classList.add('dark-categories-btn');
+    }
+    otherBtn.classList.add('dark-categories-btn');
+    mobCatBtn.classList.add('dark-categories-btn');
+  }
+
+  darkModeDeskCheckbox.addEventListener('click', () => {
+    switchDarkBtnMode(catMenuBtnList, otherBtn, mobCatBtn);
+  });
+
+  darkModeMobCheckbox.addEventListener('click', () => {
+    switchDarkBtnMode(catMenuBtnList, otherBtn, mobCatBtn);
+  });
 });
 
 function createMarkup({ section, display_name }) {
   return `
   <li>
-  <button type="button" data-section="${section}" data-name='${display_name}'> ${display_name}</button>
+  <button class="cat-menu-btn" type="button" data-section="${section}" data-name='${display_name}'> ${display_name}</button>
   </li>
   `;
 }
 
-//------------------------- categories menu -------------------------------------//
+//--------Функція зміни фону кнопок при переключення світлого або темного режиму -------//
+
+function switchDarkBtnMode(array, deskBtn, MobBtn) {
+  for (btn of array) {
+    btn.classList.toggle('dark-categories-btn');
+  }
+  deskBtn.classList.toggle('dark-categories-btn');
+  MobBtn.classList.toggle('dark-categories-btn');
+}
+
+//------------------------- Блок коду десктопного меню -------------------------------------------/;
 
 otherBtn.addEventListener('click', onClickOtherBtn);
 categoriesList.addEventListener('click', onClickCatBtn);
@@ -169,11 +201,24 @@ function closeDesktopMenu(e) {
 
   console.log(withinDesktopMenu);
 
-  if (!withinDesktopMenu) {
+  if (
+    !withinDesktopMenu &&
+    !otherBtn.classList.contains('has-active-button-inside')
+  ) {
     dropDownContent.classList.add('category_hidden');
     otherBtn.classList.remove('is-active-other-btn');
     catBtnIcon.classList.remove('rotate');
     document.removeEventListener('click', closeDesktopMenu);
+    console.log('Закриваю меню без активної кнопки всередині');
+  } else if (
+    !withinDesktopMenu &&
+    otherBtn.classList.contains('has-active-button-inside')
+  ) {
+    dropDownContent.classList.add('category_hidden');
+    otherBtn.classList.add('is-active-other-btn');
+    catBtnIcon.classList.remove('rotate');
+    document.removeEventListener('click', closeDesktopMenu);
+    console.log('Закриваю меню з активною кнопкою всередині');
   }
 }
 
@@ -196,6 +241,7 @@ function onClickCatBtn(event) {
   if (activeBtn) {
     activeBtn.classList.remove('is-active-category-btn');
     otherBtn.classList.remove('is-active-other-btn');
+    otherBtn.classList.remove('has-active-button-inside');
   }
 
   const activeBtnInOther = event.composedPath().includes(dropDownContent);
@@ -203,6 +249,7 @@ function onClickCatBtn(event) {
   if (activeBtnInOther) {
     event.target.classList.add('is-active-category-btn');
     otherBtn.classList.add('is-active-other-btn');
+    otherBtn.classList.add('has-active-button-inside');
   } else {
     event.target.classList.add('is-active-category-btn');
   }
