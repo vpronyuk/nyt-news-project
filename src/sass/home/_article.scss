@@ -2,8 +2,12 @@
   position: relative;
   pointer-events: auto;
   width: 100%;
+  max-width: 288px;
   // max-height: 630px;
   height: 630px;
+  @include tablet {
+    max-width: none;
+  }
 }
 
 .favorite-container {
@@ -38,11 +42,17 @@
 }
 
 .item-news__img {
-  min-width: 288px;
+  max-width: 288px;
   height: 395px;
   border-radius: 4px;
   object-fit: cover;
   // margin-bottom: 20px;
+  @include tablet {
+    max-width: 353px;
+  }
+  @include desktop {
+    max-width: 395px;
+  }
 }
 
 .item-news__category {
