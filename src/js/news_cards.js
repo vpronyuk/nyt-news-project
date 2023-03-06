@@ -1,25 +1,27 @@
 import axios from 'axios';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
+import { addRemoveToLocalStorageREAD} from './read';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
 const CATEGORY_LIST = 'news/v3/content/section-list.json'; //потрібно для відмальовки dropdown menu
 const CATEGORY_NEWS = 'news/v3/content/inyt/automobiles.json'; //фідбек на запит з dropdown menu
 const SEARCHED_QUERY = 'search/v2/articlesearch.json'; //фідбек на запит з input
-
 const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
 let btnAddtoStorage;
 
 const newsWrapper = document.querySelector('.list-news');
 newsWrapper.addEventListener('click', addRemoveToLocalStorage);
+newsWrapper.addEventListener('click', addRemoveToLocalStorageREAD);
+
 // standard
-async function getPopularNews() {
+ async function getPopularNews() {
   try {
     const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
 
     const response = await axios.get(url);
     console.log(response.data.results);
-
+    
     return response.data;
   } catch (error) {
     console.error(error);
@@ -35,6 +37,9 @@ getPopularNews()
     return results.map(createMarkup).join('');
   })
   .then(updateNewsList);
+
+
+
 
 function createMarkup({
   title,
@@ -79,22 +84,9 @@ function createMarkup({
     </li>`;
 }
 
-function readmoreHandler(e) {
-  if (e.target.nodeName === 'A') {
-    const readMoreLink = e.target;
-    readMoreLink.setAttribute('data-is-read', true);
 
-    const ulItem = e.target.parentElement.parentElement.parentElement;
-    console.log(ulItem);
-    const read = document.createElement('p');
-    read.innerText = 'Already read';
-    read.classList.add('have-read');
-    ulItem.appendChild(read);
-    const ID = ulItem.getAttribute('data-id');
-  }
-  return;
-}
-
-// newsWrapper.addEventListener('click', readmoreHandler);
 
 localStorage.setItem('cards', '[]');
+localStorage.setItem('read-more','[]');
+
+export default getPopularNews;
