@@ -1,7 +1,7 @@
 const objFromStorale = localStorage.getItem('cards');
 const objParse = JSON.parse(objFromStorale);
 
-const newsWrapper = document.querySelector('.card_list');
+const newsWrapper = document.querySelector('.list-news');
 
 newsWrapper.addEventListener('click', addRemoveToLocalStorage);
 
@@ -23,8 +23,8 @@ function createFavoriteMarkup({
         <div class="item-news__wrapper-img">
           <img class="item-news__img" src="${imageUrl}" alt="photo">
           <p class="item-news__category">${section}</p>
-          <button checked="true" class="item-news__add-to-favorite">Add to favorite
-            <!-- сердечко -->
+          <button checked="true" class="item-news__add-to-favorite">
+          Remove from favorite
           </button>
         </div>
         <h2 class="item-news__title">${title}</h2>
@@ -53,6 +53,7 @@ function updateStorageFavotite(parseStorage, btnDivID) {
     return acc;
   }, []);
   const strStorage = JSON.stringify(newStorage);
+
   localStorage.setItem('cards', strStorage);
   const updatedStorage = JSON.parse(localStorage.getItem('cards'));
   const markFromUpdStarage = markupFavorite(updatedStorage);

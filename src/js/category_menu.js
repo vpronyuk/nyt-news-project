@@ -330,4 +330,4 @@ function readmoreHandler(e) {
 
 newsList.addEventListener('click', readmoreHandler);
 
-localStorage.setItem('cards', '[]');
+// localStorage.setItem('cards', '[]');

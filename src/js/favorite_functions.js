@@ -1,6 +1,10 @@
 export { addRemoveToLocalStorage, updateStorage };
 
 function addRemoveToLocalStorage(evt) {
+  if (localStorage.getItem('cards') === null) {
+    localStorage.setItem('cards', '[]');
+  }
+
   if (evt.target.tagName !== 'BUTTON') {
     return;
   }

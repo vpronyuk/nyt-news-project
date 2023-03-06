@@ -65,10 +65,10 @@ function createMarkup({
                 <img class="item-news__img" src="${imageUrl}" alt="photo">
                 <p class="item-news__category">${section}</p>
                 <div class="article_flag">
-                  <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span> 
+                  <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span>
                     <svg width="16" height="16">
                       <use href="./images/symbol-defs.svg#icon-heart-empty" width="16" height="16"></use>
-                    </svg>    
+                    </svg>
                   </button>
                   <button class="article_flag--remove is-hidden"><span class="article_flag_text">Remove from favorite</span>
                     <svg width="16" height="16">
@@ -87,6 +87,25 @@ function createMarkup({
           </li>`;
 }
 
+function readmoreHandler(e) {
+  if (e.target.nodeName === 'A') {
+    const readMoreLink = e.target;
+    readMoreLink.setAttribute('data-is-read', true);
+
+    const ulItem = e.target.parentElement.parentElement.parentElement;
+    console.log(ulItem);
+    const read = document.createElement('p');
+    read.innerText = 'Already read';
+    read.classList.add('have-read');
+    ulItem.appendChild(read);
+    const ID = ulItem.getAttribute('data-id');
+  }
+  return;
+}
+
+// newsWrapper.addEventListener('click', readmoreHandler);
+
+// localStorage.setItem('cards', '[]');
 localStorage.setItem('cards', '[]');
 localStorage.setItem('read-more', '[]');
 
