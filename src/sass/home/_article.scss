@@ -12,6 +12,7 @@
   row-gap: 28px;
   column-gap: 30px;
   @include tablet {
+    justify-content: start;
     row-gap: 30px;
   }
   @include desktop {
