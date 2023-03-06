@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
-import { addRemoveToLocalStorageREAD} from './read';
+import { addRemoveToLocalStorageREAD } from './read';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
@@ -15,13 +15,13 @@ newsWrapper.addEventListener('click', addRemoveToLocalStorage);
 newsWrapper.addEventListener('click', addRemoveToLocalStorageREAD);
 
 // standard
- async function getPopularNews() {
+async function getPopularNews() {
   try {
     const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
 
     const response = await axios.get(url);
     console.log(response.data.results);
-    
+
     return response.data;
   } catch (error) {
     console.error(error);
@@ -37,9 +37,6 @@ getPopularNews()
     return results.map(createMarkup).join('');
   })
   .then(updateNewsList);
-
-
-
 
 function createMarkup({
   title,
@@ -63,30 +60,34 @@ function createMarkup({
   const year = date.getFullYear().toString();
   const formattedDate = `${day}/${month}/${year}`;
   return `<li class="list-news__item" data-id="${id}" >
-      <article class="item-news__article">
-        <div class="item-news__wrapper-img">
-          <img class="item-news__img" src="${imageUrl}" alt="photo">
-          <p class="item-news__category">${section}</p>
-          <button class="item-news__add-to-favorite" 
-          <svg class="heart-icon">
-                <use
-                  href="./images/symbol-defs.svg#icon-heart-empty"
-                ></use></svg>Add to favorite
-          </button>
-        </div>
-        <h2 class="item-news__title">${title}</h2>
-        <p class="item-news__description">${abstract}</p>
-        <div class="item-news__info">
-          <span class="item-news__info-date">${formattedDate}</span>
-          <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
-        </div>
-      </article>
-    </li>`;
+            <article class="item-news__article">
+              <div class="item-news__wrapper-img">
+                <img class="item-news__img" src="${imageUrl}" alt="photo">
+                <p class="item-news__category">${section}</p>
+                <div class="article_flag">
+                  <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span> 
+                    <svg width="16" height="16">
+                      <use href="./images/symbol-defs.svg#icon-heart-empty" width="16" height="16"></use>
+                    </svg>    
+                  </button>
+                  <button class="article_flag--remove is-hidden"><span class="article_flag_text">Remove from favorite</span>
+                    <svg width="16" height="16">
+                      <use href="./images/symbol-defs.svg#icon-heart-fill" width="16" height="16"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <h2 class="item-news__title">${title}</h2>
+              <p class="item-news__description">${abstract}</p>
+              <div class="item-news__info">
+                <span class="item-news__info-date">${formattedDate}</span>
+                <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
+              </div>
+            </article>
+          </li>`;
 }
 
-
-
 localStorage.setItem('cards', '[]');
-localStorage.setItem('read-more','[]');
+localStorage.setItem('read-more', '[]');
 
 export default getPopularNews;
