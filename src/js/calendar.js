@@ -1,8 +1,3 @@
-// const prev = document.querySelector('.calendar__prev');
-// console.log(prev);
-// const conCalendar = document.querySelector('.calendar');
-// console.log(conCalendar);
-
 const date = new Date();
 
 const renderCalendar = () => {
@@ -50,8 +45,6 @@ const renderCalendar = () => {
   document.querySelector('.calendar__date h1').innerHTML =
     months[date.getMonth()];
   document.querySelector('.calendar__date h2').innerHTML = date.getFullYear();
-
-  // document.querySelector('.calendar__date p').innerHTML = new Date().toDateString();
 
   let days = '';
 
@@ -109,12 +102,16 @@ calendarWeekdaysEl.addEventListener('click', onCalendarClick);
 
 function onOpenCalendar() {
   calendarContainerEl.classList.toggle('is-hidden');
+  calendarInputEl.style.backgroundColor = '#4440F6';
 }
 
 function onCalendarClick(event) {
   const target = event.target;
 
-  if (target.tagName === 'DIV' && target.classList.contains('day')) {
+  if (
+    (target.tagName === 'DIV' && target.classList.contains('day')) ||
+    target.classList.contains('calendar__today')
+  ) {
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = parseInt(target.innerText);
