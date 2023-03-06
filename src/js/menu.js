@@ -1,3 +1,5 @@
+// import { selectedDate } from './calendar';
+// console.log(selectedDate);
 /*-----------------------Поява інпуту на мобільній версії при кліці на лупу--------------------------*/
 const headerIconSearch = document.querySelector('.form-header__icon-search');
 const headerInput = document.querySelector('.form-header__input');
@@ -26,34 +28,57 @@ const headerLight = document.querySelector('.form-header__light');
 const iconMobMenu = document.querySelector('.icon-mob-menu');
 const header = document.querySelector('.header');
 const searchClearBtn = document.getElementById('searchClear');
+const mob = document.querySelector('.mob-menu__checkbox-input');
+const menu = document.querySelector('.mob-nav-menu');
+const sun = document.querySelector('.mob-icon-sun');
+const mobMoon = document.querySelector('.mob-icon-moon');
+const btnMenu = document.querySelector('.button-menu__icon-close');
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
+mob.addEventListener('change', onMobClick);
+
+function addDarkMode() {
+  document.body.classList.add('body--dark');
+  headerIconSun.classList.add('form-header__icon-sun--dark');
+  headerIconMoon.classList.add('form-header__icon-moon--dark');
+  headerDark.classList.add('form-header__dark--dark');
+  headerLight.classList.add('form-header__light--dark');
+  headerInput.classList.add('form-header__input--dark');
+  headerIconSearch.classList.add('form-header__icon-search--dark');
+  iconMobMenu.classList.add('icon-mob-menu--dark');
+  header.classList.add('header--dark');
+  searchClearBtn.classList.add('search__clear--dark');
+  menu.classList.add('mob-nav-menu--dark');
+  sun.classList.add('mob-icon-sun--dark');
+  mobMoon.classList.add('mob-icon-moon--dark');
+}
+
+function removeDarkMode() {
+  document.body.classList.remove('body--dark');
+  headerIconSun.classList.remove('form-header__icon-sun--dark');
+  headerIconMoon.classList.remove('form-header__icon-moon--dark');
+  headerDark.classList.remove('form-header__dark--dark');
+  headerLight.classList.remove('form-header__light--dark');
+  headerInput.classList.remove('form-header__input--dark');
+  headerIconSearch.classList.remove('form-header__icon-search--dark');
+  iconMobMenu.classList.remove('icon-mob-menu--dark');
+  header.classList.remove('header--dark');
+  searchClearBtn.classList.remove('search__clear--dark');
+  menu.classList.remove('mob-nav-menu--dark');
+  sun.classList.remove('mob-icon-sun--dark');
+  mobMoon.classList.remove('mob-icon-moon--dark');
+  btnMenu.classList.add('.button-menu__icon-close--dark');
+}
 
 function setDarkMode(isDarkMode) {
   if (isDarkMode) {
-    document.body.classList.add('body--dark');
-    headerIconSun.classList.add('form-header__icon-sun--dark');
-    headerIconMoon.classList.add('form-header__icon-moon--dark');
-    headerDark.classList.add('form-header__dark--dark');
-    headerLight.classList.add('form-header__light--dark');
-    headerInput.classList.add('form-header__input--dark');
-    headerIconSearch.classList.add('form-header__icon-search--dark');
-    iconMobMenu.classList.add('icon-mob-menu--dark');
-    header.classList.add('header--dark');
-    searchClearBtn.classList.add('search__clear--dark');
+    addDarkMode();
     checkboxInput.checked = true;
+    mob.checked = true;
   } else {
-    document.body.classList.remove('body--dark');
-    headerIconSun.classList.remove('form-header__icon-sun--dark');
-    headerIconMoon.classList.remove('form-header__icon-moon--dark');
-    headerDark.classList.remove('form-header__dark--dark');
-    headerLight.classList.remove('form-header__light--dark');
-    headerInput.classList.remove('form-header__input--dark');
-    headerIconSearch.classList.remove('form-header__icon-search--dark');
-    iconMobMenu.classList.remove('icon-mob-menu--dark');
-    header.classList.remove('header--dark');
-    searchClearBtn.classList.remove('search__clear--dark');
+    removeDarkMode();
     checkboxInput.checked = false;
+    mob.checked = false;
   }
 
   localStorage.setItem('isDarkMode', isDarkMode);
@@ -68,27 +93,17 @@ const isDarkMode = JSON.parse(localStorage.getItem('isDarkMode')) || false;
 setDarkMode(isDarkMode);
 
 /*-----------------------------------------------Темна тема мобільне меню-----------------------------------*/
-const mob = document.querySelector('.mob-menu__checkbox-input');
-const menu = document.querySelector('.mob-nav-menu');
-const sun = document.querySelector('.mob-icon-sun');
-const mobMoon = document.querySelector('.mob-icon-moon');
-const btnMenu = document.querySelector('.button-menu__icon-close');
-// const iconMobMenu = document.querySelector('.icon-mob-menu');
 
-mob.addEventListener('click', onMobClick);
+// const iconMobMenu = document.querySelector('.icon-mob-menu');
 
 function onMobClick() {
   const isDarkModeMob = mob.checked;
   if (isDarkModeMob) {
-    menu.classList.add('mob-nav-menu--dark');
-    sun.classList.add('mob-icon-sun--dark');
-    mobMoon.classList.add('mob-icon-moon--dark');
-    btnMenu.classList.add('.button-menu__icon-close--dark');
+    addDarkMode();
+    checkboxInput.checked = true;
   } else {
-    menu.classList.remove('mob-nav-menu--dark');
-    sun.classList.remove('mob-icon-sun--dark');
-    mobMoon.classList.remove('mob-icon-moon--dark');
-    btnMenu.classList.add('.button-menu__icon-close--dark');
+    checkboxInput.checked = false;
+    removeDarkMode();
   }
   mob.setAttribute('checked', 'checked');
   localStorage.setItem('isDarkMode', isDarkModeMob);
@@ -98,16 +113,12 @@ const isDarkModeMob = JSON.parse(localStorage.getItem('isDarkMode'));
 
 if (isDarkModeMob) {
   mob.checked = true;
-  menu.classList.add('mob-nav-menu--dark');
-  sun.classList.add('mob-icon-sun--dark');
-  mobMoon.classList.add('mob-icon-moon--dark');
-  btnMenu.classList.add('.button-menu__icon-close--dark');
+  checkboxInput.checked = true;
+  addDarkMode();
 } else {
   mob.checked = false;
-  menu.classList.remove('mob-nav-menu--dark');
-  sun.classList.remove('mob-icon-sun--dark');
-  mobMoon.classList.remove('mob-icon-moon--dark');
-  btnMenu.classList.add('.button-menu__icon-close--dark');
+  checkboxInput.checked = false;
+  removeDarkMode();
 }
 
 /*------------------------------Отримання данних знахлдження користувача на сторінці та навігація по хедеру------------------*/
@@ -208,16 +219,17 @@ function clear() {
 }
 
 /*-------------------------------------------------------Добавляє хрестик в інпуті для видалення інформації-----------------------------*/
-const searchClear = document.querySelector('#searchClear');
-searchClear.addEventListener('click', () => {
-  headerInput.value = '';
-  console.log(headerInput.value);
-});
-
+const searchClear = document.getElementById('searchClear');
+console.log(searchClear);
 headerInput.addEventListener('input', () => {
   if (headerInput.value && document.documentElement.clientWidth > 768) {
     searchClear.style.display = 'block';
   } else {
     searchClear.style.display = 'none';
   }
+});
+
+searchClear.addEventListener('click', () => {
+  headerInput.value = '';
+  searchClear.style.display = 'none';
 });
