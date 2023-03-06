@@ -122,6 +122,7 @@ function onCalendarClick(event) {
     const selectedDate = new Date(year, month, day);
 
     calendarInputEl.value = selectedDate.toLocaleDateString();
+
+    calendarContainerEl.classList.add('is-hidden');
   }
-  calendarContainerEl.classList.add('is-hidden');
 }
