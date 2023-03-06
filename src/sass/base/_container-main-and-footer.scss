@@ -1,0 +1,10 @@
+.container-main-and-footer {
+  position: absolute;
+  top: 104px;
+  @include tablet {
+    top: 116px;
+  }
+  @include desktop {
+    top: 120px;
+  }
+}
