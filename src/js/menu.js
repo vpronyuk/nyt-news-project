@@ -34,7 +34,6 @@ const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
 
-console.log(mob);
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
 mob.addEventListener('change', onMobClick);
