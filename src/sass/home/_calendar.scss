@@ -9,7 +9,6 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 25px;
-    color: #111321;
 }
 
 .calendar__box{
@@ -18,25 +17,36 @@ display: flex;
 
 
 .calendar__input {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid var(--border-color);
-    width: 168px;
-    min-height: 31px;
-    border-radius: 20px;
-    padding: 7.5px 13px;
-    font-size: 12px;
-    line-height: 16px;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #ffffff;
-    // background-color: var(--accent-color);
+ 
+  box-sizing: border-box;
+  height: 31px;
+  width: 168px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  padding: 7.5px 30px;
+  text-align: justify;
+  color: #FFFFFF;
+  background: #4440F6;
+  border-radius: 20px;
+  border: 1px solid #4440f6;
+  outline: none;
+  cursor: pointer;
+  &:focus {
+  border: 1px solid #4440f6;
+  }
 }
 
-.calendar__conteiner {
+.calendar__input::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+}
+
+.calendar__container {
 display: flex;
 flex-direction: column;
 align-items: flex-end;

@@ -1,7 +1,7 @@
-const prev = document.querySelector('.calendar__prev');
-console.log(prev);
-const conCalendar = document.querySelector('.calendar');
-console.log(conCalendar);
+// const prev = document.querySelector('.calendar__prev');
+// console.log(prev);
+// const conCalendar = document.querySelector('.calendar');
+// console.log(conCalendar);
 
 const date = new Date();
 
@@ -66,7 +66,7 @@ const renderCalendar = () => {
     ) {
       days += `<div class='calendar__today'>${i}</div>`;
     } else {
-      days += `<div>${i}</div>`;
+      days += `<div class='day'>${i}</div>`;
     }
   }
 
@@ -97,3 +97,31 @@ document.querySelector('.calendar__next-year').addEventListener('click', () => {
   date.setFullYear(date.getFullYear() + 1);
   renderCalendar();
 });
+
+// =================================================================================
+
+const calendarContainerEl = document.querySelector('.calendar__container');
+const calendarInputEl = document.querySelector('.calendar__input');
+const calendarWeekdaysEl = document.querySelector('.calendar__calendar');
+
+calendarInputEl.addEventListener('click', onOpenCalendar);
+calendarWeekdaysEl.addEventListener('click', onCalendarClick);
+
+function onOpenCalendar() {
+  calendarContainerEl.classList.toggle('is-hidden');
+}
+
+function onCalendarClick(event) {
+  const target = event.target;
+
+  if (target.tagName === 'DIV' && target.classList.contains('day')) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = parseInt(target.innerText);
+
+    const selectedDate = new Date(year, month, day);
+
+    calendarInputEl.value = selectedDate.toLocaleDateString();
+  }
+  calendarContainerEl.classList.add('is-hidden');
+}

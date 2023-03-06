@@ -174,7 +174,7 @@
     }
   }
 }
-::placeholder {
+.form-header__input::placeholder {
   margin-right: 60px;
   border-right: 1px solid #999aa0;
   @include tablet {
