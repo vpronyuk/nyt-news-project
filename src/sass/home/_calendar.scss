@@ -15,9 +15,29 @@
 display: flex;
 }
 
+.calendar__box-input {
+  display: flex;
+  position: relative;
+  height: 31px;
+  width: 168px;
+  border-radius: 20px;
+  color:#4440F6;
+  &:focus,
+  &:hover {
+      color: #ffffff;
+    }
+}
+
+
+
+.calendar__icon {
+  position: absolute;
+  fill: currentColor;
+  top: 7px;
+  left: 13px;
+ }
 
 .calendar__input {
- 
   box-sizing: border-box;
   height: 31px;
   width: 168px;
@@ -26,16 +46,23 @@ display: flex;
   line-height: 1.5;
   letter-spacing: 0.02em;
   padding: 7.5px 30px;
-  text-align: justify;
+  text-align: center;
   color: #FFFFFF;
-  background: #4440F6;
+  // background: #4440F6;
   border-radius: 20px;
-  border: 1px solid #4440f6;
+  border: 1px solid #111321;
   outline: none;
   cursor: pointer;
-  &:focus {
+  &:focus,
+  &:hover  {
   border: 1px solid #4440f6;
+  background-color: #4440F6;
   }
+}
+
+.calendar__input:hover + .calendar__icon,
+.calendar__input:focus + .calendar__icon {
+  fill: #FFFFFF;
 }
 
 .calendar__input::placeholder {
@@ -43,7 +70,10 @@ display: flex;
       font-size: 14px;
       line-height: 1.5;
       letter-spacing: 0.02em;
-      color: #FFFFFF;
+      color: #A2A2A2;
+        &:focus {
+          color: #ffffff
+          }
 }
 
 .calendar__container {

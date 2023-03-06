@@ -1,11 +1,16 @@
 .mob-nav-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: -100%;
   left: 0px;
   width: 100%;
   height: 100%;
+  padding-bottom: 18px;
   background-color: var(--bg-color);
   z-index: 52;
+  overflow: auto;
   transform: translateY(0%);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   @media screen and (min-width: 768px) {
@@ -56,8 +61,8 @@
   margin-right: 14px;
   fill: var(--accent-color);
   border-radius: 50%;
-  margin-left: 15px;
-  stroke: var(--third-color);
+  margin-left: 16px;
+  stroke: var(--bg-color);
   stroke-width: 2px;
 }
 
@@ -65,7 +70,7 @@
   display: flex;
   position: absolute;
   top: 28px;
-  right: 30px;
+  right: 8%;
   background-color: transparent;
   border: none;
   display: block;
@@ -77,12 +82,20 @@
   }
 }
 
-.mob-menu__link:hover::after,
-.mob-menu__link:focus::after {
+body.lock {
+  overflow: hidden;
+}
+
+.mob-menu__link.selected-menu {
+  background-color: var(--accent-color);
+  color: var(--third-color);
+}
+
+.selected-menu::after {
   position: absolute;
-  right: 5%;
+  right: 8%;
   content: '';
-  background-image: url(/src/img/chevron-right.svg);
+  background-image: url(../img/chevron-right.svg);
   object-fit: cover;
   display: inline-block;
   width: 24px;
@@ -90,18 +103,16 @@
 }
 
 .mob-menu-switch {
-  position: absolute;
-  top: 90%;
-  left: 3%;
+  margin-left: 16px;
+  margin-top: 10px;
 }
 
 .mob-nav-menu--dark {
-  fill: #ffffff;
-  color: white;
-  background-color: rgba(46, 46, 46, 1);
+  fill: var(--bg-color);
+  color: var(--bg-color);
+  background-color: var(--bg-dark-color);
 
   .button-menu__icon-close--dark {
-    fill: #ffffff;
+    fill: var(--bg-color);
   }
 }
-//////////////////////////

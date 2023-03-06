@@ -105,6 +105,7 @@
   }
   &__input {
     display: none;
+    background-color: var(--bg-color);
     @include tablet {
       display: inline;
       font-family: 'Poppins', sans-serif;
@@ -117,6 +118,8 @@
       border: 1px solid #111321;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       padding-left: 50px;
+
+      cursor: pointer;
     }
     @include desktop {
       width: 290px;
@@ -353,12 +356,11 @@
 }
 
 .light {
-  background-color: white;
+  background-color: var(--bg-color);
   color: black;
 }
 
 body {
-  background-color: white;
   position: relative;
   transition: background-color 700ms;
 }
@@ -366,7 +368,7 @@ body {
 .body--dark {
   background-color: rgba(46, 46, 46, 1);
 
-  color: white;
+  color: var(--bg-color);
 }
 
 .mob-icon-sun {
@@ -379,7 +381,7 @@ body {
 }
 
 .mob-icon-moon {
-  fill: white;
+  fill: var(--bg-color);
   stroke: #5f6775;
 }
 .mob-icon-moon--dark {
@@ -398,7 +400,7 @@ body {
 }
 
 .form-header__icon-moon {
-  fill: white;
+  fill: var(--bg-color);
   stroke: #5f6775;
 }
 
@@ -417,15 +419,15 @@ body {
 
 .form-header__input--dark {
   background-color: rgba(46, 46, 46, 1);
-  border: 1px solid #f4f4f4;
-  color: #ffffff;
+  border: 1px solid var(--bg-color);
+  color: var(--bg-color);
 }
 
 .form-header__icon-search--dark {
-  fill: #f4f4f4;
+  fill: var(--bg-color);
 }
 .icon-mob-menu--dark {
-  fill: #f4f4f4;
+  fill: var(--bg-color);
 }
 
 .search__clear {
@@ -438,7 +440,7 @@ body {
 }
 
 .search__clear--dark {
-  color: #ffffff;
+  color: var(--bg-color);
 }
 
 .header {
@@ -447,7 +449,8 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: var(--bg-color);
+  transition: background-color 700ms;
 }
 
 .header--dark {

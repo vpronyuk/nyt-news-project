@@ -30,7 +30,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--switcher-accent-day);
-  background-color: var(--third-color);
 }
 
 .is-active {
@@ -107,7 +106,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--switcher-accent-day);
-  background-color: var(--third-color);
   fill: var(--switcher-accent-day);
   &:hover,
   &:focus {
@@ -169,6 +167,7 @@
 .is-active-other-btn {
   background-color: var(--accent-color) !important;
   color: var(--third-color) !important;
+  fill: var(--third-color);
 }
 
 .category_hidden {
@@ -178,4 +177,8 @@
 .category_mobile_hidden {
   display: none;
   transform: translateY(-100%);
+}
+
+.dark-categories-btn {
+  background-color: var(--third-color);
 }

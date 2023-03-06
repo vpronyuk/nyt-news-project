@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -16,18 +16,20 @@
 
 <body>
   <include src="./partials/header.html"></include>
-  <main>
-    <div class="container">
-      <!-- ❗️❗️❗️ Add partials like so for every page -->
-      <!-- <include src="./partials/example.html"></include> -->
-      <include src="./partials/read.html"></include>
-
-    </div>
-  </main>
-  <include src="./partials/footer.html"></include>
+  <div class="container-main-and-footer">
+    <main>
+      <div class="container">
+        <!-- ❗️❗️❗️ Add partials like so for every page -->
+        <!-- <include src="./partials/example.html"></include> -->
+        <include src="./partials/read.html"></include>
+        <include src="./partials/components/mob-menu.html"></include>
+      </div>
+    </main>
+    <include src="./partials/footer-read.html"></include>
+  </div>
   <script src="./js/menu.js" type="module"></script>
-  <script src="./js/header_mode.js" type="module"></script>
   <script src="./js/read.js" type="module"></script>
+  <script src="./js/mob-menu.js" type="module"></script>
 </body>
 
 </html>

@@ -18,16 +18,16 @@
 // .main {
 //   flex: 1 1 auto;
 // }
-main {
-  position: absolute;
-  top: 104px;
-  @include tablet {
-    top: 116px;
-  }
-  @include desktop {
-    top: 120px;
-  }
-}
+// main {
+//   position: absolute;
+//   top: 104px;
+//   @include tablet {
+//     top: 116px;
+//   }
+//   @include desktop {
+//     top: 120px;
+//   }
+// }
 
 .container {
   max-width: 480px;
