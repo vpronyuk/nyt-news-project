@@ -1,0 +1,50 @@
+.article_flag {
+    display: block;
+    text-align: end;
+  
+    font-size: 12px;
+    line-height: 16px;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+  
+  }
+  
+  .article_flag--add {
+    display: flex;
+    align-items: end;
+    padding: 6px 12px;
+  
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 0px;
+  
+  }
+  
+  .article_flag_text {
+    margin-right: 4px;
+  }
+  
+  .article_flag--remove {
+    display: flex;
+    align-items: end;
+    padding: 6px 12px;
+  
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 0px;
+  }
+  
+  .article_flag--add.is-hidden {
+    overflow: hidden;
+    opacity: 0;
+    display: none;
+  
+  
+  }
+  
+  .article_flag--remove.is-hidden {
+    overflow: hidden;
+    opacity: 0;
+    display: none;
+  }
