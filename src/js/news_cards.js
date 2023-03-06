@@ -97,4 +97,4 @@ function readmoreHandler(e) {
 
 // newsWrapper.addEventListener('click', readmoreHandler);
 
-localStorage.setItem('cards', '[]');
+// localStorage.setItem('cards', '[]');
