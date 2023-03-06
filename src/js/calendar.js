@@ -100,6 +100,8 @@ const calendarWeekdaysEl = document.querySelector('.calendar__calendar');
 calendarInputEl.addEventListener('click', onOpenCalendar);
 calendarWeekdaysEl.addEventListener('click', onCalendarClick);
 
+export let userDate = '';
+
 function onOpenCalendar() {
   calendarContainerEl.classList.toggle('is-hidden');
   calendarInputEl.style.backgroundColor = '#4440F6';
@@ -121,5 +123,7 @@ function onCalendarClick(event) {
     calendarInputEl.value = selectedDate.toLocaleDateString();
 
     calendarContainerEl.classList.add('is-hidden');
+
+    return (userDate = calendarInputEl.value);
   }
 }
