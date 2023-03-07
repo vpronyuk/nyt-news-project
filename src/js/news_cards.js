@@ -76,39 +76,15 @@ async function getPopularNews() {
   }
 }
 
-// function updateNewsList(markup) {
-//   newsWrapper.innerHTML = markup;
-// }
+function updateNewsList(markup) {
+  newsWrapper.innerHTML = markup;
+}
 
-// getPopularNews()
-//   .then(({ results }) => {
-//     return results.map(createMarkup).join('');
-//   })
-//   .then(updateNewsList);
-
-getPopularNews().then(data => {
-  if (data.results === null) {
-    newsWrapper.innerHTML = '';
-    // emptyPage.style.display = 'block';
-  } else {
-    const cards = data.results.reduce((markup, card, index) => {
-      if (index === 0) {
-        return (
-          markup + `<li><div class="div1"></div></li>` + createMarkup(card)
-        );
-      }
-      if (index === 1) {
-        markup + createMarkup(card) + `<li><div class="div2"></div></li>`;
-      }
-      if (index === 2) {
-        markup + createMarkup(card) + `<li><div class="div3"></div></li>`;
-      }
-      return markup + createMarkup(card);
-    }, '');
-    // emptyPage.style.display = 'none';
-    newsWrapper.innerHTML = cards;
-  }
-});
+getPopularNews()
+  .then(({ results }) => {
+    return results.map(createMarkup).join('');
+  })
+  .then(updateNewsList);
 
 function createMarkup({
   title,
