@@ -23,7 +23,7 @@ function createFavoriteMarkup({
         <div class="item-news__wrapper-img">
           <img class="item-news__img" src="${imageUrl}" alt="photo">
           <p class="item-news__category">${section}</p>
-          <button checked="true" class="item-news__add-to-favorite">
+          <button checked="true" class="article_flag--remove">
           Remove from favorite
           </button>
         </div>
@@ -37,7 +37,7 @@ function createFavoriteMarkup({
     </li>`;
 }
 function markupFavorite(objParse) {
-  const markFav = objParse.map(el => createFavoriteMarkup(el));
+  const markFav = objParse.map(el => createFavoriteMarkup(el)).join('');
   return markFav;
 }
 
