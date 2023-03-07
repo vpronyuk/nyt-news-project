@@ -56,7 +56,7 @@ footer {
   @include mobile{
     font-size: 14px;
     padding-left: 7px;
-    padding-top:20px;
+    padding-top:30px;
     text-transform: uppercase;
     text-align: center;
   }
@@ -67,7 +67,7 @@ footer {
   }
   @include desktop{
     padding-left: 200px;
-    padding-top:35px;
+    padding-top:37px;
     font-size: 45px;
   }
 }
@@ -109,7 +109,7 @@ height:130 px;
 .footer__fav-page{
   @include mobile{
     padding-left: 7px;
-    padding-top:75px;
+    padding-top:68px;
     text-transform: uppercase;
     text-align: center;
   }
@@ -120,7 +120,7 @@ height:130 px;
   }
   @include desktop{
     padding-left: 200px;
-    padding-top:65px;
+    padding-top:68px;
     font-size:45px;
   }
 }
@@ -156,7 +156,7 @@ height:130 px;
     padding-left:20px;
   }
   @include desktop{
-    font-size: 45px;
+    font-size: 47px;
     text-align: center;
     padding-top:70px;
     padding-left:180px;
