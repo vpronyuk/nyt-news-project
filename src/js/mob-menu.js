@@ -10,7 +10,7 @@
   refs.closeMenuBtn.addEventListener('click', toggleMenu);
 
   function toggleMenu() {
-    refs.menu.classList.toggle('active');
+    refs.menu.classList.toggle('active-mob');
     refs.menu.classList.toggle('is-hidden');
     document.body.classList.toggle('lock')
     // refs.body.classList.toggle("no-scroll");
