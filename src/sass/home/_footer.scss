@@ -28,46 +28,43 @@ footer {
   }
 }
 
-.footer__new-page{
-  @include mobile{
+.footer__new-page {
+  @include mobile {
     display: flex;
     justify-content: flex-start;
     align-items: center;
   }
 }
 
-.footer__info{
-  @include mobile{
- 
-  display: flex;
-  justify-content: flex-start;
-}
-  @include tablet{
+.footer__info {
+  @include mobile {
     display: flex;
     justify-content: flex-start;
-    
   }
-  @include desktop{
-   
+  @include tablet {
+    display: flex;
+    justify-content: flex-start;
+  }
+  @include desktop {
   }
 }
 
-.footer__new-page{
-  @include mobile{
+.footer__new-page {
+  @include mobile {
     font-size: 14px;
     padding-left: 7px;
-    padding-top:30px;
+    padding-top: 30px;
     text-transform: uppercase;
     text-align: center;
   }
-  @include tablet{
+  @include tablet {
     padding-left: 80px;
-    padding-top:30px;
+    padding-top: 30px;
     font-size: 30px;
   }
-  @include desktop{
+  @include desktop {
     padding-left: 200px;
-    padding-top:37px;
+    padding-top: 37px;
     font-size: 45px;
   }
 }
@@ -75,104 +72,97 @@ footer {
 // .footer__page-link{
 //   margin-left:7px;
 // }
-.footer__svg-globe{
-  @include mobile{
+.footer__svg-globe {
+  @include mobile {
     width: 18px;
     height: 18px;
-   margin-right: 5px;
+    margin-right: 5px;
   }
-  @include tablet{
+  @include tablet {
     width: 22px;
     height: 22px;
   }
-  @include desktop{
+  @include desktop {
     width: 30px;
     height: 30px;
   }
 }
-.photo__victory{
-  @include mobile{
+.photo__victory {
+  @include mobile {
     width: 130px;
     height: 130px;
   }
-  @include tablet{
+  @include tablet {
     width: 130px;
-height:130 px;
+    height: 130 px;
   }
-  @include desktop{
+  @include desktop {
     width: 120px;
     height: 120px;
   }
 }
 
-
-.footer__fav-page{
-  @include mobile{
+.footer__fav-page {
+  @include mobile {
     padding-left: 7px;
-    padding-top:68px;
+    padding-top: 68px;
     text-transform: uppercase;
     text-align: center;
   }
-  @include tablet{
+  @include tablet {
     padding-left: 60px;
-    padding-top:67px;
-    font-size:35px;
+    padding-top: 67px;
+    font-size: 35px;
   }
-  @include desktop{
+  @include desktop {
     padding-left: 200px;
-    padding-top:68px;
-    font-size:45px;
+    padding-top: 68px;
+    font-size: 45px;
   }
 }
 
-.favorite__svg-globe{
-  @include mobile{
+.favorite__svg-globe {
+  @include mobile {
     width: 10px;
     height: 10px;
-   
   }
-  @include tablet{
+  @include tablet {
     width: 22px;
     height: 22px;
   }
-  @include desktop{
+  @include desktop {
     width: 30px;
     height: 30px;
-  } 
+  }
 }
 
-
-.footer__read-page{
-  @include mobile{
+.footer__read-page {
+  @include mobile {
     font-size: 14px;
     text-transform: uppercase;
     text-align: center;
-    padding-top:45px;
+    padding-top: 45px;
   }
-  @include tablet{
+  @include tablet {
     font-size: 30px;
     text-align: center;
-    padding-top:70px;
-    padding-left:20px;
+    padding-top: 70px;
+    padding-left: 20px;
   }
-  @include desktop{
+  @include desktop {
     font-size: 47px;
     text-align: center;
-    padding-top:70px;
-    padding-left:180px;
+    padding-top: 70px;
+    padding-left: 180px;
   }
 }
 
-
-.footer__read-link{
-  @include mobile{
+.footer__read-link {
+  @include mobile {
     padding-left: 7px;
-   
   }
-  
 }
 
-.icon__web—dark{
-  fill:var(--third-color);
+.icon__web--dark {
+  fill: var(--third-color);
 }
-

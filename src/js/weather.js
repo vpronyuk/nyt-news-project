@@ -94,7 +94,7 @@ displayDate();
 weekWeatherBtn.addEventListener(`click`, () => {
   weatherCard.style.display = 'none';
   weekWeatherCard.style.display = 'block';
-  const newApiKey = `ffa0b0a775424c0b835c3cb89496b67e`;
+  const newApiKey = `494cc86ea4be4942a2ea7eae8a726091`;
   function getCurrentLocation() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
