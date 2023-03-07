@@ -65,14 +65,10 @@ function createMarkup({
                 <p class="item-news__category">${section}</p>
                 <div class="article_flag">
                   <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span>
-                    <svg width="16" height="16">
-                      <use href="./images/symbol-defs.svg#icon-heart-empty" width="16" height="16"></use>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="#4440f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
                   </button>
                   <button class="article_flag--remove is-hidden"><span class="article_flag_text">Remove from favorite</span>
-                    <svg width="16" height="16">
-                      <use href="./images/symbol-defs.svg#icon-heart-fill" width="16" height="16"></use>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
                   </button>
                 </div>
               </div>
@@ -102,9 +98,9 @@ function readmoreHandler(e) {
   return;
 }
 
-if (!localStorage.getItem('read-more')){
-  localStorage.setItem('read-more','[]')
+if (!localStorage.getItem('read-more')) {
+  localStorage.setItem('read-more', '[]');
 }
-if(!localStorage.getItem('cards')){
+if (!localStorage.getItem('cards')) {
   localStorage.setItem('cards', '[]');
 }
