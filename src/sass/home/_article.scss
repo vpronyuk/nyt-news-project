@@ -15,9 +15,11 @@
   // margin-right: auto;
   row-gap: 28px;
   column-gap: 30px;
+  margin-top: 28px;
   @include tablet {
     justify-content: start;
     row-gap: 30px;
+    margin-top: 0;
   }
   @include desktop {
     row-gap: 40px;
