@@ -1,3 +1,13 @@
+const calendarContainerEl = document.querySelector('.calendar__container');
+const calendarInputEl = document.querySelector('.calendar__input');
+const calendarWeekdaysEl = document.querySelector('.calendar__calendar');
+const iconEl = document.querySelector('.calendar__icon');
+
+calendarInputEl.placeholder = new Date().toLocaleDateString();
+
+calendarInputEl.addEventListener('click', onOpenCalendar);
+calendarWeekdaysEl.addEventListener('click', onCalendarClick);
+
 const date = new Date();
 
 const renderCalendar = () => {
@@ -91,25 +101,15 @@ document.querySelector('.calendar__next-year').addEventListener('click', () => {
   renderCalendar();
 });
 
-// =================================================================================
-
-const calendarContainerEl = document.querySelector('.calendar__container');
-const calendarInputEl = document.querySelector('.calendar__input');
-const calendarWeekdaysEl = document.querySelector('.calendar__calendar');
-
-calendarInputEl.addEventListener('click', onOpenCalendar);
-calendarWeekdaysEl.addEventListener('click', onCalendarClick);
-
-export let userDate = '';
-
 function onOpenCalendar() {
   calendarContainerEl.classList.toggle('is-hidden');
   calendarInputEl.style.backgroundColor = '#4440F6';
+  calendarInputEl.style.border = '1px solid #4440f6;';
+  iconEl.style.fill = '#ffffff';
 }
 
 function onCalendarClick(event) {
   const target = event.target;
-
   if (
     (target.tagName === 'DIV' && target.classList.contains('day')) ||
     target.classList.contains('calendar__today')
@@ -123,7 +123,5 @@ function onCalendarClick(event) {
     calendarInputEl.value = selectedDate.toLocaleDateString();
 
     calendarContainerEl.classList.add('is-hidden');
-
-    return (userDate = calendarInputEl.value);
   }
 }
