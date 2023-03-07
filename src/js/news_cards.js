@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
-import addRemoveToLocalStorageREAD from './read';
+//import addRemoveToLocalStorageREAD from './read';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
@@ -11,8 +11,56 @@ const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
 let btnAddtoStorage;
 
 const newsWrapper = document.querySelector('.list-news');
+function addReadMore(evt) {
+  if (evt.target.nodeName !== 'A' ) {
+    return;
+  }
+
+  const readMoreLink = evt.target;
+  readMoreLink.setAttribute('data-is-read', true);
+
+  const ulItem = evt.target.parentNode.parentNode.parentNode;
+  console.log('li item',ulItem);
+  const read = document.createElement('p');
+  read.innerText = 'Already read';
+  read.classList.add('have-read');
+  ulItem.appendChild(read);
+  ulItem.style.opacity = 0.22;
+  const ID = ulItem.getAttribute('data-id');
+
+  const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
+  const choosenCardImg = evt.target.closest('div');
+  const imageUrl = ulItem.childNodes[1].childNodes[1].childNodes[1].getAttribute('src');
+  const section = choosenCardImg.childNodes[3].textContent;
+  const titleDiv = evt.target.closest('article');
+  const title = titleDiv.childNodes[3].textContent;
+  const abstract = titleDiv.childNodes[5].textContent;
+  const published_date = titleDiv.childNodes[7].childNodes[1].textContent;
+  const url = titleDiv.childNodes[7].childNodes[3].href;
+  const time = new Date().getTime();
+  const date = new Date(time);
+
+  let storage = localStorage.getItem('read-more');
+  console.log(imageUrl);
+  // додаємо елемент
+  const params = {
+    id: choosenCardID,
+    imageUrl: imageUrl,
+    section: section,
+    title: title,
+    abstract: abstract,
+    published_date: published_date,
+    url: url,
+    time: date.toLocaleDateString('en-GB'),
+  };
+
+  const parseStorage = JSON.parse(storage);
+  parseStorage.push(params);
+  const strStorage = JSON.stringify(parseStorage);
+  localStorage.setItem('read-more', strStorage);
+}
 newsWrapper.addEventListener('click', addRemoveToLocalStorage);
-newsWrapper.addEventListener('click', addRemoveToLocalStorageREAD);
+newsWrapper.addEventListener('click', addReadMore);
 
 // standard
 async function getPopularNews() {
