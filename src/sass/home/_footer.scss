@@ -28,8 +28,6 @@ footer {
   }
 }
 
-.footer__new-page {
-  @include mobile {
 .footer__new-page{
   @include mobile{
     display: flex;
@@ -38,13 +36,6 @@ footer {
   }
 }
 
-.footer__info {
-  @include mobile {
-    display: flex;
-    justify-content: flex-start;
-  }
-<<<<<<< Updated upstream
-  @include tablet {
 .footer__info{
   @include mobile{
  
@@ -55,19 +46,19 @@ footer {
     display: flex;
     justify-content: flex-start;
   }
-  }
-=======
-
 }
 
-  @include mobile {
+.footer__new-page{
   @include mobile{
     font-size: 14px;
     padding-left: 7px;
+    padding-top:30px;
     text-transform: uppercase;
     text-align: center;
   }
+  @include tablet{
     padding-left: 80px;
+    padding-top:30px;
     font-size: 30px;
   }
   @include desktop{
