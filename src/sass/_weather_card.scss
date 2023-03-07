@@ -1,4 +1,5 @@
 .weather-card {
+  z-index: 3; /* без індексу*/
   background-color: #4440f6;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -13,7 +14,7 @@
     height: 675px;
   }
   @include desktop {
-    width: 395px;
+    width: 397px; /* width:395px*/
     height: 675px;
   }
   margin: 0 auto;
