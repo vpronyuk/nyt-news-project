@@ -34,7 +34,6 @@ const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
 
-
 checkboxInput.addEventListener('change', onCheckBoxClick);
 mob.addEventListener('change', onMobClick);
 
@@ -129,11 +128,11 @@ const homeLink = document.getElementById('home__link');
 const favoriteLink = document.getElementById('favorite__link');
 const readLink = document.getElementById('read__link');
 
-if (currentPage === '/index.html') {
+if (currentPage.includes('/index.html')) {
   homeLink.classList.add('current');
-} else if (currentPage === '/favorite.html') {
+} else if (currentPage.includes('/favorite.html')) {
   favoriteLink.classList.add('current');
-} else if (currentPage === '/read.html') {
+} else if (currentPage.includes('/read.html')) {
   readLink.classList.add('current');
 } else {
   homeLink.classList.add('current');
