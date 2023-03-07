@@ -2,33 +2,36 @@ export { addRemoveToLocalStorageREAD };
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json';
 const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
-import axios from "axios";
+import axios from 'axios';
 
-const readContainer = document.querySelector('.container');
+const readContainer = document.querySelector('.container-read');
 
 async function getPopularNewsREAD() {
-    try {
-      const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
-  
-      const response = await axios.get(url);
-    
-      const datasOBJ =  response.data.results.map(item=>item.published_date)
-      const datas =  datasOBJ.filter((item,index,array)=>array.indexOf(item) === index).sort();
-      console.log(datas);
-      return datas;
-    } catch (error) {
-      console.error(error);
-    }
+  try {
+    const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
+
+    const response = await axios.get(url);
+
+    const datasOBJ = response.data.results.map(item => item.published_date);
+    const datas = datasOBJ
+      .filter((item, index, array) => array.indexOf(item) === index)
+      .sort();
+    console.log(datas);
+    return datas;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
- function insertReadPage(markup){
-    readContainer.innerHTML=markup;
+function insertReadPage(markup) {
+  readContainer.innerHTML = markup;
 }
-
 
 function renderAccordion(array) {
-  const acordions = array.map(item => 
-    `<div class="collapsible-accordion">
+  const acordions = array
+    .map(
+      item =>
+        `<div class="collapsible-accordion">
         <div class="collapsible-item">
         <input class="accordion-input" type="checkbox" id="tab1">
         <label class="collapsible-item-label"  for="tab1">${item}</label>
@@ -37,14 +40,15 @@ function renderAccordion(array) {
         </div>
         </div>
      </div>
-    `).join('')
-    readContainer.innerHTML=acordions;
+    `
+    )
+    .join('');
+  readContainer.innerHTML = acordions;
 }
 
-getPopularNewsREAD()
-  .then((results)=>renderAccordion(results))
+// getPopularNewsREAD().then(results => renderAccordion(results));
 
- function addRemoveToLocalStorageREAD(evt) {
+function addRemoveToLocalStorageREAD(evt) {
   if (evt.target.tagName !== 'A') {
     return;
   }
@@ -105,20 +109,12 @@ console.log(tabs);
 
 // readContainer.addEventListener('click',readHandler);
 
-
-
-
-
-
-
-
-
 /*<div class="list-news__item" data-id="${id}" >
             <article class="item-news__article">
               <div class="item-news__wrapper-img">
                 <img class="item-news__img" src="${imageUrl}" alt="photo">
                 <p class="item-news__category">${section}</p>
-                <button class="item-news__add-to-favorite" 
+                <button class="item-news__add-to-favorite"
                 <svg class="heart-icon">
                       <use
                         href="./images/symbol-defs.svg#icon-heart-empty"
