@@ -68,7 +68,7 @@ function removeDarkMode() {
   sun.classList.remove('mob-icon-sun--dark');
   mobMoon.classList.remove('mob-icon-moon--dark');
   btnMenu.classList.add('button-menu__icon-close--dark');
-  iconFooter.classList.remove('icon__web--dark');
+  // iconFooter.classList.remove('icon__web--dark');
 }
 
 function setDarkMode(isDarkMode) {

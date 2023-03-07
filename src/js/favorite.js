@@ -23,9 +23,14 @@ function createFavoriteMarkup({
         <div class="item-news__wrapper-img">
           <img class="item-news__img" src="${imageUrl}" alt="photo">
           <p class="item-news__category">${section}</p>
-          <button checked="true" class="article_flag--remove">
-          Remove from favorite
-          </button>
+           <div class="article_flag">
+          <button class="article_flag--add is-hidden"><span class="article_flag_text">Add to favorite</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="#4440f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
+                  </button>
+                  <button class="article_flag--remove "><span class="article_flag_text">Remove from favorite</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#4b48da" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
+                  </button>
+                  </div>
         </div>
         <h2 class="item-news__title">${title}</h2>
         <p class="item-news__description">${abstract}</p>
@@ -61,12 +66,20 @@ function updateStorageFavotite(parseStorage, btnDivID) {
 }
 
 function addRemoveToLocalStorage(evt) {
-  if (evt.target.tagName !== 'BUTTON') {
+  if (
+    evt.target.tagName !== 'BUTTON' &&
+    evt.target.tagName !== 'SPAN' &&
+    evt.target.tagName !== 'SVG'
+  ) {
     return;
   }
+
   let btnAddtoStorage;
   btnAddtoStorage = evt.target;
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
+  let storage = localStorage.getItem('cards');
+  let parseStorage = JSON.parse(storage);
+  // updateStorageFavotite(parseStorage, btnDivID);
 
   if (evt.target.hasAttribute('checked')) {
     btnAddtoStorage.removeAttribute('checked');
@@ -80,7 +93,7 @@ function addRemoveToLocalStorage(evt) {
   btnAddtoStorage.setAttribute('checked', true);
 
   const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
-  const choosenCardImg = evt.target.closest('div');
+  const choosenCardImg = evt.target.closest('div.item-news__wrapper-img');
   const imageUrl = choosenCardImg.childNodes[1].src;
   const section = choosenCardImg.childNodes[3].textContent;
   const titleDiv = evt.target.closest('article');
@@ -89,7 +102,7 @@ function addRemoveToLocalStorage(evt) {
   const published_date = titleDiv.childNodes[7].childNodes[1].textContent;
   const url = titleDiv.childNodes[7].childNodes[3].href;
 
-  let storage = localStorage.getItem('cards');
+  storage = localStorage.getItem('cards');
 
   // додаємо елемент
   const params = {
@@ -102,7 +115,7 @@ function addRemoveToLocalStorage(evt) {
     url: url,
   };
 
-  const parseStorage = JSON.parse(storage);
+  parseStorage = JSON.parse(storage);
   parseStorage.push(params);
   const strStorage = JSON.stringify(parseStorage);
   localStorage.setItem('cards', strStorage);

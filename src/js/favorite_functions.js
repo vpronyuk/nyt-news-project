@@ -9,23 +9,30 @@ function addRemoveToLocalStorage(evt) {
     return;
   }
 
-  btnAddtoStorage = evt.target;
+  let btnAddtoStorage = evt.target;
+  const btnDiv = btnAddtoStorage.closest('div.article_flag');
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
+
+  const addButton = evt.target.closest('div').childNodes[1];
+  console.log(addButton);
+  const removeButton = evt.target.closest('div').childNodes[3];
+  console.dir(removeButton);
+  addButton.classList.toggle('is-hidden');
+  removeButton.classList.toggle('is-hidden');
 
   let storage = localStorage.getItem('cards');
   let parseStorage = JSON.parse(storage);
   updateStorage(parseStorage, btnDivID);
 
-  if (evt.target.hasAttribute('checked')) {
-    btnAddtoStorage.removeAttribute('checked');
-
+  if (btnDiv.hasAttribute('checked')) {
+    btnDiv.removeAttribute('checked');
     let storage = localStorage.getItem('cards');
     const parseStorage = JSON.parse(storage);
     updateStorage(parseStorage, btnDivID);
     return;
   }
 
-  btnAddtoStorage.setAttribute('checked', true);
+  btnDiv.setAttribute('checked', true);
 
   const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
   const choosenCardImg = evt.target.closest('div.item-news__wrapper-img');
