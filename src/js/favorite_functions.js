@@ -14,9 +14,7 @@ function addRemoveToLocalStorage(evt) {
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
 
   const addButton = evt.target.closest('div').childNodes[1];
-  console.log(addButton);
   const removeButton = evt.target.closest('div').childNodes[3];
-  console.dir(removeButton);
   addButton.classList.toggle('is-hidden');
   removeButton.classList.toggle('is-hidden');
 
