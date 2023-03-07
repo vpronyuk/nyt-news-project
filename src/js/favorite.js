@@ -1,4 +1,12 @@
+const emptyPage = document.querySelector('.empty');
+const container = document.querySelector('.favorite-container');
+
 const objFromStorale = localStorage.getItem('cards');
+if (objFromStorale === '[]') {
+  emptyPage.style.display = 'block';
+  container.style.padding = 0;
+}
+console.log(objFromStorale);
 const objParse = JSON.parse(objFromStorale);
 
 const newsWrapper = document.querySelector('.list-news');
