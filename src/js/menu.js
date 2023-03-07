@@ -1,5 +1,3 @@
-// import { selectedDate } from './calendar';
-// console.log(selectedDate);
 /*-----------------------Поява інпуту на мобільній версії при кліці на лупу--------------------------*/
 const headerIconSearch = document.querySelector('.form-header__icon-search');
 const headerInput = document.querySelector('.form-header__input');
@@ -33,7 +31,7 @@ const menu = document.querySelector('.mob-nav-menu');
 const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
-
+const iconFooter = document.querySelector('.footer__svg-globe');
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
 mob.addEventListener('change', onMobClick);
@@ -52,6 +50,7 @@ function addDarkMode() {
   menu.classList.add('mob-nav-menu--dark');
   sun.classList.add('mob-icon-sun--dark');
   mobMoon.classList.add('mob-icon-moon--dark');
+  iconFooter.classList.add('icon__web--dark');
 }
 
 function removeDarkMode() {
@@ -68,7 +67,8 @@ function removeDarkMode() {
   menu.classList.remove('mob-nav-menu--dark');
   sun.classList.remove('mob-icon-sun--dark');
   mobMoon.classList.remove('mob-icon-moon--dark');
-  btnMenu.classList.add('.button-menu__icon-close--dark');
+  btnMenu.classList.add('button-menu__icon-close--dark');
+  iconFooter.classList.remove('icon__web--dark');
 }
 
 function setDarkMode(isDarkMode) {
@@ -129,11 +129,11 @@ const homeLink = document.getElementById('home__link');
 const favoriteLink = document.getElementById('favorite__link');
 const readLink = document.getElementById('read__link');
 
-if (currentPage === '/index.html') {
+if (currentPage.includes('/index.html')) {
   homeLink.classList.add('current');
-} else if (currentPage === '/favorite.html') {
+} else if (currentPage.includes('/favorite.html')) {
   favoriteLink.classList.add('current');
-} else if (currentPage === '/read.html') {
+} else if (currentPage.includes('/read.html')) {
   readLink.classList.add('current');
 } else {
   homeLink.classList.add('current');
@@ -145,10 +145,9 @@ const newsWrapper = document.querySelector('.list-news');
 headerForm.addEventListener('submit', onHeaderFormClick);
 
 const KEY = 'Oibsmafk4s4CtvFNxqESgOWZuCdEVskz';
-
-function fetchNews(searchKeyword) {
+function fetchNews(searchKeyword, pubDate) {
   return fetch(`
-  https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${KEY}&q=${searchKeyword}&fq=sort=relevance`).then(
+  https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${KEY}&q=${searchKeyword}&fq=pub_date:(${pubDate})`).then(
     res => {
       if (res.status === 404) {
         throw new Error(res.status);
@@ -161,13 +160,15 @@ function fetchNews(searchKeyword) {
 function onHeaderFormClick(event) {
   event.preventDefault();
   const searchKeyword = headerInput.value.trim();
+
   if (searchKeyword === '') {
     clear();
   } else {
-    fetchNews(searchKeyword)
+    const pubDate = '2023-02-24';
+    fetchNews(searchKeyword, pubDate)
       .then(data => {
         const articles = data.response.docs;
-
+        console.log(articles);
         newsWrapper.innerHTML = articles
           .map(article => {
             const headline = article.headline.main;
@@ -177,12 +178,14 @@ function onHeaderFormClick(event) {
               snippet = snippet.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';
             }
             const articleUrl = article.web_url;
+
             const date = new Date(article.pub_date);
             const day = date.getDate().toString().padStart(2, '0');
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
             const year = date.getFullYear().toString();
             const formattedDate = `${day}/${month}/${year}`;
             const id = article._id;
+
             const section = article.section_name;
             const imageUrl =
               article.multimedia.length > 0
@@ -194,10 +197,14 @@ function onHeaderFormClick(event) {
        <div class="item-news__wrapper-img">
  <img class="item-news__img" src="${imageUrl}" alt="photo">
 <p class="item-news__category">${section}</p>
-  <button class="item-news__add-to-favorite"
- <svg class="heart-icon">
-  <use href="./images/symbol-defs.svg#icon-heart-empty"></use></svg>Add to favorite
-           </button>
+<div class="article_flag">
+                  <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="#4440f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
+                  </button>
+                  <button class="article_flag--remove is-hidden"><span class="article_flag_text">Remove from favorite</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#4b48da" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
+                  </button>
+                </div>
          </div>
          <h2 class="item-news__title">${headline}</h2>
          <p class="item-news__description">${snippet}</p>

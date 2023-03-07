@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
-import addRemoveToLocalStorageREAD from './read';
+//import addRemoveToLocalStorageREAD from './read';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
@@ -11,8 +11,56 @@ const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
 let btnAddtoStorage;
 
 const newsWrapper = document.querySelector('.list-news');
+function addReadMore(evt) {
+  if (evt.target.nodeName !== 'A' ) {
+    return;
+  }
+
+  const readMoreLink = evt.target;
+  readMoreLink.setAttribute('data-is-read', true);
+
+  const ulItem = evt.target.parentNode.parentNode.parentNode;
+  console.log('li item',ulItem);
+  const read = document.createElement('p');
+  read.innerText = 'Already read';
+  read.classList.add('have-read');
+  ulItem.appendChild(read);
+  ulItem.style.opacity = 0.22;
+  const ID = ulItem.getAttribute('data-id');
+
+  const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
+  const choosenCardImg = evt.target.closest('div');
+  const imageUrl = ulItem.childNodes[1].childNodes[1].childNodes[1].getAttribute('src');
+  const section = choosenCardImg.childNodes[3].textContent;
+  const titleDiv = evt.target.closest('article');
+  const title = titleDiv.childNodes[3].textContent;
+  const abstract = titleDiv.childNodes[5].textContent;
+  const published_date = titleDiv.childNodes[7].childNodes[1].textContent;
+  const url = titleDiv.childNodes[7].childNodes[3].href;
+  const time = new Date().getTime();
+  const date = new Date(time);
+
+  let storage = localStorage.getItem('read-more');
+  console.log(imageUrl);
+  // додаємо елемент
+  const params = {
+    id: choosenCardID,
+    imageUrl: imageUrl,
+    section: section,
+    title: title,
+    abstract: abstract,
+    published_date: published_date,
+    url: url,
+    time: date.toLocaleDateString('en-GB'),
+  };
+
+  const parseStorage = JSON.parse(storage);
+  parseStorage.push(params);
+  const strStorage = JSON.stringify(parseStorage);
+  localStorage.setItem('read-more', strStorage);
+}
 newsWrapper.addEventListener('click', addRemoveToLocalStorage);
-newsWrapper.addEventListener('click', addRemoveToLocalStorageREAD);
+newsWrapper.addEventListener('click', addReadMore);
 
 // standard
 async function getPopularNews() {
@@ -65,14 +113,10 @@ function createMarkup({
                 <p class="item-news__category">${section}</p>
                 <div class="article_flag">
                   <button class="article_flag--add"><span class="article_flag_text">Add to favorite</span>
-                    <svg width="16" height="16">
-                      <use href="./images/symbol-defs.svg#icon-heart-empty" width="16" height="16"></use>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="#4440f7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
                   </button>
                   <button class="article_flag--remove is-hidden"><span class="article_flag_text">Remove from favorite</span>
-                    <svg width="16" height="16">
-                      <use href="./images/symbol-defs.svg#icon-heart-fill" width="16" height="16"></use>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#4b48da" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3s-5 3-5 3s-2.239-3-5-3Z"/></svg>
                   </button>
                 </div>
               </div>
@@ -102,9 +146,9 @@ function readmoreHandler(e) {
   return;
 }
 
-if (!localStorage.getItem('read-more')){
-  localStorage.setItem('read-more','[]')
+if (!localStorage.getItem('read-more')) {
+  localStorage.setItem('read-more', '[]');
 }
-if(!localStorage.getItem('cards')){
+if (!localStorage.getItem('cards')) {
   localStorage.setItem('cards', '[]');
 }
