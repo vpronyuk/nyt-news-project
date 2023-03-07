@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
-import { addRemoveToLocalStorageREAD } from './read';
+import addRemoveToLocalStorageREAD from './read';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
 const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
@@ -21,7 +21,6 @@ async function getPopularNews() {
 
     const response = await axios.get(url);
     console.log(response.data.results);
-
     return response.data;
   } catch (error) {
     console.error(error);
@@ -103,10 +102,9 @@ function readmoreHandler(e) {
   return;
 }
 
-// newsWrapper.addEventListener('click', readmoreHandler);
-
-// localStorage.setItem('cards', '[]');
-localStorage.setItem('cards', '[]');
-localStorage.setItem('read-more', '[]');
-
-export default getPopularNews;
+if (!localStorage.getItem('read-more')){
+  localStorage.setItem('read-more','[]')
+}
+if(!localStorage.getItem('cards')){
+  localStorage.setItem('cards', '[]');
+}
