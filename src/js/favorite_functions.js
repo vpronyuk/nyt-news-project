@@ -1,30 +1,39 @@
 export { addRemoveToLocalStorage, updateStorage };
 
 function addRemoveToLocalStorage(evt) {
-  if (localStorage.getItem('cards') === null) {
-    localStorage.setItem('cards', '[]');
-  }
-
-  if (evt.target.tagName !== 'BUTTON') {
+  if (
+    evt.target.tagName !== 'BUTTON' &&
+    evt.target.tagName !== 'SPAN' &&
+    evt.target.tagName !== 'SVG'
+  ) {
     return;
   }
 
-  btnAddtoStorage = evt.target;
+  let btnAddtoStorage = evt.target;
+  const btnDiv = btnAddtoStorage.closest('div.article_flag');
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
 
-  if (evt.target.hasAttribute('checked')) {
-    btnAddtoStorage.removeAttribute('checked');
+  const addButton = evt.target.closest('div').childNodes[1];
+  const removeButton = evt.target.closest('div').childNodes[3];
+  addButton.classList.toggle('is-hidden');
+  removeButton.classList.toggle('is-hidden');
 
+  let storage = localStorage.getItem('cards');
+  let parseStorage = JSON.parse(storage);
+  updateStorage(parseStorage, btnDivID);
+
+  if (btnDiv.hasAttribute('checked')) {
+    btnDiv.removeAttribute('checked');
     let storage = localStorage.getItem('cards');
     const parseStorage = JSON.parse(storage);
     updateStorage(parseStorage, btnDivID);
     return;
   }
 
-  btnAddtoStorage.setAttribute('checked', true);
+  btnDiv.setAttribute('checked', true);
 
   const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
-  const choosenCardImg = evt.target.closest('div');
+  const choosenCardImg = evt.target.closest('div.item-news__wrapper-img');
   const imageUrl = choosenCardImg.childNodes[1].src;
   const section = choosenCardImg.childNodes[3].textContent;
   const titleDiv = evt.target.closest('article');
@@ -33,7 +42,7 @@ function addRemoveToLocalStorage(evt) {
   const published_date = titleDiv.childNodes[7].childNodes[1].textContent;
   const url = titleDiv.childNodes[7].childNodes[3].href;
 
-  let storage = localStorage.getItem('cards');
+  storage = localStorage.getItem('cards');
 
   // додаємо елемент
   const params = {
@@ -46,7 +55,7 @@ function addRemoveToLocalStorage(evt) {
     url: url,
   };
 
-  const parseStorage = JSON.parse(storage);
+  parseStorage = JSON.parse(storage);
   parseStorage.push(params);
   const strStorage = JSON.stringify(parseStorage);
   localStorage.setItem('cards', strStorage);
