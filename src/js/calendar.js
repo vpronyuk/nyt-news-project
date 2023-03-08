@@ -2,6 +2,7 @@ const calendarContainerEl = document.querySelector('.calendar__container');
 const calendarInputEl = document.querySelector('.calendar__input');
 const calendarWeekdaysEl = document.querySelector('.calendar__calendar');
 const iconEl = document.querySelector('.calendar__icon');
+const iconArrowEl = document.getElementById('arrow-down');
 
 calendarInputEl.placeholder = new Date().toLocaleDateString();
 
@@ -106,10 +107,13 @@ function onOpenCalendar() {
   calendarInputEl.style.backgroundColor = '#4440F6';
   calendarInputEl.style.border = '1px solid #4440f6;';
   iconEl.style.fill = '#ffffff';
+  iconArrowEl.style.fill = '#ffffff';
+  iconArrowEl.classList.toggle('rotate');
 }
 
 function onCalendarClick(event) {
   const target = event.target;
+
   if (
     (target.tagName === 'DIV' && target.classList.contains('day')) ||
     target.classList.contains('calendar__today')
