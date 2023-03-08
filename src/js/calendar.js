@@ -5,6 +5,7 @@ const iconEl = document.querySelector('.calendar__icon');
 const iconArrowEl = document.getElementById('arrow-down');
 
 calendarInputEl.placeholder = new Date().toLocaleDateString();
+calendarInputEl.dataset.date = new Date().toLocaleDateString(); // запись в дата-атрибут значения плейсхолдера
 
 calendarInputEl.addEventListener('click', onOpenCalendar);
 calendarWeekdaysEl.addEventListener('click', onCalendarClick);
@@ -125,7 +126,7 @@ function onCalendarClick(event) {
     const selectedDate = new Date(year, month, day);
 
     calendarInputEl.value = selectedDate.toLocaleDateString();
-
+    calendarInputEl.dataset.date = selectedDate.toLocaleDateString(); // записала дату в дата-атрибут
     calendarContainerEl.classList.add('is-hidden');
   }
 }

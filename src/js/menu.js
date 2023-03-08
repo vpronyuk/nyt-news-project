@@ -161,6 +161,8 @@ function onHeaderFormClick(event) {
   event.preventDefault();
   const searchKeyword = headerInput.value.trim();
 
+  console.log(document.querySelector('.calendar__input').dataset.date); // получение даты календаря из дата-атрибута
+
   if (searchKeyword === '') {
     clear();
   } else {
