@@ -1,9 +1,8 @@
-
-
 const readContainer = document.querySelector('.container-read');
 
 const news = JSON.parse(localStorage.getItem("all")); 
 const readStorage = JSON.parse(localStorage.getItem("read-more"));
+const uniqueStorage = [...new Map(readStorage.map((item)=> [item['id'],item])).values()]
 
 
 function getDatesFromNews(arr){
@@ -16,7 +15,7 @@ function renderAccordion() {
   if(!localStorage.getItem('read-more') || localStorage.getItem('read-more') === '[]'){
     return;
   }
-  const array = getDatesFromNews(readStorage)
+  const array = getDatesFromNews(uniqueStorage)
   const acordions = array
     .map(
       item =>
@@ -90,7 +89,8 @@ function accordionHandler(e){
   var panel = this.nextElementSibling;
   console.log(panel);
   const date = this.textContent;
-  const filtred = readStorage.filter(item=>item.time === date);
+  const filtred = uniqueStorage.filter(item=>item.time === date);
+  console.log(filtred);
   const liel = filtred.map(createMarkup).join("");
   panel.innerHTML = liel;
   if (panel.style.display === "flex") {
@@ -108,46 +108,3 @@ for (i = 0; i < acc.length; i++) {
   acc[i].addEventListener("click", accordionHandler);
 }
 
-
-export default addRemoveToLocalStorageREAD
-//  function readHandler(evt){
-//     console.log(evt.target);
-//     if(evt.target.nodeName !== 'LABEL' ){
-//         console.log('neto');
-//         return
-//     }
-//  }
-
-// readContainer.addEventListener('click',readHandler);
-
-/*<div class="list-news__item" data-id="${id}" >
-            <article class="item-news__article">
-              <div class="item-news__wrapper-img">
-                <img class="item-news__img" src="${imageUrl}" alt="photo">
-                <p class="item-news__category">${section}</p>
-                <button class="item-news__add-to-favorite"
-                <svg class="heart-icon">
-                      <use
-                        href="./images/symbol-defs.svg#icon-heart-empty"
-                      ></use></svg>Add to favorite
-                </button>
-              </div>
-              <h2 class="item-news__title">${title}</h2>
-              <p class="item-news__description">${abstract}</p>
-              <div class="item-news__info">
-                <span class="item-news__info-date">${formattedDate}</span>
-                <a class="item-news__info-link" href="${url}" target="_blank" rel="noreferrer noopener">Read more</a>
-              </div>
-            </article>
-          </div>
-
-          <div class="collapsible-accordion">
-            <div class="collapsible-item">
-                <input type="radio" id="rad1" name="radio">
-                <label class="collapsible-item-label" for="rad1">Item 1</label>
-                <div class="collapsible-item-content">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, reiciendis!
-                </div>
-            </div>
-        </div>
- */

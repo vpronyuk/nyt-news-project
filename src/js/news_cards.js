@@ -56,6 +56,8 @@ function addReadMore(evt) {
   };
 
   const parseStorage = JSON.parse(storage);
+  const uniq = [...new Map(parseStorage.map((item)=> [item['id'],item])).values()]
+  console.log(uniq);
   parseStorage.push(params);
   const strStorage = JSON.stringify(parseStorage);
   localStorage.setItem('read-more', strStorage);
