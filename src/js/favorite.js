@@ -76,7 +76,8 @@ function addRemoveToLocalStorage(evt) {
   if (
     evt.target.tagName !== 'BUTTON' &&
     evt.target.tagName !== 'SPAN' &&
-    evt.target.tagName !== 'SVG'
+    evt.target.tagName !== 'svg' &&
+    evt.target.tagName !== 'path'
   ) {
     return;
   }
