@@ -1,3 +1,5 @@
+import Pagination from 'tui-pagination'; /* ES6 */
+
 export const paginOptions = {
   totalItems: 0,
   itemsPerPage: 20,
@@ -53,3 +55,8 @@ export const paginOptionsLess = {
       '</a>',
   },
 };
+
+const container = document.getElementById('tui-pagination-container');
+const instance = new Pagination(container, paginOptionsLess);
+
+instance.getCurrentPage();
