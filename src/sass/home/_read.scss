@@ -2,20 +2,35 @@
   background-color: inherit;
   color:inherit;
   cursor: pointer;
-  padding: 18px;
+  padding: 12px;
   width: 100%;
   text-align: left;
   border: none;
   outline: none;
   transition: 0.4s;
+  border-bottom: 1px solid #000;
+  margin-bottom: 60px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.02em;
+  color: #111321;
+}
+.accordion::after{
+  content: url('../images/arrow-down.svg');    
+  color: inherit;
+  float: right;
+}
+.readmore{
+  padding:60px 0;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-  background-color: #0c0c0c;
+.active .accordion:after {
+  content:""
 }
 
-/* Style the accordion panel. Note: hidden by default */
 .panel {
   padding: 0 18px;
   background-color: inherit;
