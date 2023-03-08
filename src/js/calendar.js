@@ -104,9 +104,8 @@ document.querySelector('.calendar__next-year').addEventListener('click', () => {
 });
 
 function onOpenCalendar() {
-  calendarContainerEl.classList.toggle('is-hidden');
+  calendarContainerEl.classList.toggle('bias');
   calendarInputEl.style.backgroundColor = '#4440F6';
-  calendarInputEl.style.border = '1px solid #4440f6;';
   iconEl.style.fill = '#ffffff';
   iconArrowEl.style.fill = '#ffffff';
   iconArrowEl.classList.toggle('rotate');
@@ -127,6 +126,6 @@ function onCalendarClick(event) {
 
     calendarInputEl.value = selectedDate.toLocaleDateString();
     calendarInputEl.dataset.date = selectedDate.toLocaleDateString(); // записала дату в дата-атрибут
-    calendarContainerEl.classList.add('is-hidden');
+    calendarContainerEl.classList.remove('bias');
   }
 }
