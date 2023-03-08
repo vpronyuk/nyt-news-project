@@ -32,6 +32,7 @@ const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
 const iconFooter = document.querySelector('.footer__svg-globe');
+const categoryBtn = document.querySelector('.cat-menu-btn');
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
 mob.addEventListener('change', onMobClick);
@@ -51,6 +52,7 @@ function addDarkMode() {
   sun.classList.add('mob-icon-sun--dark');
   mobMoon.classList.add('mob-icon-moon--dark');
   iconFooter.classList.add('icon__web--dark');
+  categoryBtn.classList.add('cat-menu-btn--dark');
 }
 
 function removeDarkMode() {
@@ -69,6 +71,7 @@ function removeDarkMode() {
   mobMoon.classList.remove('mob-icon-moon--dark');
   btnMenu.classList.add('button-menu__icon-close--dark');
   iconFooter.classList.remove('icon__web--dark');
+  categoryBtn.classList.remove('cat-menu-btn--dark');
 }
 
 function setDarkMode(isDarkMode) {
@@ -161,12 +164,20 @@ function onHeaderFormClick(event) {
   event.preventDefault();
   const searchKeyword = headerInput.value.trim();
 
-  console.log(document.querySelector('.calendar__input').dataset.date); // получение даты календаря из дата-атрибута
+  const dateCalendarInput =
+    document.querySelector('.calendar__input').dataset.date;
+
+  const dateParts = dateCalendarInput.split('.');
+
+  const dateSearch = `${dateParts[2]}-${dateParts[1].padStart(
+    2,
+    '0'
+  )}-${dateParts[0].padStart(2, '0')}`;
 
   if (searchKeyword === '') {
     clear();
   } else {
-    const pubDate = '2023-02-24';
+    const pubDate = dateSearch;
     fetchNews(searchKeyword, pubDate)
       .then(data => {
         const articles = data.response.docs;
