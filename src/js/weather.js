@@ -134,7 +134,7 @@ weekWeatherBtn.addEventListener(`click`, () => {
               <div class="week-weather-body">
                <div class="week-weather-temp">${Math.round(
                  minTemp
-               )}° - ${Math.round(maxTemp)}°</div>
+               )}° / ${Math.round(maxTemp)}°</div>
                <div class="week-weather-desc">${descriptionWeek}</div>
               </div>
              </div>
