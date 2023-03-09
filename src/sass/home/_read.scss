@@ -1,6 +1,6 @@
 .accordion {
   background-color: inherit;
-  color:inherit;
+  color: inherit;
   cursor: pointer;
   padding: 12px;
   width: 100%;
@@ -16,19 +16,19 @@
   font-size: 14px;
   line-height: 1.71;
   letter-spacing: 0.02em;
-  color: #111321;
+  // color: #111321;
 }
-.accordion::after{
-  content: url('../images/arrow-down.svg');    
+.accordion::after {
+  content: url('../images/arrow-down.svg');
   color: inherit;
   float: right;
 }
-.readmore{
-  padding:60px 0;
+.readmore {
+  padding: 60px 0;
 }
 
 .active .accordion:after {
-  content:""
+  content: '';
 }
 
 .panel {

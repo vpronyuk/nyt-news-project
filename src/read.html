@@ -16,17 +16,17 @@
 
 <body>
   <include src="./partials/header.html"></include>
-  <div class="container-main-and-footer">
-    <main>
-      <div class="container">
-        <!-- ❗️❗️❗️ Add partials like so for every page -->
-        <!-- <include src="./partials/example.html"></include> -->
-        <include src="./partials/read.html"></include>
-        <include src="./partials/components/mob-menu.html"></include>
-      </div>
-    </main>
-    <include src="./partials/footer-read.html"></include>
-  </div>
+  <!-- <div class="container-main-and-footer"> -->
+  <main class="container-main-and-footer">
+    <div class="container">
+      <!-- ❗️❗️❗️ Add partials like so for every page -->
+      <!-- <include src="./partials/example.html"></include> -->
+      <include src="./partials/read.html"></include>
+      <include src="./partials/components/mob-menu.html"></include>
+    </div>
+  </main>
+  <include src="./partials/footer-read.html"></include>
+  <!-- </div> -->
   <script src="./js/menu.js" type="module"></script>
   <!-- <script src="./js/news_cards.js" type="module"></script> -->
   <script src="./js/read.js" type="module"></script>
