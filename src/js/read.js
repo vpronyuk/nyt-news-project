@@ -29,6 +29,7 @@ function renderAccordion() {
         <ul class="panel list-news">
 
         </ul>
+        
     `
     )
     .join('');
@@ -86,6 +87,7 @@ function createMarkup({
 
 function accordionHandler(e) {
   this.classList.toggle('active');
+
   var panel = this.nextElementSibling;
   console.log(panel);
   const date = this.textContent;
