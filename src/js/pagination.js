@@ -57,6 +57,7 @@ export const paginOptionsLess = {
 };
 
 const container = document.getElementById('tui-pagination-container');
-const instance = new Pagination(container, paginOptionsLess);
+export const instance = new Pagination(container, paginOptionsLess);
 
 instance.getCurrentPage();
+console.log(instance);
