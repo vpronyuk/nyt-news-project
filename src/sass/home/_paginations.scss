@@ -10,15 +10,15 @@
   font-weight: 500;
   line-height: 19px;
   text-align: left;
-    @media screen and (min-width: 768px) and (max-width: 1279.98px) {
-      height: 31px;
-      margin-bottom: 100px;
-      margin-top: 48px;
-    }
-    @media screen and (min-width: 1280px) {
-      margin-bottom: 150px;
-      margin-top: 60px;
-    }
+  @media screen and (min-width: 768px) and (max-width: 1279.98px) {
+    height: 31px;
+    margin-bottom: 100px;
+    margin-top: 48px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 150px;
+    margin-top: 60px;
+  }
 }
 
 .pagin {
@@ -26,11 +26,12 @@
   justify-content: center;
   height: 28px;
   width: 288px;
+  margin-right: auto;
+  margin-left: auto;
   @media screen and (min-width: 768px) {
     height: 31px;
     width: 415px;
   }
-   
 }
 .page-container a {
   padding: 4px 12px;
@@ -39,7 +40,6 @@
   font-weight: 500;
   color: var(--main-color);
 }
-
 
 .page-container button {
   display: flex;
@@ -60,12 +60,9 @@ button.next-page {
   border: 1px solid var(--accent-color);
   border-radius: 2px;
 }
-button.prev-page{
+button.prev-page {
   margin-right: 6px;
 }
-button.next-page{
+button.next-page {
   margin-left: 6px;
 }
-
-
-
