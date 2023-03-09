@@ -21,7 +21,6 @@ const emptyPage = document.querySelector('.empty');
 const darkModeDeskCheckbox = document.querySelector('.checkbox-header__input');
 const darkModeMobCheckbox = document.querySelector('.mob-menu__checkbox-input');
 const weatherCard = document.querySelector('.weather-card');
-console.log(weatherCard);
 
 mobileCatList.classList.remove('category_hidden');
 mobileCatList.classList.add('category_mobile_hidden');
@@ -72,7 +71,6 @@ function onClickMobileBtn(event) {
 
 function closeMobileMenu(e) {
   const withinMobileMenu = e.composedPath().includes(mobileMenu);
-  console.log(withinMobileMenu);
 
   if (
     !withinMobileMenu &&
@@ -102,8 +100,6 @@ function onClickMobileCat(event) {
   mobCatBtnIcon.classList.remove('rotate');
   mobCatBtnIcon.style.fill = 'white';
 
-  console.log(query);
-
   if (text != undefined && text.length < 11) {
     mobBtnSpan.textContent = text;
   } else {
@@ -114,11 +110,13 @@ function onClickMobileCat(event) {
     if (data.results === null) {
       newsList.innerHTML = '';
       emptyPage.style.display = 'block';
+      weatherCard.style.display = 'none';
     } else {
       const cards = data.results.reduce((markup, card) => {
         return markup + createCard(card);
       }, '');
       emptyPage.style.display = 'none';
+      weatherCard.style.display = 'block';
       newsList.innerHTML = cards;
     }
   });
@@ -181,7 +179,7 @@ function createMarkup({ section, display_name }) {
 //--------Функція зміни фону кнопок при переключення світлого або темного режиму -------//
 
 function switchDarkBtnMode(array, deskBtn, MobBtn) {
-  for (btn of array) {
+  for (const btn of array) {
     btn.classList.toggle('dark-categories-btn');
   }
   deskBtn.classList.toggle('dark-categories-btn');
@@ -213,7 +211,6 @@ function closeDesktopMenu(e) {
     otherBtn.classList.remove('is-active-other-btn');
     catBtnIcon.classList.remove('rotate');
     document.removeEventListener('click', closeDesktopMenu);
-    console.log('Закриваю меню без активної кнопки всередині');
   } else if (
     !withinDesktopMenu &&
     otherBtn.classList.contains('has-active-button-inside')
@@ -222,7 +219,6 @@ function closeDesktopMenu(e) {
     otherBtn.classList.add('is-active-other-btn');
     catBtnIcon.classList.remove('rotate');
     document.removeEventListener('click', closeDesktopMenu);
-    console.log('Закриваю меню з активною кнопкою всередині');
   }
 }
 
