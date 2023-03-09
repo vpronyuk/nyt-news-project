@@ -152,8 +152,9 @@ getCategoryList().then(response => {
 
   const catMenuBtnList = document.querySelectorAll('.cat-menu-btn');
   const darkMode = JSON.parse(localStorage.getItem('isDarkMode'));
+  console.log(darkMode);
   if (darkMode) {
-    for (btn of catMenuBtnList) {
+    for (let btn of catMenuBtnList) {
       btn.classList.add('dark-categories-btn');
     }
     otherBtn.classList.add('dark-categories-btn');
