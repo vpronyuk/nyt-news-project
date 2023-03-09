@@ -11,7 +11,7 @@ const uniqueStorage = [
 
 function getDatesFromNews(arr) {
   const result = [...new Set(arr.map(item => item.time.toString()))];
-  return result;
+  return result.sort((a,b) => new Date(b) - new Date(a));
 }
 
 function renderAccordion() {
