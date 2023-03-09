@@ -1,7 +1,6 @@
 export { addRemoveToLocalStorage, updateStorage };
 
 function addRemoveToLocalStorage(evt) {
-  console.dir(evt.target.tagName);
   if (
     evt.target.tagName !== 'BUTTON' &&
     evt.target.tagName !== 'SPAN' &&
@@ -10,8 +9,19 @@ function addRemoveToLocalStorage(evt) {
   ) {
     return;
   }
+  if (
+    evt.target.classList.contains('accordion') ||
+    evt.target.classList.contains('container-read')
+  ) {
+    return;
+  }
+  const dateInCard = evt.target.closest('article').childNodes[7].childNodes[1];
+  if (evt.target === dateInCard) {
+    return;
+  }
 
   let btnAddtoStorage = evt.target;
+
   const btnDiv = btnAddtoStorage.closest('div.article_flag');
   const btnDivID = evt.target.closest('li.list-news__item').dataset.id;
 

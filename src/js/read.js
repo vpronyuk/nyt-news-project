@@ -1,4 +1,7 @@
+import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
+
 const readContainer = document.querySelector('.container-read');
+readContainer.addEventListener('click', addRemoveToLocalStorage);
 
 const news = JSON.parse(localStorage.getItem('all'));
 const readStorage = JSON.parse(localStorage.getItem('read-more'));
