@@ -128,7 +128,6 @@
   background-color: #f8f8f8;
   border-radius: 20px;
   padding: 27px 16.5px 20px;
- 
 }
 
 .calendar__month-year {
@@ -243,4 +242,8 @@
 
 .calendar__today {
   background-color: #4440f6;
+}
+
+.calendar__input--dark {
+  background-color: var(--bg-dark-color);
 }

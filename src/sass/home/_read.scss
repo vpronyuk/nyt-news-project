@@ -1,6 +1,5 @@
 .accordion {
   background-color: inherit;
-  color: inherit;
   cursor: pointer;
   padding: 12px;
   width: 100%;
@@ -8,7 +7,7 @@
   border: none;
   outline: none;
   transition: 0.4s;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #929292;
   margin-bottom: 60px;
   font-family: 'Poppins';
   font-style: normal;
@@ -19,9 +18,14 @@
   // color: #111321;
 }
 .accordion::after {
-  content: url('../images/arrow-down.svg');
+  content: '';
+  background: url('../images/arrow-down.svg') 0 4px no-repeat;
+  width: 15px;
+  height: 15px;
   color: inherit;
   float: right;
+  transform: var(--rotate, rotate(0deg));
+  transition: transform 700ms;
 }
 .readmore {
   padding: 60px 0;
@@ -53,4 +57,8 @@
     row-gap: 40px;
     column-gap: 30px;
   }
+}
+
+.accordion--dark {
+  color: var(--third-color);
 }
