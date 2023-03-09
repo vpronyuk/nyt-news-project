@@ -25,7 +25,7 @@ function addReadMore(evt) {
   read.innerText = 'Already read';
   read.classList.add('have-read');
   ulItem.appendChild(read);
-  ulItem.style.opacity = 0.22;
+  ulItem.style.opacity = 0.55; //0.22
   const ID = ulItem.getAttribute('data-id');
 
   const choosenCardID = evt.target.closest('li.list-news__item').dataset.id;
@@ -56,7 +56,9 @@ function addReadMore(evt) {
   };
 
   const parseStorage = JSON.parse(storage);
-  const uniq = [...new Map(parseStorage.map((item)=> [item['id'],item])).values()]
+  const uniq = [
+    ...new Map(parseStorage.map(item => [item['id'], item])).values(),
+  ];
   console.log(uniq);
   parseStorage.push(params);
   const strStorage = JSON.stringify(parseStorage);
