@@ -13,12 +13,13 @@
   width: 100%;
   // margin-left: auto;
   // margin-right: auto;
-  row-gap: 28px;
-  column-gap: 30px;
+  gap: 28px;
+  // column-gap: 30px;
   margin-top: 28px;
   @include tablet {
     justify-content: start;
     row-gap: 30px;
+    column-gap: 30px;
     margin-top: 0;
   }
   @include desktop {
@@ -37,6 +38,10 @@
   @include tablet {
     max-width: none;
   }
+}
+
+.item-news__article {
+  max-height: 630px;
 }
 
 .favorite-container {
@@ -61,7 +66,7 @@
   //opacity: 1;
   pointer-events: auto;
   position: relative;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   // max-width: 288px;
 }
 
