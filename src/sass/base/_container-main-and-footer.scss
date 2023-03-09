@@ -1,13 +1,17 @@
 .container-main-and-footer {
-  position: absolute;
+  flex-grow: 1;
+  padding-top: 94px; /* Высота хедера */
+  // position: absolute;
   width: 100%;
-  top: 104px;
-  left: auto;
-  right: auto;
+  // top: 104px;
+  // left: auto;
+  // right: auto;
   @include tablet {
-    top: 116px;
+    // top: 116px;
+    padding-top: 106px;
   }
   @include desktop {
-    top: 114px;
+    // top: 114px;
+    padding-top: 114px;
   }
 }
