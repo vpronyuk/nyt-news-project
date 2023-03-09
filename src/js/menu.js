@@ -6,7 +6,13 @@ const currentPage = window.location.pathname;
 const homeLink = document.getElementById('home__link');
 const favoriteLink = document.getElementById('favorite__link');
 const readLink = document.getElementById('read__link');
-
+if (
+  !currentPage.includes('/index.html') &&
+  !currentPage.includes('/read.html') &&
+  !currentPage.includes('/favorite.html')
+) {
+  currentPage.includes('/index.html');
+}
 headerIconSearch.addEventListener('click', onHeaderIconSearchClick);
 
 function onHeaderIconSearchClick() {
