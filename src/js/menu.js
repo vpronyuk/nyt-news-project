@@ -1,6 +1,11 @@
 /*-----------------------Поява інпуту на мобільній версії при кліці на лупу--------------------------*/
 const headerIconSearch = document.querySelector('.form-header__icon-search');
 const headerInput = document.querySelector('.form-header__input');
+const currentPage = window.location.pathname;
+
+const homeLink = document.getElementById('home__link');
+const favoriteLink = document.getElementById('favorite__link');
+const readLink = document.getElementById('read__link');
 
 headerIconSearch.addEventListener('click', onHeaderIconSearchClick);
 
@@ -32,6 +37,26 @@ const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
 const iconFooter = document.querySelector('.footer__svg-globe');
+const accordion = document.querySelector('.accordion');
+const calendarInputEl = document.querySelector('.calendar__input');
+
+if (
+  currentPage.includes('/read.html') &&
+  localStorage.getItem('read-more') !== '[]' &&
+  accordion !== null
+) {
+  accordion.addEventListener('click', onContantValueClick);
+
+  function onContantValueClick() {
+    const accStyle = getComputedStyle(accordion, '::after');
+    const transformValue = accStyle.getPropertyValue('transform');
+    if (transformValue === 'matrix(1, 0, 0, 1, 0, 0)') {
+      accordion.style.setProperty('--rotate', 'rotate(180deg)');
+    } else {
+      accordion.style.setProperty('--rotate', 'rotate(0deg)');
+    }
+  }
+}
 
 checkboxInput.addEventListener('change', onCheckBoxClick);
 mob.addEventListener('change', onMobClick);
@@ -51,6 +76,16 @@ function addDarkMode() {
   sun.classList.add('mob-icon-sun--dark');
   mobMoon.classList.add('mob-icon-moon--dark');
   iconFooter.classList.add('icon__web--dark');
+  if (
+    currentPage.includes('/read.html') &&
+    localStorage.getItem('read-more') !== '[]' &&
+    accordion !== null
+  ) {
+    accordion.classList.add('accordion--dark');
+  }
+  if (currentPage.includes('/index.html')) {
+    calendarInputEl.classList.add('calendar__input--dark');
+  }
 }
 
 function removeDarkMode() {
@@ -69,6 +104,16 @@ function removeDarkMode() {
   mobMoon.classList.remove('mob-icon-moon--dark');
   btnMenu.classList.add('button-menu__icon-close--dark');
   iconFooter.classList.remove('icon__web--dark');
+  if (
+    currentPage.includes('/read.html') &&
+    localStorage.getItem('read-more') !== '[]' &&
+    accordion !== null
+  ) {
+    accordion.classList.remove('accordion--dark');
+  }
+  if (currentPage.includes('/index.html')) {
+    calendarInputEl.classList.remove('calendar__input--dark');
+  }
 }
 
 function setDarkMode(isDarkMode) {
@@ -123,11 +168,6 @@ if (isDarkModeMob) {
 }
 
 /*------------------------------Отримання данних знахлдження користувача на сторінці та навігація по хедеру------------------*/
-const currentPage = window.location.pathname;
-
-const homeLink = document.getElementById('home__link');
-const favoriteLink = document.getElementById('favorite__link');
-const readLink = document.getElementById('read__link');
 
 if (currentPage.includes('/index.html')) {
   homeLink.classList.add('current');
@@ -142,6 +182,8 @@ if (currentPage.includes('/index.html')) {
 /*----------------------------------------------------------Пошук по слову----------------------------------------*/
 const headerForm = document.querySelector('.form-header');
 const newsWrapper = document.querySelector('.list-news');
+const emptyPage = document.querySelector('.empty');
+const weatherCard = document.querySelector('.weather-card');
 headerForm.addEventListener('submit', onHeaderFormClick);
 
 const KEY = 'Oibsmafk4s4CtvFNxqESgOWZuCdEVskz';
@@ -161,48 +203,59 @@ function onHeaderFormClick(event) {
   event.preventDefault();
   const searchKeyword = headerInput.value.trim();
 
-  const dateCalendarInput =
-    document.querySelector('.calendar__input').dataset.date;
+  if (currentPage.includes('/index.html')) {
+    const dateCalendarInput =
+      document.querySelector('.calendar__input').dataset.date;
 
-  const dateParts = dateCalendarInput.split('.');
+    const dateParts = dateCalendarInput.split('.');
 
-  const dateSearch = `${dateParts[2]}-${dateParts[1].padStart(
-    2,
-    '0'
-  )}-${dateParts[0].padStart(2, '0')}`;
+    const dateSearch = `${dateParts[2]}-${dateParts[1].padStart(
+      2,
+      '0'
+    )}-${dateParts[0].padStart(2, '0')}`;
 
-  if (searchKeyword === '') {
-    clear();
-  } else {
-    const pubDate = dateSearch;
-    fetchNews(searchKeyword, pubDate)
-      .then(data => {
-        const articles = data.response.docs;
-        console.log(articles);
-        newsWrapper.innerHTML = articles
-          .map(article => {
-            const headline = article.headline.main;
-            const MAX_SNIPPET_LENGTH = 110;
-            let snippet = article.lead_paragraph;
-            if (snippet.length > MAX_SNIPPET_LENGTH) {
-              snippet = snippet.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';
-            }
-            const articleUrl = article.web_url;
+    if (searchKeyword === '') {
+      clear();
+      emptyPage.style.display = 'block';
+      weatherCard.style.display = 'none';
+    } else {
+      const pubDate = dateSearch;
+      fetchNews(searchKeyword, pubDate)
+        .then(data => {
+          console.log(data);
+          if (!data.response.docs.length) {
+            emptyPage.style.display = 'block';
+            weatherCard.style.display = 'none';
+            newsWrapper.innerHTML = '';
+          } else {
+            emptyPage.style.display = 'none';
+            weatherCard.style.display = 'block';
+            const articles = data.response.docs;
+            console.log(articles);
+            newsWrapper.innerHTML = articles
+              .map(article => {
+                const headline = article.headline.main;
+                const MAX_SNIPPET_LENGTH = 110;
+                let snippet = article.lead_paragraph;
+                if (snippet.length > MAX_SNIPPET_LENGTH) {
+                  snippet = snippet.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';
+                }
+                const articleUrl = article.web_url;
 
-            const date = new Date(article.pub_date);
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear().toString();
-            const formattedDate = `${day}/${month}/${year}`;
-            const id = article._id;
+                const date = new Date(article.pub_date);
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const year = date.getFullYear().toString();
+                const formattedDate = `${day}/${month}/${year}`;
+                const id = article._id;
 
-            const section = article.section_name;
-            const imageUrl =
-              article.multimedia.length > 0
-                ? `https://www.nytimes.com/${article.multimedia[0].url}`
-                : 'https://source.unsplash.com/featured/?nature';
+                const section = article.section_name;
+                const imageUrl =
+                  article.multimedia.length > 0
+                    ? `https://www.nytimes.com/${article.multimedia[0].url}`
+                    : 'https://source.unsplash.com/featured/?nature';
 
-            return `<li class="list-news__item" data-id="${id}">
+                return `<li class="list-news__item" data-id="${id}">
   <article class="item-news__article">
        <div class="item-news__wrapper-img">
  <img class="item-news__img" src="${imageUrl}" alt="photo">
@@ -224,11 +277,17 @@ function onHeaderFormClick(event) {
          </div>
        </article>
      </li>`;
-          })
-          .join('');
-        localStorage.setItem('nytimesNews', JSON.stringify(data.response.docs));
-      })
-      .catch(error => console.log(error));
+              })
+              .join('');
+
+            localStorage.setItem(
+              'nytimesNews',
+              JSON.stringify(data.response.docs)
+            );
+          }
+        })
+        .catch(error => console.log(error));
+    }
   }
 }
 
