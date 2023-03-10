@@ -59,6 +59,8 @@ button.next-page {
   text-align: left;
   border: 1px solid var(--accent-color);
   border-radius: 2px;
+  // color: inherit;
+  background-color: var(--bg-color);
 }
 button.prev-page {
   margin-right: 6px;
