@@ -1,11 +1,11 @@
 .news-weather-wrapper {
   position: relative;
-  @include tablet {
-    min-height: 2790px;
-  }
-  @include desktop {
-    min-height: 2105px;
-  }
+  // @include tablet {
+  //   min-height: 100wh;
+  // }
+  // @include desktop {
+  //   min-height: 2105px;
+  // }
 }
 
 .section__list-news {
