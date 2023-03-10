@@ -1,5 +1,8 @@
 .news-weather-wrapper {
   position: relative;
+  @include desktop {
+    min-height: 2105px;
+  }
 }
 
 .section__list-news {
