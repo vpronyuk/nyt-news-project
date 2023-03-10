@@ -22,6 +22,10 @@ const darkModeDeskCheckbox = document.querySelector('.checkbox-header__input');
 const darkModeMobCheckbox = document.querySelector('.mob-menu__checkbox-input');
 const weatherCard = document.querySelector('.weather-card');
 const dateCalendarInput = document.querySelector('.calendar__input');
+const btnNext = document.querySelector('.next-page');
+const btnPrevious = document.querySelector('.prev-page');
+
+btnPrevious.disabled = true;
 
 const noImage =
   'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
@@ -31,10 +35,20 @@ const noNews =
 mobileCatList.classList.remove('category_hidden');
 mobileCatList.classList.add('category_mobile_hidden');
 
+let newsPerPage = 0;
+let currentNewsCount = 0;
+
+if (window.matchMedia('(max-width: 767.98px)').matches) {
+  newsPerPage = 4;
+} else if (window.matchMedia('(min-width: 1280px)').matches) {
+  newsPerPage = 9;
+} else if (window.matchMedia('(min-width: 768px)').matches) {
+  newsPerPage = 8;
+}
+
 async function getNewsByCategory(query) {
   try {
-    const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}`;
-
+    const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}&limit=${newsPerPage}&offset=${currentNewsCount}`;
     const response = await axios.get(url);
 
     return response.data;
@@ -111,22 +125,7 @@ function onClickMobileCat(event) {
     mobBtnSpan.textContent = `${text.substring(0, 9)}...`;
   }
 
-  getNewsByCategory(query).then(data => {
-    if (data.results === null) {
-      newsList.innerHTML = '';
-      emptyPage.style.display = 'block';
-      weatherCard.style.display = 'none';
-    } else {
-      const cards = data.results.reduce((markup, card) => {
-        return markup + createCard(card);
-      }, '');
-      emptyPage.style.display = 'none';
-      weatherCard.style.display = 'block';
-      newsList.innerHTML = cards;
-
-      observer.observe(dateCalendarInput, config);
-    }
-  });
+  renderNewsCard(query);
 }
 
 ///------------------------   Отримання даних з бекенденду та рендеринг кнопок меню ----------//////
@@ -262,6 +261,72 @@ function onClickCatBtn(event) {
   document.removeEventListener('click', closeDesktopMenu);
   const query = event.target.dataset.section;
 
+  currentNewsCount = 0;
+  renderNewsCard(query);
+
+  btnNext.addEventListener('click', () => {
+    incrementNewsCard(query);
+  });
+  btnPrevious.addEventListener('click', () => {
+    decrementNewsCard(query);
+  });
+}
+
+//------------------------ Функція додавання картки новини в на сторінку read more --------------///
+
+function readmoreHandler(e) {
+  if (e.target.nodeName === 'A') {
+    const readMoreLink = e.target;
+    readMoreLink.setAttribute('data-is-read', true);
+
+    const ulItem = e.target.parentElement.parentElement.parentElement;
+    const read = document.createElement('p');
+    read.innerText = 'Already read';
+    read.classList.add('have-read');
+    ulItem.appendChild(read);
+    const ID = ulItem.getAttribute('data-id');
+  }
+  return;
+}
+
+newsList.addEventListener('click', readmoreHandler);
+
+//-------------------------------- Відслідквання зміни data атрибуту на інпуті ------------------//
+
+const config = {
+  attributes: true,
+  attributeFilter: ['data-date'],
+};
+
+const getFilterNewsByDate = function (el, observer) {
+  const date = dateCalendarInput.dataset.date.split('.').join('/');
+  weatherCard.style.display = 'none';
+
+  const newsArray = Array.prototype.slice.call(newsList.childNodes);
+  const filteredNewsArray = newsArray.filter(
+    el => el.dataset.pub_date === date
+  );
+  if (filteredNewsArray.length > 0) {
+    newsList.childNodes.forEach(el => {
+      if (el.dataset.pub_date !== date) {
+        el.style.display = 'none';
+      } else {
+        el.style.display = 'block';
+      }
+    });
+  } else {
+    newsList.childNodes.forEach(el => (el.style.display = 'none'));
+    newsList.insertAdjacentHTML(
+      'afterbegin',
+      `<li style="margin:0 auto"><img src="${noNews}" alt="no news"></img></li>`
+    );
+  }
+};
+const observer = new MutationObserver(getFilterNewsByDate);
+
+///-------------------------------  Відмалювання карток після отримання даних з беку ----------////
+
+function renderNewsCard(query) {
   getNewsByCategory(query).then(data => {
     if (data.results === null) {
       newsList.innerHTML = '';
@@ -279,6 +344,25 @@ function onClickCatBtn(event) {
     }
   });
 }
+
+//----------------------------------------- Пагінатор -------------------------------------///
+
+function incrementNewsCard(query) {
+  currentNewsCount += newsPerPage;
+  btnPrevious.disabled = false;
+  renderNewsCard(query);
+}
+
+function decrementNewsCard(query) {
+  currentNewsCount -= newsPerPage;
+  if (currentNewsCount === 0) {
+    btnPrevious.disabled = true;
+  }
+
+  renderNewsCard(query);
+}
+
+//------------------------------- Створення розмітки картки новин ------------------------///
 
 function createCard({
   title,
@@ -326,63 +410,3 @@ function createCard({
             </article>
           </li>`;
 }
-
-function readmoreHandler(e) {
-  if (e.target.nodeName === 'A') {
-    const readMoreLink = e.target;
-    readMoreLink.setAttribute('data-is-read', true);
-
-    const ulItem = e.target.parentElement.parentElement.parentElement;
-    const read = document.createElement('p');
-    read.innerText = 'Already read';
-    read.classList.add('have-read');
-    ulItem.appendChild(read);
-    const ID = ulItem.getAttribute('data-id');
-  }
-  return;
-}
-
-newsList.addEventListener('click', readmoreHandler);
-
-// localStorage.setItem('cards', '[]');
-
-//-------------------------------- Відслідквання зміни data атрибуту на інпуті ------------------//
-
-const config = {
-  attributes: true,
-};
-
-let mutationCount = 0;
-
-const getFilterNewsByDate = function (el, observer) {
-  for (const mutation of el) {
-    if (mutation.type === 'attributes' && mutationCount === 0) {
-      mutationCount += 1;
-    } else {
-      const date = dateCalendarInput.dataset.date.split('.').join('/');
-      weatherCard.style.display = 'none';
-
-      const newsArray = Array.prototype.slice.call(newsList.childNodes);
-      const filteredNewsArray = newsArray.filter(
-        el => el.dataset.pub_date === date
-      );
-      if (filteredNewsArray.length > 0) {
-        newsList.childNodes.forEach(el => {
-          if (el.dataset.pub_date !== date) {
-            el.style.display = 'none';
-          } else {
-            el.style.display = 'block';
-          }
-        });
-      } else {
-        newsList.childNodes.forEach(el => (el.style.display = 'none'));
-        newsList.insertAdjacentHTML(
-          'afterbegin',
-          `<li style="margin:0 auto"><img src="${noNews}" alt="no news"></img></li>`
-        );
-      }
-    }
-  }
-};
-
-const observer = new MutationObserver(getFilterNewsByDate);
