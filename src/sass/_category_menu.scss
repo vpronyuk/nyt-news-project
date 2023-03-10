@@ -112,6 +112,7 @@
     background-color: var(--accent-color);
     color: var(--third-color);
     fill: var(--third-color);
+    transition: background-color 400ms ease, color 400ms ease, fill 400ms ease;
   }
 }
 
