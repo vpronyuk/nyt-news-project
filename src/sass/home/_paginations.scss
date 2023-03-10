@@ -23,6 +23,7 @@
 
 .pagin {
   display: flex;
+  gap: 16px;
   justify-content: center;
   height: 28px;
   width: 288px;
@@ -32,6 +33,11 @@
     height: 31px;
     width: 415px;
   }
+}
+
+.pagin button {
+  padding-top: 4px;
+  // border-radius: 6px;
 }
 .page-container a {
   padding: 4px 12px;
@@ -58,13 +64,13 @@ button.next-page {
   letter-spacing: 0em;
   text-align: left;
   border: 1px solid var(--accent-color);
-  border-radius: 2px;
+  border-radius: 6px;
   // color: inherit;
   background-color: var(--bg-color);
 }
-button.prev-page {
-  margin-right: 6px;
-}
-button.next-page {
-  margin-left: 6px;
-}
+// button.prev-page {
+//   margin-right: 6px;
+// }
+// button.next-page {
+//   margin-left: 6px;
+// }
