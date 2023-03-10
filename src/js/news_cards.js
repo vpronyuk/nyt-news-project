@@ -20,7 +20,6 @@ function addReadMore(evt) {
   readMoreLink.setAttribute('data-is-read', true);
 
   const ulItem = evt.target.parentNode.parentNode.parentNode;
-  console.log('li item', ulItem);
   const read = document.createElement('p');
   read.innerText = 'Already read';
   read.classList.add('have-read');
@@ -42,7 +41,6 @@ function addReadMore(evt) {
   const date = new Date(time);
 
   let storage = localStorage.getItem('read-more');
-  console.log(imageUrl);
   // додаємо елемент
   const params = {
     id: choosenCardID,
@@ -59,7 +57,6 @@ function addReadMore(evt) {
   const uniq = [
     ...new Map(parseStorage.map(item => [item['id'], item])).values(),
   ];
-  console.log(uniq);
   parseStorage.push(params);
   const strStorage = JSON.stringify(parseStorage);
   localStorage.setItem('read-more', strStorage);
@@ -67,13 +64,18 @@ function addReadMore(evt) {
 newsWrapper.addEventListener('click', addRemoveToLocalStorage);
 newsWrapper.addEventListener('click', addReadMore);
 
+const weatherCard = document.querySelector('.weather-card');
+const dateCalendarInput = document.querySelector('.calendar__input');
+
+const noNews =
+  'https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif';
+
 // standard
 async function getPopularNews() {
   try {
     const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
 
     const response = await axios.get(url);
-    console.log(response.data.results);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -82,6 +84,7 @@ async function getPopularNews() {
 
 function updateNewsList(markup) {
   newsWrapper.innerHTML = markup;
+  observer.observe(dateCalendarInput, config);
 }
 
 getPopularNews()
@@ -111,7 +114,7 @@ function createMarkup({
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear().toString();
   const formattedDate = `${day}/${month}/${year}`;
-  return `<li class="list-news__item" data-id="${id}" >
+  return `<li class="list-news__item" data-id="${id}" data-pub_date="${formattedDate}"  >
             <article class="item-news__article">
               <div class="item-news__wrapper-img">
                 <img class="item-news__img" src="${imageUrl}" alt="photo">
@@ -141,7 +144,6 @@ function readmoreHandler(e) {
     readMoreLink.setAttribute('data-is-read', true);
 
     const ulItem = e.target.parentElement.parentElement.parentElement;
-    console.log(ulItem);
     const read = document.createElement('p');
     read.innerText = 'Already read';
     read.classList.add('have-read');
@@ -157,3 +159,42 @@ if (!localStorage.getItem('read-more')) {
 if (!localStorage.getItem('cards')) {
   localStorage.setItem('cards', '[]');
 }
+
+const config = {
+  attributes: true,
+};
+
+let mutationCount = 0;
+
+const getFilterNewsByDate = function (el, observer) {
+  for (const mutation of el) {
+    if (mutationCount === 0) {
+      mutationCount += 1;
+    } else {
+      const date = dateCalendarInput.dataset.date.split('.').join('/');
+      weatherCard.style.display = 'none';
+
+      const newsArray = Array.prototype.slice.call(newsWrapper.childNodes);
+      const filteredNewsArray = newsArray.filter(
+        el => el.dataset.pub_date === date
+      );
+      if (filteredNewsArray.length > 0) {
+        newsWrapper.childNodes.forEach(el => {
+          if (el.dataset.pub_date !== date) {
+            el.style.display = 'none';
+          } else {
+            el.style.display = 'block';
+          }
+        });
+      } else {
+        newsWrapper.childNodes.forEach(el => (el.style.display = 'none'));
+        newsWrapper.insertAdjacentHTML(
+          'afterbegin',
+          `<li style="margin:0 auto"><img src="${noNews}" alt="no news"></img></li>`
+        );
+      }
+    }
+  }
+};
+
+const observer = new MutationObserver(getFilterNewsByDate);
