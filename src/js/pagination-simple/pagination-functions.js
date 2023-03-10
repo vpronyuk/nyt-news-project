@@ -1,25 +1,27 @@
 import { AxiosPhotos } from './api';
-import {
-  LoadMoreBtnRight,
-  LoadMoreBtnLeft,
-} from '../js/components/button-upload';
+import { LoadMoreBtnRight, LoadMoreBtnLeft } from './button-upload';
 // import SimpleLightbox from 'simplelightbox';
 // import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export const loadMoreBtn = new LoadMoreBtn({
-  selector: '.load-more',
+export const loadMoreBtnRight = new LoadMoreBtnRight({
+  selector: '.load-left',
   isHidden: true,
 });
 
-const gallery = document.querySelector('.gallery');
-const axiosPhotos = new AxiosPhotos();
-const activePicture = new SimpleLightbox(
-  '.gallery a'
-  // , {
-  // captionsData: 'alt',
-  // captionDelay: 250,
-  // }
-);
+export const loadMoreBtnLeft = new LoadMoreBtnLeft({
+  selector: '.load-right',
+  isHidden: true,
+});
+
+const newsBlock = document.querySelector('.list-news');
+// const axiosPhotos = new AxiosPhotos();
+// const activePicture = new SimpleLightbox(
+//   '.gallery a'
+//   // , {
+//   // captionsData: 'alt',
+//   // captionDelay: 250,
+//   // }
+// );
 
 async function handleSubmit(event) {
   event.preventDefault();
