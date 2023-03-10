@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://OlgaMunaieva.github.io/news-project-9",
+  "homepage": "https://vpronyuk.github.io/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /news-project-9/"
+    "build": "parcel build src/*.html --public-url /nyt-news-project/"
   },
   "repository": {
     "type": "git",
