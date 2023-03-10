@@ -250,7 +250,7 @@ function onHeaderFormClick(event) {
             pagination.style.display = 'block';
             emptyPage.style.display = 'none';
             weatherCard.style.display = 'block';
-            const articles = data.response.docs;
+            const articles = data.response.docs.slice(0, 9);
 
             newsWrapper.innerHTML = articles
               .map(article => {
