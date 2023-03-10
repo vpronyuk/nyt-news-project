@@ -1,4 +1,5 @@
 import { AxiosPhotos } from './api';
+import onHeaderFormClick from '../menu';
 import { LoadMoreBtnRight, LoadMoreBtnLeft } from './button-upload';
 // import SimpleLightbox from 'simplelightbox';
 // import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -23,9 +24,10 @@ const newsBlock = document.querySelector('.list-news');
 //   // }
 // );
 
-async function handleSubmit(event) {
+function handleSubmit(event) {
   event.preventDefault();
   window.scrollTo(0, 0);
+  onHeaderFormClick();
   axiosPhotos.q = event.currentTarget.elements.searchQuery.value.trim();
   axiosPhotos.page = 0;
   const data = await processTheRequest();

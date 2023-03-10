@@ -7,9 +7,12 @@ const currentPage = window.location.pathname;
 const homeLink = document.getElementById('home__link');
 const favoriteLink = document.getElementById('favorite__link');
 const readLink = document.getElementById('read__link');
-const missingPage = ['/index.html', '/read.html', '/favorite.html'];
-if (!missingPage.some(page => currentPage.includes(page))) {
-  window.location.href = '/index.html';
+if (
+  !currentPage.includes('/index.html') &&
+  !currentPage.includes('/read.html') &&
+  !currentPage.includes('/favorite.html')
+) {
+  currentPage.includes('/index.html');
 }
 headerIconSearch.addEventListener('click', onHeaderIconSearchClick);
 
