@@ -38,7 +38,24 @@ async function handleSubmit(event) {
   loadMoreBtn.enable();
 }
 
-async function fetchPhotos() {
+async function fetchContinue() {
+  loadMoreBtn.disable();
+  const data = await processTheRequest();
+  if ((axiosPhotos.page - 1) * 40 > data.totalHits) {
+    Notiflix.Notify.info(
+      `We're sorry, but you've reached the end of search results.`
+    );
+    loadMoreBtn.hide();
+    return;
+  }
+  const markup = await createMarkupCardPhotos(data);
+  const nextPhotos = await appendNewsToList(markup);
+  activePicture.refresh();
+  loadMoreBtn.enable();
+  return nextPhotos;
+}
+
+async function fetchBack() {
   loadMoreBtn.disable();
   const data = await processTheRequest();
   if ((axiosPhotos.page - 1) * 40 > data.totalHits) {
@@ -130,4 +147,4 @@ function appendNewsToList(markup) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-export { handleSubmit, fetchPhotos, handleInput };
+export { handleSubmit, fetchContinue, fetchBack, handleInput };

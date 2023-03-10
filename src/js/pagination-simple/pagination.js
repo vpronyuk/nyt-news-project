@@ -1,12 +1,19 @@
-import { handleSubmit, fetchPhotos, handleInput } from './pagination-functions';
+import {
+  handleSubmit,
+  fetchContinue,
+  fetchBack,
+  handleInput,
+} from './pagination-functions';
 import { loadMoreBtnRight, loadMoreBtnLeft } from './pagination-functions';
 import debounce from 'lodash.debounce';
 
-const formEl = document.querySelector('.search-form');
+const formEl = document.querySelector('.header__form');
 
 formEl.addEventListener('submit', handleSubmit);
 
-loadMoreBtn.button.addEventListener('click', fetchPhotos);
+loadMoreBtnRight.button.addEventListener('click', fetchContinue);
+
+loadMoreBtnLeft.button.addEventListener('click', fetchBack);
 
 formEl.addEventListener(
   'input',
