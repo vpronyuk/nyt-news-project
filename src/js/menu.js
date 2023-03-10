@@ -1,6 +1,7 @@
 /*-----------------------Поява інпуту на мобільній версії при кліці на лупу--------------------------*/
 const headerIconSearch = document.querySelector('.form-header__icon-search');
 const headerInput = document.querySelector('.form-header__input');
+const pagination = document.querySelector('.pagination');
 const currentPage = window.location.pathname;
 
 const homeLink = document.getElementById('home__link');
@@ -43,23 +44,30 @@ const sun = document.querySelector('.mob-icon-sun');
 const mobMoon = document.querySelector('.mob-icon-moon');
 const btnMenu = document.querySelector('.button-menu__icon-close');
 const iconFooter = document.querySelector('.footer__svg-globe');
-const accordion = document.querySelector('.accordion');
+const accordionContainer = document.querySelector('.container-read');
+const accordions = document.querySelectorAll('.accordion');
+
 const calendarInputEl = document.querySelector('.calendar__input');
 
 if (
   currentPage.includes('/read.html') &&
   localStorage.getItem('read-more') !== '[]' &&
-  accordion !== null
+  accordionContainer !== null
 ) {
-  accordion.addEventListener('click', onContantValueClick);
+  accordionContainer.addEventListener('click', onContantValueClick);
 
-  function onContantValueClick() {
-    const accStyle = getComputedStyle(accordion, '::after');
+  function onContantValueClick(event) {
+    const targetAccordion = event.target.closest('.accordion');
+    if (!targetAccordion) {
+      return;
+    }
+
+    const accStyle = getComputedStyle(targetAccordion, '::after');
     const transformValue = accStyle.getPropertyValue('transform');
     if (transformValue === 'matrix(1, 0, 0, 1, 0, 0)') {
-      accordion.style.setProperty('--rotate', 'rotate(180deg)');
+      targetAccordion.style.setProperty('--rotate', 'rotate(180deg)');
     } else {
-      accordion.style.setProperty('--rotate', 'rotate(0deg)');
+      targetAccordion.style.setProperty('--rotate', 'rotate(0deg)');
     }
   }
 }
@@ -85,9 +93,11 @@ function addDarkMode() {
   if (
     currentPage.includes('/read.html') &&
     localStorage.getItem('read-more') !== '[]' &&
-    accordion !== null
+    accordions !== null
   ) {
-    accordion.classList.add('accordion--dark');
+    accordions.forEach(accordion => {
+      accordion.classList.add('accordion--dark');
+    });
   }
   if (currentPage.includes('/index.html')) {
     calendarInputEl.classList.add('calendar__input--dark');
@@ -113,9 +123,11 @@ function removeDarkMode() {
   if (
     currentPage.includes('/read.html') &&
     localStorage.getItem('read-more') !== '[]' &&
-    accordion !== null
+    accordions !== null
   ) {
-    accordion.classList.remove('accordion--dark');
+    accordions.forEach(accordion => {
+      accordion.classList.remove('accordion--dark');
+    });
   }
   if (currentPage.includes('/index.html')) {
     calendarInputEl.classList.remove('calendar__input--dark');
@@ -224,20 +236,22 @@ function onHeaderFormClick(event) {
       clear();
       emptyPage.style.display = 'block';
       weatherCard.style.display = 'none';
+      pagination.style.display = 'none';
     } else {
       const pubDate = dateSearch;
       fetchNews(searchKeyword, pubDate)
         .then(data => {
-          console.log(data);
           if (!data.response.docs.length) {
+            pagination.style.display = 'none';
             emptyPage.style.display = 'block';
             weatherCard.style.display = 'none';
             newsWrapper.innerHTML = '';
           } else {
+            pagination.style.display = 'block';
             emptyPage.style.display = 'none';
             weatherCard.style.display = 'block';
             const articles = data.response.docs;
-            console.log(articles);
+
             newsWrapper.innerHTML = articles
               .map(article => {
                 const headline = article.headline.main;
@@ -303,7 +317,6 @@ function clear() {
 
 /*-------------------------------------------------------Добавляє хрестик в інпуті для видалення інформації-----------------------------*/
 const searchClear = document.getElementById('searchClear');
-console.log(searchClear);
 headerInput.addEventListener('input', () => {
   if (headerInput.value && document.documentElement.clientWidth > 768) {
     searchClear.style.display = 'block';
