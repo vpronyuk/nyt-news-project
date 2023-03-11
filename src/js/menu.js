@@ -1,3 +1,5 @@
+// import { getNewsByInput } from '../api/newsApi';
+
 /*-----------------------Поява інпуту на мобільній версії при кліці на лупу--------------------------*/
 const headerIconSearch = document.querySelector('.form-header__icon-search');
 const headerInput = document.querySelector('.form-header__input');

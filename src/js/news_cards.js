@@ -63,6 +63,8 @@ const dateCalendarInput = document.querySelector('.calendar__input');
 
 const noNews =
   'https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif';
+const noImage =
+  'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg';
 
 function updateNewsList(markup) {
   newsWrapper.innerHTML = markup;
@@ -84,9 +86,7 @@ function createMarkup({
   published_date,
   url,
 }) {
-  const imageUrl =
-    media?.[0]?.['media-metadata']?.[2]?.url ||
-    `https://source.unsplash.com/featured/?nature`;
+  const imageUrl = media?.[0]?.['media-metadata']?.[2]?.url || noImage;
   const MAX_SNIPPET_LENGTH = 110;
   if (abstract.length > MAX_SNIPPET_LENGTH) {
     abstract = abstract.slice(0, MAX_SNIPPET_LENGTH - 3) + '...';

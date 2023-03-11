@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios, { all } from 'axios';
 
 const BASE_URL = 'https://api.nytimes.com/svc/';
-const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
-const CATEGORY_LIST = 'news/v3/content/section-list.json'; //потрібно для відмальовки dropdown menu
-const CATEGORY_NEWS = 'news/v3/content/inyt/automobiles.json'; //фідбек на запит з dropdown menu
-const SEARCHED_QUERY = 'search/v2/articlesearch.json'; //фідбек на запит з input
+const MOST_POPULAR = 'mostpopular/v2/viewed/30.json';
+const CATEGORY_LIST = 'news/v3/content/section-list.json';
+const CATEGORY_NEWS = 'news/v3/content/all/';
+const SEARCHED_QUERY = 'search/v2/articlesearch.json';
 const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
 
 async function getPopularNews() {
@@ -18,14 +18,14 @@ async function getPopularNews() {
   }
 }
 
-async function getNewsByCategory(category, newsPerPage, currentNewsCount) {
+async function getNewsByCategory(query, newsPerPage, currentNewsCount) {
   try {
     const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}&limit=${newsPerPage}&offset=${currentNewsCount}`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error(`Failed to fetch news by category: ${category}`);
+    throw new Error(`Failed to fetch news by category: ${query}`);
   }
 }
 
@@ -42,7 +42,7 @@ async function getCategoryList() {
 
 async function getNewsByInput(searchKeyword, pubDate) {
   try {
-    const url = `${BASE_URL}&${SEARCHED_QUERY}api-key=${API_KEY}&q=${searchKeyword}&fq=pub_date:(${pubDate})`;
+    const url = `${BASE_URL}&${SEARCHED_QUERY}?api-key=${API_KEY}&q=${searchKeyword}&fq=pub_date:(${pubDate})`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {

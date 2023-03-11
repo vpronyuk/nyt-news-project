@@ -1,11 +1,6 @@
-import axios, { all } from 'axios';
+// import axios, { all } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { getNewsByCategory, getCategoryList } from '../api/newsApi';
-
-const API_KEY = 'AKwAkjVAbzaYm1bK9yzcr2BnwjHsxavz';
-const BASE_URL = 'https://api.nytimes.com/svc/';
-const CATEGORY_NEWS = 'news/v3/content/all/';
-const CATEGORY_LIST = `https://api.nytimes.com/svc/news/v3/content/section-list.json?`;
+import { getCategoryList, getNewsByCategory } from '../api/newsApi';
 
 const mobileMenu = document.querySelector('.mobile_category_menu');
 const categoriesList = document.querySelector('.category_list');
@@ -45,32 +40,6 @@ if (window.matchMedia('(max-width: 767.98px)').matches) {
   newsPerPage = 9;
 } else if (window.matchMedia('(min-width: 768px)').matches) {
   newsPerPage = 8;
-}
-
-async function getNewsByCategory(query) {
-  try {
-    const url = `${BASE_URL}${CATEGORY_NEWS}${query}.json?api-key=${API_KEY}&limit=${newsPerPage}&offset=${currentNewsCount}`;
-    const response = await axios.get(url);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    newsList.innerHTML = '';
-    emptyPage.style.display = 'block';
-    weatherCard.style.display = 'none';
-  }
-}
-
-async function getCategoryList() {
-  try {
-    const url = `${CATEGORY_LIST}api-key=${API_KEY}`;
-
-    const response = await axios.get(url);
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
 }
 
 //---------------------- Mobile categories menu -------------------------------------//
@@ -328,26 +297,28 @@ const observer = new MutationObserver(getFilterNewsByDate);
 ///-------------------------------  Відмалювання карток після отримання даних з беку ----------////
 
 function renderNewsCard(query) {
-  getNewsByCategory(query).then(({ results, num_results }) => {
-    if (results === null) {
-      newsList.innerHTML = '';
-      emptyPage.style.display = 'block';
-      weatherCard.style.display = 'none';
-    } else {
-      const cards = results.reduce((markup, card) => {
-        return markup + createCard(card);
-      }, '');
-      emptyPage.style.display = 'none';
-      weatherCard.style.display = 'block';
-      newsList.innerHTML = cards;
+  getNewsByCategory(query, newsPerPage, currentNewsCount).then(
+    ({ results, num_results }) => {
+      if (results === null) {
+        newsList.innerHTML = '';
+        emptyPage.style.display = 'block';
+        weatherCard.style.display = 'none';
+      } else {
+        const cards = results.reduce((markup, card) => {
+          return markup + createCard(card);
+        }, '');
+        emptyPage.style.display = 'none';
+        weatherCard.style.display = 'block';
+        newsList.innerHTML = cards;
 
-      num_results - 450 < currentNewsCount
-        ? (btnNext.disabled = true)
-        : (btnNext.disabled = false);
+        num_results - 450 < currentNewsCount
+          ? (btnNext.disabled = true)
+          : (btnNext.disabled = false);
 
-      observer.observe(dateCalendarInput, config);
+        observer.observe(dateCalendarInput, config);
+      }
     }
-  });
+  );
 }
 
 //----------------------------------------- Пагінатор -------------------------------------///
