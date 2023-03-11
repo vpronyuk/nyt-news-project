@@ -1,5 +1,6 @@
 import axios, { all } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { getNewsByCategory, getCategoryList } from '../api/newsApi';
 
 const API_KEY = 'AKwAkjVAbzaYm1bK9yzcr2BnwjHsxavz';
 const BASE_URL = 'https://api.nytimes.com/svc/';

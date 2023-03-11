@@ -1,13 +1,7 @@
-import axios from 'axios';
+import { getPopularNews } from '../api/newsApi';
 import { addRemoveToLocalStorage, updateStorage } from './favorite_functions';
 //import addRemoveToLocalStorageREAD from './read';
 
-const BASE_URL = 'https://api.nytimes.com/svc/';
-const MOST_POPULAR = 'mostpopular/v2/viewed/1.json'; //тягнеться на home при загрузці
-const CATEGORY_LIST = 'news/v3/content/section-list.json'; //потрібно для відмальовки dropdown menu
-const CATEGORY_NEWS = 'news/v3/content/inyt/automobiles.json'; //фідбек на запит з dropdown menu
-const SEARCHED_QUERY = 'search/v2/articlesearch.json'; //фідбек на запит з input
-const API_KEY = 'mc1GG2VGT2VGMPz3mpzlHGRmnyjAqbuI';
 let btnAddtoStorage;
 
 const newsWrapper = document.querySelector('.list-news');
@@ -69,18 +63,6 @@ const dateCalendarInput = document.querySelector('.calendar__input');
 
 const noNews =
   'https://cdn.dribbble.com/users/2382015/screenshots/6065978/media/8b4662f8023e4e2295f865106b5d3aa7.gif';
-
-// standard
-async function getPopularNews() {
-  try {
-    const url = `${BASE_URL}${MOST_POPULAR}?api-key=${API_KEY}`;
-
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 function updateNewsList(markup) {
   newsWrapper.innerHTML = markup;
